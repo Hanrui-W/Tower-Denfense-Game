@@ -11,7 +11,7 @@ public class InitGameScreen {
     private Button nextButton;
     private Label label;
 
-    public InitGameScreen() {}
+    public InitGameScreen() { }
     public InitGameScreen(int width, int height) {
         this.width = width;
         this.height = height;

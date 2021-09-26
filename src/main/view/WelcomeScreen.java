@@ -11,7 +11,7 @@ public class WelcomeScreen {
     private Button startButton;
     private Label label;
 
-    public WelcomeScreen() {}
+    public WelcomeScreen() { }
     public WelcomeScreen(int width, int height) {
         this.width = width;
         this.height = height;
