@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import model.Model;
+import view.InitConfigScreen;
 import view.InitGameScreen;
 import view.WelcomeScreen;
 
@@ -22,7 +23,16 @@ public class Controller extends Application {
     public void initWelcomeScreen() {
         WelcomeScreen screen = new WelcomeScreen(WIDTH, HEIGHT);
         Button startButton = screen.getStartButton();
-        startButton.setOnAction(e -> {goToInitGameScreen();});
+        startButton.setOnAction(e -> {goToInitConfigScreen();});
+
+        mainWindow.setScene(screen.getScene());
+        mainWindow.show();
+    }
+
+    public void goToInitConfigScreen() {
+        InitConfigScreen screen = new InitConfigScreen(WIDTH, HEIGHT);
+        Button nextButton = screen.getNextButton();
+        nextButton.setOnAction(e -> {goToInitGameScreen();});
 
         mainWindow.setScene(screen.getScene());
         mainWindow.show();
