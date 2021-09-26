@@ -11,7 +11,7 @@ public class InitConfigScreen {
     private Button nextButton;
     private Label label;
 
-    public InitConfigScreen() {}
+    public InitConfigScreen() { }
     public InitConfigScreen(int width, int height) {
         this.width = width;
         this.height = height;

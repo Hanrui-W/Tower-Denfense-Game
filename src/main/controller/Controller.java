@@ -11,8 +11,8 @@ import view.WelcomeScreen;
 public class Controller extends Application {
     private Stage mainWindow;
     private Model gameModel;
-    private final int WIDTH = 400;
-    private final int HEIGHT = 400;
+    private static final int WIDTH = 400;
+    private static final int HEIGHT = 400;
 
     public void start(Stage stage) {
         mainWindow = stage;
@@ -23,7 +23,9 @@ public class Controller extends Application {
     public void initWelcomeScreen() {
         WelcomeScreen screen = new WelcomeScreen(WIDTH, HEIGHT);
         Button startButton = screen.getStartButton();
-        startButton.setOnAction(e -> {goToInitConfigScreen();});
+        startButton.setOnAction(e -> {
+            goToInitConfigScreen();
+        });
 
         mainWindow.setScene(screen.getScene());
         mainWindow.show();
@@ -32,7 +34,9 @@ public class Controller extends Application {
     public void goToInitConfigScreen() {
         InitConfigScreen screen = new InitConfigScreen(WIDTH, HEIGHT);
         Button nextButton = screen.getNextButton();
-        nextButton.setOnAction(e -> {goToInitGameScreen();});
+        nextButton.setOnAction(e -> {
+            goToInitGameScreen();
+        });
 
         mainWindow.setScene(screen.getScene());
         mainWindow.show();
@@ -41,7 +45,9 @@ public class Controller extends Application {
     public void goToInitGameScreen() {
         InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT);
         Button nextButton = screen.getNextButton();
-        nextButton.setOnAction(e -> {mainWindow.close();});
+        nextButton.setOnAction(e -> {
+            mainWindow.close();
+        });
 
         mainWindow.setScene(screen.getScene());
         mainWindow.show();
