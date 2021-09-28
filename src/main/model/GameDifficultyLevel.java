@@ -1,5 +1,5 @@
 package model;
 
-public enum GameDifficultLevel {
+public enum GameDifficultyLevel {
     EASY, MEDIUM, HARD, HELL
 }
