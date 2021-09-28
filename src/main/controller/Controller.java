@@ -9,8 +9,8 @@ import view.WelcomeScreen;
 
 public class Controller extends Application {
     private Stage mainWindow;
-    private static final int WIDTH = 400;
-    private static final int HEIGHT = 400;
+    private static final int WIDTH = 960;
+    private static final int HEIGHT = 720;
 
     public void start(Stage stage) {
         mainWindow = stage;
