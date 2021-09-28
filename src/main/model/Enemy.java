@@ -1,6 +1,6 @@
 package model;
 
-public class Enemy extends GameObject{
+public class Enemy extends Position implements GameObject{
     private double speed;
 
     public Enemy() {

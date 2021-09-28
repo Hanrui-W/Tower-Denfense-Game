@@ -1,6 +1,6 @@
 package model;
 
-public class Monument extends GameObject{
+public class Monument extends Position implements GameObject{
     private int health;
 
     public Monument() {

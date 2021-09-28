@@ -1,8 +1,6 @@
 package model;
 
-public class Tower extends GameObject{
-    private int xPosition;
-    private int yPosition;
+public class Tower extends Position implements GameObject{
     private int level;
     private TowerType type;
     private int attackRange;
@@ -12,8 +10,7 @@ public class Tower extends GameObject{
     }
 
     public Tower(int xPosition, int yPosition, int level, TowerType type, int attackRange) {
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
+        super(xPosition, yPosition);
         this.level = level;
         this.type = type;
         this.attackRange = attackRange;
@@ -22,28 +19,12 @@ public class Tower extends GameObject{
     @Override
     public String toString() {
         return "Tower{" +
-                "xPosition=" + xPosition +
-                ", yPosition=" + yPosition +
+                "xPosition=" + getxPosition() +
+                ", yPosition=" + getyPosition() +
                 ", level=" + level +
                 ", type=" + type +
                 ", attackRange=" + attackRange +
                 '}';
-    }
-
-    public int getxPosition() {
-        return xPosition;
-    }
-
-    public void setxPosition(int xPosition) {
-        this.xPosition = xPosition;
-    }
-
-    public int getyPosition() {
-        return yPosition;
-    }
-
-    public void setyPosition(int yPosition) {
-        this.yPosition = yPosition;
     }
 
     public int getLevel() {
