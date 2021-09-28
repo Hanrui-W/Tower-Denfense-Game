@@ -4,18 +4,22 @@ import java.util.ArrayList;
 
 public class Player extends GameObject {
     private String name;
-    private double money;
+    private int money;
     private ArrayList<Tower> towers;
+
+    public Player() {
+        this("", 0, new ArrayList<>());
+    }
 
     public Player(String name) {
         this(name, 0, new ArrayList<>());
     }
 
-    public Player(String name, double money) {
+    public Player(String name, int money) {
         this(name, money, new ArrayList<>());
     }
 
-    public Player(String name, double money, ArrayList<Tower> towers) {
+    public Player(String name, int money, ArrayList<Tower> towers) {
         super();
         this.name = name;
         this.money = money;
@@ -39,11 +43,11 @@ public class Player extends GameObject {
         this.name = name;
     }
 
-    public double getMoney() {
+    public int getMoney() {
         return money;
     }
 
-    public void setMoney(double money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 

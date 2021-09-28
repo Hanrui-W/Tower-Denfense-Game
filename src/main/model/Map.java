@@ -8,22 +8,22 @@ public class Map {
     private int mapLength;
     private int mapWidth;
     private ArrayList<Position>[] enemyPaths;
-    private ArrayList<Position> mounments;
+    private Position monument;
 
     static int DEFAULT_LENGTH = 100;
     static int DEFAULT_WIDTH = 100;
     static int DEFAULT_PATHS = 1;
     public Map() {
-        this(new ArrayList<>(), new int[Map.DEFAULT_LENGTH][Map.DEFAULT_WIDTH], new ArrayList[Map.DEFAULT_PATHS], new ArrayList<>());
+        this(new ArrayList<>(), new int[Map.DEFAULT_LENGTH][Map.DEFAULT_WIDTH], new ArrayList[Map.DEFAULT_PATHS], new Position());
     }
 
-    public Map(ArrayList<GameObject> gameObjects, int[][] map, ArrayList<Position>[] enemyPaths, ArrayList<Position> mounments) {
+    public Map(ArrayList<GameObject> gameObjects, int[][] map, ArrayList<Position>[] enemyPaths, Position monument) {
         this.gameObjects = gameObjects;
         this.map = map;
         this.mapLength = this.map.length;
         this.mapWidth = this.map[0].length;
         this.enemyPaths = enemyPaths;
-        this.mounments = mounments;
+        this.monument = monument;
     }
 
     public ArrayList<Position>[] getEnemyPaths() {
@@ -34,12 +34,12 @@ public class Map {
         this.enemyPaths = enemyPaths;
     }
 
-    public ArrayList<Position> getMounments() {
-        return mounments;
+    public Position getMonument() {
+        return monument;
     }
 
-    public void setMounments(ArrayList<Position> mounments) {
-        this.mounments = mounments;
+    public void setMonument(Position monument) {
+        this.monument = monument;
     }
 
     public int getMapWidth() {

@@ -1,13 +1,13 @@
 package model;
 
 public class Monument extends GameObject{
-    private double health;
+    private int health;
 
     public Monument() {
-        this(0, 0, 0.0);
+        this(0, 0, 0);
     }
 
-    public Monument(int xPosition, int yPosition, double health) {
+    public Monument(int xPosition, int yPosition, int health) {
         super(xPosition, yPosition);
         this.health = health;
     }
@@ -21,11 +21,11 @@ public class Monument extends GameObject{
                 '}';
     }
 
-    public double getHealth() {
+    public int getHealth() {
         return health;
     }
 
-    public void setHealth(double health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 }
