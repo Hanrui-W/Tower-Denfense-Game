@@ -2,21 +2,21 @@ package model;
 
 public class GameSetting {
 
-    private GameDifficultLevel level;
+    private GameDifficultyLevel level;
 
     public GameSetting() {
-        this.level = GameDifficultLevel.EASY;
+        this.level = GameDifficultyLevel.EASY;
     }
 
-    public GameSetting(GameDifficultLevel level) {
+    public GameSetting(GameDifficultyLevel level) {
         this.level = level;
     }
 
-    public GameDifficultLevel getLevel() {
+    public GameDifficultyLevel getLevel() {
         return level;
     }
 
-    public void setLevel(GameDifficultLevel level) {
+    public void setLevel(GameDifficultyLevel level) {
         this.level = level;
     }
 
