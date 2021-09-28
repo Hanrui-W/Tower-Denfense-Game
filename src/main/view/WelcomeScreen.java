@@ -39,6 +39,8 @@ public class WelcomeScreen {
         vBox.setMinSize(40, 70);
         Image image = new Image("view/TowerDefenseLogo.jpeg");
         ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
         label.setAlignment(Pos.TOP_CENTER);
         root.getChildren().add(imageView);
         root.getChildren().add(vBox);
