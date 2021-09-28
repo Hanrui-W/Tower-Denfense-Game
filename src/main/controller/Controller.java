@@ -3,14 +3,12 @@ package controller;
 import javafx.application.Application;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import model.Model;
 import view.InitConfigScreen;
 import view.InitGameScreen;
 import view.WelcomeScreen;
 
 public class Controller extends Application {
     private Stage mainWindow;
-    private Model gameModel;
     private static final int WIDTH = 400;
     private static final int HEIGHT = 400;
 
