@@ -1,6 +1,6 @@
 package model;
 
-public class Tower extends GameObject{
+public class Tower extends Position implements GameObject{
     private int level;
     private TowerType type;
     private int attackRange;
