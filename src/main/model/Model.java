@@ -17,8 +17,12 @@ public class Model {
         monument = new Monument();
     }
 
-    public void setPlayersName(String name) {
-        player.setName(name);
+    public boolean setPlayersName(String name) {
+        if (name == null || name.trim().equals("")) {
+            return false;
+        }
+        player.setName(name.trim());
+        return true;
     }
 
     public void setDifficulty(GameDifficultyLevel level) {
