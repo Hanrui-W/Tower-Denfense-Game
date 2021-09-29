@@ -37,7 +37,7 @@ public class WelcomeScreen {
         VBox vBox = new VBox(label, startButton);
         vBox.setAlignment(Pos.CENTER);
         vBox.setMinSize(40, 70);
-        Image image = new Image("view/TowerDefenseLogo.jpeg");
+        Image image = new Image("resources/TowerDefenseLogo.jpeg");
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);

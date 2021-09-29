@@ -5,23 +5,24 @@ import java.util.ArrayList;
 public class Map {
     private ArrayList<GameObject> gameObjects;
     private int[][] map;
-    private int mapLength;
     private int mapWidth;
+    private int mapHeight;
     private ArrayList<Position>[] enemyPaths;
     private Position monument;
 
-    static int DEFAULT_LENGTH = 100;
-    static int DEFAULT_WIDTH = 100;
-    static int DEFAULT_PATHS = 1;
+    private static int DEFAULT_WIDTH = 50;
+    private static int DEFAULT_HEIGHT = 40;
+    private static int DEFAULT_PATHS = 1;
+
     public Map() {
-        this(new ArrayList<>(), new int[Map.DEFAULT_LENGTH][Map.DEFAULT_WIDTH], new ArrayList[Map.DEFAULT_PATHS], new Position());
+        this(new ArrayList<>(), new int[Map.DEFAULT_HEIGHT][Map.DEFAULT_WIDTH], new ArrayList[Map.DEFAULT_PATHS], new Position());
     }
 
     public Map(ArrayList<GameObject> gameObjects, int[][] map, ArrayList<Position>[] enemyPaths, Position monument) {
         this.gameObjects = gameObjects;
         this.map = map;
-        this.mapLength = this.map.length;
         this.mapWidth = this.map[0].length;
+        this.mapHeight = this.map.length;
         this.enemyPaths = enemyPaths;
         this.monument = monument;
     }
@@ -46,8 +47,8 @@ public class Map {
         return mapWidth;
     }
 
-    public int getMapLength() {
-        return mapLength;
+    public int getMapHeight() {
+        return mapHeight;
     }
 
     public ArrayList<GameObject> getGameObjects() {
@@ -66,11 +67,11 @@ public class Map {
         this.map = map;
     }
 
-    public void setMapLength(int mapLength) {
-        this.mapLength = mapLength;
-    }
-
     public void setMapWidth(int mapWidth) {
         this.mapWidth = mapWidth;
+    }
+
+    public void setMapHeight(int mapHeight) {
+        this.mapHeight = mapHeight;
     }
 }

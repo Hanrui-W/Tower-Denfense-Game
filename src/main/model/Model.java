@@ -17,16 +17,12 @@ public class Model {
         monument = new Monument();
     }
 
-    public void setPlayersName(String name) {
+    public boolean initGame(String name, GameDifficultyLevel level) {
+        if (name == null || name.equals("")) {
+            return false;
+        }
         player.setName(name);
-    }
-
-    public void setDifficulty(GameDifficultyLevel level) {
-        setting.setLevel(level);
-    }
-
-    public void setStartingMoney() {
-        switch (setting.getLevel()) {
+        switch (level) {
             case EASY:
                 player.setMoney(1000);
                 break;
@@ -40,6 +36,8 @@ public class Model {
                 player.setMoney(300);
                 break;
         }
+        setting.setLevel(level);
+        return true;
     }
 
     public int getMoney() {
