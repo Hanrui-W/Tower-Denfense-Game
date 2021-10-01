@@ -17,18 +17,16 @@ public class WelcomeScreen {
     private Button startButton;
     private Label label;
 
-    public WelcomeScreen() {
-
-    }
+    public WelcomeScreen() { }
 
     public WelcomeScreen(int width, int height) {
         this.width = width;
         this.height = height;
         startButton = new Button("Start");
         startButton.setMinSize(70, 30);
-        startButton.setFont(Font.font("Verdana", 20));
+        startButton.setFont(Font.font("Verdana", 40));
         label = new Label("Welcome Screen");
-        label.setFont(Font.font("Comic Sans MS", 40));
+        label.setFont(Font.font("Comic Sans MS", 70));
         label.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
     }
 
