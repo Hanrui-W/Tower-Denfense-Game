@@ -71,9 +71,11 @@ public class InitConfigScreen {
         return nextButton;
     }
 
-    public TextField getUsername() {return nameText; }
+    public TextField getUsername() {
+        return nameText;
+    }
 
-    public ChoiceBox<GameDifficultyLevel> getDifficultyChoiceBox() {return difficultyChoiceBox; }
-
+    public ChoiceBox<GameDifficultyLevel> getDifficultyChoiceBox() {
+        return difficultyChoiceBox;
+    }
 }
-

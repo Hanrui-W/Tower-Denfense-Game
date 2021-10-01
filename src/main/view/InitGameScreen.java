@@ -10,6 +10,7 @@ public class InitGameScreen {
     private int height;
     private Button nextButton;
     private Label label;
+    private int statingMoney;
 
     public InitGameScreen() { }
     public InitGameScreen(int width, int height) {

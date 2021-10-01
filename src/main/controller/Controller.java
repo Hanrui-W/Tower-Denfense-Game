@@ -16,10 +16,11 @@ public class Controller extends Application {
     private Model model;
     private static final int WIDTH = 960;
     private static final int HEIGHT = 720;
+    private int startingMoney;
 
     public void start(Stage stage) {
         mainWindow = stage;
-        mainWindow.setTitle("Game");
+        mainWindow.setTitle("Tower Defense Game");
         model = new Model();
         initWelcomeScreen();
     }
