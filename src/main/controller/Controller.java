@@ -21,7 +21,7 @@ public class Controller extends Application {
         mainWindow = stage;
         mainWindow.setTitle("Game");
         model = new Model();
-        goToInitConfigScreen();
+        initWelcomeScreen();
     }
 
     public void initWelcomeScreen() {
