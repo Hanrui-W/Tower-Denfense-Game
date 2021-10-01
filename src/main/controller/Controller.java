@@ -2,20 +2,26 @@ package controller;
 
 import javafx.application.Application;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.GameDifficultyLevel;
+import model.Model;
 import view.InitConfigScreen;
 import view.InitGameScreen;
 import view.WelcomeScreen;
 
 public class Controller extends Application {
     private Stage mainWindow;
+    private Model model;
     private static final int WIDTH = 960;
     private static final int HEIGHT = 720;
 
     public void start(Stage stage) {
         mainWindow = stage;
         mainWindow.setTitle("Game");
-        initWelcomeScreen();
+        model = new Model();
+        goToInitConfigScreen();
     }
 
     public void initWelcomeScreen() {
@@ -31,9 +37,20 @@ public class Controller extends Application {
 
     public void goToInitConfigScreen() {
         InitConfigScreen screen = new InitConfigScreen(WIDTH, HEIGHT);
+        screen.getUsername().setText("123");
+        TextField nameText = screen.getUsername();
+        nameText.setOnAction(e -> {
+            nameText.setText(nameText.getText());
+        });
+        ChoiceBox<GameDifficultyLevel> difficultyChoiceBox = screen.getDifficultyChoiceBox();
+        difficultyChoiceBox.setOnAction(e -> {
+            difficultyChoiceBox.setValue(difficultyChoiceBox.getValue());
+        });
         Button nextButton = screen.getNextButton();
         nextButton.setOnAction(e -> {
-            goToInitGameScreen();
+            if (model.initGame(nameText.getText().trim(), difficultyChoiceBox.getValue())) {
+                goToInitGameScreen();
+            }
         });
 
         mainWindow.setScene(screen.getScene());
