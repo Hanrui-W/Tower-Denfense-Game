@@ -40,6 +40,7 @@ public class InitConfigScreen {
         difficultyChoiceBox.setConverter(new StringConverter<GameDifficultyLevel>() {
             @Override
             public String toString(GameDifficultyLevel level) {
+                // Temporarily commented out so to perform tests on view 3
                 /**
                 switch (level) {
                     case EASY:
