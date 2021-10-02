@@ -22,6 +22,14 @@ public class Enemy extends Position implements GameObject{
                 '}';
     }
 
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
     public double getSpeed() {
         return speed;
     }
