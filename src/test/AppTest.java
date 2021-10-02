@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**import controller.Controller;
 =======
 //

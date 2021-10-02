@@ -2,14 +2,16 @@ package model;
 
 public class Enemy extends Position implements GameObject{
     private double speed;
+    private double health;
 
     public Enemy() {
-        this(0, 0, 0.0);
+        this(0, 0, 0.0, 1);
     }
 
-    public Enemy(int xPosition, int yPosition, double speed) {
+    public Enemy(int xPosition, int yPosition, double speed, double health) {
         super(xPosition, yPosition);
         this.speed = speed;
+        this.health = health;
     }
 
     public String toString() {

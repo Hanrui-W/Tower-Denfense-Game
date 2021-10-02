@@ -1,32 +1,41 @@
 package view;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import model.Model;
 
 public class InitGameScreen {
-    private int width;
-    private int height;
-    private Button nextButton;
-    private Label label;
-    private int statingMoney;
+    private final int width;
+    private final int height;
 
-    public InitGameScreen() { }
     public InitGameScreen(int width, int height) {
         this.width = width;
         this.height = height;
-        nextButton = new Button("Next");
-        label = new Label("Init Game Screen");
     }
 
-    public Scene getScene() {
-        VBox root = new VBox(label, nextButton);
-        Scene scene = new Scene(root, width, height);
+    public Scene getScene(Model model) {
+        ImageView map = new ImageView("resources/SimpleMap.png");
+        map.setFitHeight(height * 0.9);
+        map.setFitWidth(width);
+
+        ImageView monument = new ImageView("resources/mario.png");
+        monument.setFitHeight(80);
+        monument.setFitWidth(80);
+
+        Label money = new Label("Remaining Funds: " + model.getMoney());
+        Label monumentHealth = new Label("Monument Heal: " + model.getMonumentHealth());
+
+
+        GridPane bottomSupport = new GridPane();
+
+        bottomSupport.getChildren().add(map);
+        bottomSupport.add(monument, 0, 0);
+        bottomSupport.add(money, 0, 100);
+        bottomSupport.add(monumentHealth, 0, 101);
+
+        Scene scene = new Scene(bottomSupport, width, height);
         return scene;
-    }
-
-    public Button getNextButton() {
-        return nextButton;
     }
 }

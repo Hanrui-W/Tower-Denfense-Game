@@ -10,9 +10,9 @@ public class Map {
     private ArrayList<Position>[] enemyPaths;
     private Position monument;
 
-    private static int DEFAULT_WIDTH = 50;
-    private static int DEFAULT_HEIGHT = 40;
-    private static int DEFAULT_PATHS = 1;
+    private final static int DEFAULT_WIDTH = 50;
+    private final static int DEFAULT_HEIGHT = 40;
+    private final static int DEFAULT_PATHS = 1;
 
     public Map() {
         this(new ArrayList<>(), new int[Map.DEFAULT_HEIGHT][Map.DEFAULT_WIDTH], new ArrayList[Map.DEFAULT_PATHS], new Position());

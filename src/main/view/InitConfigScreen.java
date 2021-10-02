@@ -30,6 +30,7 @@ public class InitConfigScreen {
         nameLabel = new Label("Username: ");
         difficultyLabel = new Label("Difficulty: ");
         nameText = new TextField();
+
         difficultyChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList(
                 GameDifficultyLevel.EASY,
                 GameDifficultyLevel.MEDIUM,
@@ -39,6 +40,7 @@ public class InitConfigScreen {
         difficultyChoiceBox.setConverter(new StringConverter<GameDifficultyLevel>() {
             @Override
             public String toString(GameDifficultyLevel level) {
+                /**
                 switch (level) {
                     case EASY:
                         return "Easy";
@@ -49,12 +51,15 @@ public class InitConfigScreen {
                     default:
                         return "Hell";
                 }
+                 */
+                return "hell";
             }
 
             @Override
             public GameDifficultyLevel fromString(String string) {
                 return null;
             }
+
         });
     }
 
@@ -71,11 +76,9 @@ public class InitConfigScreen {
         return nextButton;
     }
 
-    public TextField getUsername() {
-        return nameText;
-    }
+    public TextField getUsername() {return nameText; }
 
-    public ChoiceBox<GameDifficultyLevel> getDifficultyChoiceBox() {
-        return difficultyChoiceBox;
-    }
+    public ChoiceBox<GameDifficultyLevel> getDifficultyChoiceBox() {return difficultyChoiceBox; }
+
 }
+

@@ -16,11 +16,10 @@ public class Controller extends Application {
     private Model model;
     private static final int WIDTH = 960;
     private static final int HEIGHT = 720;
-    private int startingMoney;
 
     public void start(Stage stage) {
         mainWindow = stage;
-        mainWindow.setTitle("Tower Defense Game");
+        mainWindow.setTitle("Game");
         model = new Model();
         initWelcomeScreen();
     }
@@ -60,12 +59,8 @@ public class Controller extends Application {
 
     public void goToInitGameScreen() {
         InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT);
-        Button nextButton = screen.getNextButton();
-        nextButton.setOnAction(e -> {
-            mainWindow.close();
-        });
 
-        mainWindow.setScene(screen.getScene());
+        mainWindow.setScene(screen.getScene(model));
         mainWindow.show();
     }
 
