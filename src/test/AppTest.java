@@ -5,8 +5,10 @@ import org.junit.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest extends ApplicationTest {
+
     public AppTest() {
     }
 
@@ -100,4 +102,5 @@ public class AppTest extends ApplicationTest {
         FxAssert.verifyThat("300", NodeMatchers.isNotNull());
         FxAssert.verifyThat("125", NodeMatchers.isNotNull());
     }
+
 }
