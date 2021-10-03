@@ -42,7 +42,7 @@ public class InitGameScreen {
         healthLabel.setText("Monument Health: " + health);
     }
 
-    public void getMoneyLabel(int money) {
+    public void setMoneyLabel(int money) {
         moneyLabel.setText("Funds: " + money);
     }
 }
