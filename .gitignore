@@ -31,5 +31,4 @@ hs_err_pid*
 /_MACOS
 desktop.ini
 .DS_Store
-cs2340_checks.xml
 run_checkstyle.py
