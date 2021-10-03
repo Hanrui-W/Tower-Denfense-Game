@@ -2,10 +2,7 @@ package view;
 
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
@@ -20,6 +17,7 @@ public class InitConfigScreen {
     private Label difficultyLabel;
     private TextField nameText;
     private ChoiceBox<GameDifficultyLevel> difficultyChoiceBox;
+    private Alert emptyNameAlert;
 
     public InitConfigScreen() { }
     public InitConfigScreen(int width, int height) {
@@ -30,14 +28,17 @@ public class InitConfigScreen {
         nameLabel = new Label("Username: ");
         difficultyLabel = new Label("Difficulty: ");
         nameText = new TextField();
+        difficultyChoiceBox = initChoiceBox();
+    }
 
-        difficultyChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList(
+    private ChoiceBox initChoiceBox() {
+        ChoiceBox<GameDifficultyLevel> box = new ChoiceBox<>(FXCollections.observableArrayList(
                 GameDifficultyLevel.EASY,
                 GameDifficultyLevel.MEDIUM,
                 GameDifficultyLevel.HARD,
                 GameDifficultyLevel.HELL)
         );
-        difficultyChoiceBox.setConverter(new StringConverter<GameDifficultyLevel>() {
+        box.setConverter(new StringConverter<GameDifficultyLevel>() {
             @Override
             public String toString(GameDifficultyLevel level) {
                 switch (level) {
@@ -58,7 +59,8 @@ public class InitConfigScreen {
             }
 
         });
-        difficultyChoiceBox.setValue(GameDifficultyLevel.EASY);
+        box.setValue(GameDifficultyLevel.EASY);
+        return box;
     }
 
     public Scene getScene() {

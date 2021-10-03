@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.application.Application;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -37,19 +38,24 @@ public class Controller extends Application {
 
     public void goToInitConfigScreen() {
         InitConfigScreen screen = new InitConfigScreen(WIDTH, HEIGHT);
-        screen.getUsername().setText("123");
         TextField nameText = screen.getUsername();
         nameText.setOnAction(e -> {
             nameText.setText(nameText.getText());
         });
-        ChoiceBox<GameDifficultyLevel> difficultyChoiceBox = screen.getDifficultyChoiceBox();
-        difficultyChoiceBox.setOnAction(e -> {
-            difficultyChoiceBox.setValue(difficultyChoiceBox.getValue());
+        ChoiceBox<GameDifficultyLevel> box = screen.getDifficultyChoiceBox();
+        box.setOnAction(e -> {
+            box.setValue(box.getValue());
         });
         Button nextButton = screen.getNextButton();
         nextButton.setOnAction(e -> {
-            if (model.initGame(nameText.getText().trim(), difficultyChoiceBox.getValue())) {
+            if (model.initGame(nameText.getText().trim(), box.getValue())) {
                 goToInitGameScreen();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Empty Name");
+                alert.setContentText("Please enter a valid name.");
+                alert.showAndWait();
             }
         });
 
@@ -59,8 +65,8 @@ public class Controller extends Application {
 
     public void goToInitGameScreen() {
         InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT);
-        screen.setHealthLabel(model.getMonumentHealth());
-        screen.getMoneyLabel(model.getMoney());
+        screen.setHealthValue(model.getMonumentHealth());
+        screen.setMoneyValue(model.getMoney());
         mainWindow.setScene(screen.getScene());
         mainWindow.show();
     }
