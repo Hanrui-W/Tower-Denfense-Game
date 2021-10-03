@@ -24,10 +24,9 @@ hs_err_pid*
 
 #intelliJ files we don't want to worry about
 *.iml
-*.xml
+pom.xml
 .idea 
 /out
-/target
 /_MACOS
 desktop.ini
 .DS_Store
