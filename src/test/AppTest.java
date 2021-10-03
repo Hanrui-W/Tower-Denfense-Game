@@ -8,8 +8,11 @@ import org.junit.Assert.*;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest extends ApplicationTest {
+    private final Player player = new Player();
+
     public AppTest() {
     }
 
@@ -102,5 +105,11 @@ public class AppTest extends ApplicationTest {
         this.clickOn("Next");
         FxAssert.verifyThat("300", NodeMatchers.isNotNull());
         FxAssert.verifyThat("125", NodeMatchers.isNotNull());
+    }
+
+    @org.junit.jupiter.api.Test
+    void testName() {
+        player.setName("Tony");
+        assertEquals("Tony", player.getName());
     }
 }
