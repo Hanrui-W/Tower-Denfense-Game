@@ -1,16 +1,21 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import model.Player;
+
+import model.GameDifficultyLevel;
+import model.Model;
 
 import org.junit.jupiter.api.Test;
 
 class ModelTest {
 
-    private final Player player = new Player();
+    private final Model model = new Model();
 
     @Test
-    void testName() {
-        player.setName("Tony");
-        assertEquals("Tony", player.getName());
+    void testInitGame() {
+        model.initGame("abc", GameDifficultyLevel.EASY);
+
+        assertEquals("abc", model.getPlayerName());
+        assertEquals(1000, model.getMoney());
+        assertEquals(1000, model.getMonumentHealth());
     }
 
 }

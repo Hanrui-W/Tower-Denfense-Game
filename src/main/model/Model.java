@@ -55,4 +55,8 @@ public class Model {
     public int getMonumentHealth() {
         return monument.getHealth();
     }
+
+    public String getPlayerName() {
+        return player.getName();
+    }
 }
