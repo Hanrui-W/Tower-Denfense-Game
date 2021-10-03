@@ -1,4 +1,3 @@
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
@@ -13,6 +12,5 @@ public class InitConfigScreenTest {
         testInitConfigScreen.getUsername().setText("Working");
         assertEquals("Working", testInitConfigScreen.getUsername().getText());
     }
-
 
 }

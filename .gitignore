@@ -24,10 +24,11 @@ hs_err_pid*
 
 #intelliJ files we don't want to worry about
 *.iml
+pom.xml
+/target
 .idea 
 /out
 /_MACOS
 desktop.ini
 .DS_Store
-cs2340_checks.xml
 run_checkstyle.py
