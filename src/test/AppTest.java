@@ -21,4 +21,14 @@ public class AppTest extends ApplicationTest {
         this.clickOn("Start");
         FxAssert.verifyThat("Init Config Screen", NodeMatchers.isNotNull());
     }
+
+    @Test
+    public void testGameLabels() {
+        this.clickOn("Start");
+        this.clickOn("Easy");
+        this.clickOn("Hell");
+        this.clickOn("Next");
+        FxAssert.verifyThat("Funds: 300", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("Monument Health: 125", NodeMatchers.isNotNull());
+    }
 }
