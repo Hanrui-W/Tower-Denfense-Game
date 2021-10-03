@@ -40,8 +40,6 @@ public class InitConfigScreen {
         difficultyChoiceBox.setConverter(new StringConverter<GameDifficultyLevel>() {
             @Override
             public String toString(GameDifficultyLevel level) {
-                // Temporarily commented out so to perform tests on view 3
-                /**
                 switch (level) {
                     case EASY:
                         return "Easy";
@@ -52,8 +50,6 @@ public class InitConfigScreen {
                     default:
                         return "Hell";
                 }
-                 */
-                return "hell";
             }
 
             @Override
@@ -62,6 +58,7 @@ public class InitConfigScreen {
             }
 
         });
+        difficultyChoiceBox.setValue(GameDifficultyLevel.EASY);
     }
 
     public Scene getScene() {
@@ -77,9 +74,13 @@ public class InitConfigScreen {
         return nextButton;
     }
 
-    public TextField getUsername() {return nameText; }
+    public TextField getUsername() {
+        return nameText;
+    }
 
-    public ChoiceBox<GameDifficultyLevel> getDifficultyChoiceBox() {return difficultyChoiceBox; }
+    public ChoiceBox<GameDifficultyLevel> getDifficultyChoiceBox() {
+        return difficultyChoiceBox;
+    }
 
 }
 
