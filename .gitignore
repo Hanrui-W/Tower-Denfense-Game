@@ -25,6 +25,7 @@ hs_err_pid*
 #intelliJ files we don't want to worry about
 *.iml
 pom.xml
+/target
 .idea 
 /out
 /_MACOS
