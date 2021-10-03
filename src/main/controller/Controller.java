@@ -65,8 +65,8 @@ public class Controller extends Application {
 
     public void goToInitGameScreen() {
         InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT);
-        screen.setHealthLabel(model.getMonumentHealth());
-        screen.setMoneyLabel(model.getMoney());
+        screen.setHealthValue(model.getMonumentHealth());
+        screen.setMoneyValue(model.getMoney());
         mainWindow.setScene(screen.getScene());
         mainWindow.show();
     }
