@@ -17,7 +17,6 @@ public class InitConfigScreen {
     private Label difficultyLabel;
     private TextField nameText;
     private ChoiceBox<GameDifficultyLevel> difficultyChoiceBox;
-    private Alert emptyNameAlert;
 
     public InitConfigScreen() { }
     public InitConfigScreen(int width, int height) {
