@@ -1,6 +1,6 @@
 package model;
 
-public class Monument extends Position implements GameObject{
+public class Monument extends Position implements GameObject {
     private int health;
 
     public Monument() {
@@ -14,11 +14,11 @@ public class Monument extends Position implements GameObject{
 
     @Override
     public String toString() {
-        return "Monument{" +
-                "xPosition=" + getxPosition() +
-                ", yPosition=" + getyPosition() +
-                "health=" + health +
-                '}';
+        return "Monument{"
+                + "xPosition=" + getxPosition()
+                + ", yPosition=" + getyPosition()
+                + "health=" + health
+                + '}';
     }
 
     public int getHealth() {

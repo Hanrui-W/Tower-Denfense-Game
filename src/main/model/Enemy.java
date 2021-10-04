@@ -1,6 +1,6 @@
 package model;
 
-public class Enemy extends Position implements GameObject{
+public class Enemy extends Position implements GameObject {
     private double speed;
     private double health;
 
@@ -15,11 +15,11 @@ public class Enemy extends Position implements GameObject{
     }
 
     public String toString() {
-        return "Enemy{" +
-                "xPosition=" + getxPosition() +
-                ", yPosition=" + getyPosition() +
-                ", speed=" + speed +
-                '}';
+        return "Enemy {"
+                + "xPosition=" + getxPosition()
+                + ", yPosition=" + getyPosition()
+                + ", speed=" + speed
+                + '}';
     }
 
     public double getHealth() {

@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Player implements GameObject{
+public class Player implements GameObject {
     private String name;
     private int money;
     private ArrayList<Tower> towers;
@@ -28,11 +28,11 @@ public class Player implements GameObject{
 
     @Override
     public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                ", money=" + money +
-                ", towers=" + towers +
-                '}';
+        return "Player{"
+                + "name='" + name + '\''
+                + ", money=" + money
+                + ", towers=" + towers
+                + '}';
     }
 
     public String getName() {

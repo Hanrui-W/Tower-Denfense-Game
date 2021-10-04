@@ -10,15 +10,17 @@ public class Map {
     private ArrayList<Position>[] enemyPaths;
     private Position monument;
 
-    private final static int DEFAULT_WIDTH = 50;
-    private final static int DEFAULT_HEIGHT = 40;
-    private final static int DEFAULT_PATHS = 1;
+    private static final int DEFAULT_WIDTH = 50;
+    private static final int DEFAULT_HEIGHT = 40;
+    private static final int DEFAULT_PATHS = 1;
 
     public Map() {
-        this(new ArrayList<>(), new int[Map.DEFAULT_HEIGHT][Map.DEFAULT_WIDTH], new ArrayList[Map.DEFAULT_PATHS], new Position());
+        this(new ArrayList<>(), new int[Map.DEFAULT_HEIGHT][Map.DEFAULT_WIDTH],
+                new ArrayList[Map.DEFAULT_PATHS], new Position());
     }
 
-    public Map(ArrayList<GameObject> gameObjects, int[][] map, ArrayList<Position>[] enemyPaths, Position monument) {
+    public Map(ArrayList<GameObject> gameObjects, int[][] map,
+               ArrayList<Position>[] enemyPaths, Position monument) {
         this.gameObjects = gameObjects;
         this.map = map;
         this.mapWidth = this.map[0].length;

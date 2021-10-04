@@ -16,10 +16,10 @@ public class Position {
 
     @Override
     public String toString() {
-        return "Position{" +
-                "xPosition=" + xPosition +
-                ", yPosition=" + yPosition +
-                '}';
+        return "Position{"
+                + "xPosition=" + xPosition
+                + ", yPosition=" + yPosition
+                + '}';
     }
 
     public int getxPosition() {

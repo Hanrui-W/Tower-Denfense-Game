@@ -23,22 +23,24 @@ public class Model {
         }
         player.setName(name);
         switch (level) {
-            case EASY:
-                player.setMoney(1000);
-                monument.setHealth(1000);
-                break;
-            case MEDIUM:
-                player.setMoney(700);
-                monument.setHealth(500);
-                break;
-            case HARD:
-                player.setMoney(500);
-                monument.setHealth(250);
-                break;
-            case HELL:
-                player.setMoney(300);
-                monument.setHealth(125);
-                break;
+        case EASY:
+            player.setMoney(1000);
+            monument.setHealth(1000);
+            break;
+        case MEDIUM:
+            player.setMoney(700);
+            monument.setHealth(500);
+            break;
+        case HARD:
+            player.setMoney(500);
+            monument.setHealth(250);
+            break;
+        case HELL:
+            player.setMoney(300);
+            monument.setHealth(125);
+            break;
+        default:
+            break;
         }
         setting.setLevel(level);
         return true;
