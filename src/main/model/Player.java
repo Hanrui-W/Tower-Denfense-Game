@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Player implements GameObject {
+public class Player {
     private String name;
     private int money;
     private ArrayList<Tower> towers;
