@@ -11,6 +11,7 @@ import model.Model;
 import view.InitConfigScreen;
 import view.InitGameScreen;
 import view.WelcomeScreen;
+import view.TowerMeun;
 
 public class Controller extends Application {
     private Stage mainWindow;
@@ -22,7 +23,8 @@ public class Controller extends Application {
         mainWindow = stage;
         mainWindow.setTitle("Game");
         model = new Model();
-        initWelcomeScreen();
+//        initWelcomeScreen();
+        goToTowerMenu();
     }
 
     public void initWelcomeScreen() {
@@ -68,6 +70,13 @@ public class Controller extends Application {
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
         mainWindow.setScene(screen.getScene());
+        mainWindow.show();
+    }
+
+    //Only for develop, should be deleted after integration with game scene
+    public void goToTowerMenu() {
+        TowerMeun towerMeun = new TowerMeun(WIDTH , (int)(HEIGHT/4 +0.5));
+        mainWindow.setScene(towerMeun.getScene());
         mainWindow.show();
     }
 
