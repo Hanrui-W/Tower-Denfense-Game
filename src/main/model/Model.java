@@ -8,6 +8,7 @@ public class Model {
     private LinkedList<Enemy> enemies;
     private GameSetting setting;
     private Monument monument;
+    private LinkedList<TowerType> towerTypes;
 
     public Model() {
         player = new Player();
@@ -15,6 +16,7 @@ public class Model {
         enemies = new LinkedList<>();
         setting = new GameSetting();
         monument = new Monument();
+        towerTypes = new LinkedList<>();
     }
 
     public boolean initGame(String name, GameDifficultyLevel level) {
@@ -56,6 +58,10 @@ public class Model {
 
     public int getMonumentHealth() {
         return monument.getHealth();
+    }
+
+    public LinkedList<TowerType> getTowerTypes() {
+        return towerTypes;
     }
 
     public String getPlayerName() {

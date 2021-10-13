@@ -8,10 +8,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.GameDifficultyLevel;
 import model.Model;
+import model.TowerType;
 import view.InitConfigScreen;
 import view.InitGameScreen;
 import view.WelcomeScreen;
-import view.TowerMeun;
+import view.TowerMeunScreen;
+
+import java.util.ArrayList;
 
 public class Controller extends Application {
     private Stage mainWindow;
@@ -75,7 +78,12 @@ public class Controller extends Application {
 
     //Only for develop, should be deleted after integration with game scene
     public void goToTowerMenu() {
-        TowerMeun towerMeun = new TowerMeun(WIDTH , (int)(HEIGHT/4 +0.5));
+        ArrayList<TowerType> towerTypes = new ArrayList<>();
+        towerTypes.add(new TowerType("tower1", "tower1", "resources/sunflower.gif", 100, 1, 1, 1));
+        towerTypes.add(new TowerType("tower2", "tower2", "resources/pea.gif", 200, 1, 1, 1));
+        towerTypes.add(new TowerType("tower3", "tower3", "resources/mushroom.gif", 300, 1, 1, 1));
+        TowerMeunScreen towerMeun = new TowerMeunScreen(WIDTH , (int)(HEIGHT/4 +0.5));
+        towerMeun.setTowerTypes(towerTypes);
         mainWindow.setScene(towerMeun.getScene());
         mainWindow.show();
     }
