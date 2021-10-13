@@ -7,7 +7,6 @@ public class TowerMenu {
 
     public TowerMenu() {
         menu = new ArrayList<>();
-        menu.add(new TowerType("1", "1st TowerType", 100, 10, 2, 1));
     }
 
     public ArrayList<TowerType> getMenu() {
