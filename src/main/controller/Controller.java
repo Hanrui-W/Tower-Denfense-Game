@@ -82,9 +82,9 @@ public class Controller extends Application {
         towerTypes.add(new TowerType("tower1", "tower1", "resources/sunflower.gif", 100, 1, 1, 1));
         towerTypes.add(new TowerType("tower2", "tower2", "resources/pea.gif", 200, 1, 1, 1));
         towerTypes.add(new TowerType("tower3", "tower3", "resources/mushroom.gif", 300, 1, 1, 1));
-        TowerMeunScreen towerMeun = new TowerMeunScreen(WIDTH , (int)(HEIGHT/4 +0.5));
-        towerMeun.setTowerTypes(towerTypes);
-        mainWindow.setScene(towerMeun.getScene());
+        TowerMeunScreen towerMenu = new TowerMeunScreen(WIDTH , (int)(HEIGHT/4 +0.5));
+        towerMenu.setTowerTypes(towerTypes);
+        mainWindow.setScene(towerMenu.getScene());
         mainWindow.show();
     }
 
