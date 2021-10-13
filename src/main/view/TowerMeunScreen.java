@@ -79,6 +79,11 @@ public class TowerMeunScreen {
         return scene;
     }
 
+    public ArrayList<TowerType> getTowerTypes() {
+        return towerTypes;
+    }
 
-
+    public ArrayList<Button> getButtons() {
+        return buttons;
+    }
 }
