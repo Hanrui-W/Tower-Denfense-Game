@@ -6,6 +6,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+import java.io.File;
+
 public class InitGameScreen {
     private final int width;
     private final int height;
@@ -24,11 +26,11 @@ public class InitGameScreen {
     }
 
     public Scene getScene() {
-        ImageView map = new ImageView("resources/SimpleMap.png");
+        ImageView map = new ImageView(new File("src/main/resources/SimpleMap.png").toURI().toString());
         map.setFitHeight(height * 0.9);
         map.setFitWidth(width);
 
-        ImageView monument = new ImageView("resources/mario.png");
+        ImageView monument = new ImageView(new File("src/main/resources/mario.png").toURI().toString());
         monument.setFitHeight(80);
         monument.setFitWidth(80);
 

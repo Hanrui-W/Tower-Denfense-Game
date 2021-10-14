@@ -14,6 +14,7 @@ import view.InitGameScreen;
 import view.WelcomeScreen;
 import view.TowerMeunScreen;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Controller extends Application {
@@ -26,7 +27,7 @@ public class Controller extends Application {
         mainWindow = stage;
         mainWindow.setTitle("Game");
         model = new Model();
-//        initWelcomeScreen();
+        initWelcomeScreen();
         goToTowerMenu();
     }
 
@@ -79,14 +80,26 @@ public class Controller extends Application {
     //Only for develop, should be deleted after integration with game scene
     public void goToTowerMenu() {
         ArrayList<TowerType> towerTypes = new ArrayList<>();
-        towerTypes.add(new TowerType("tower1", "tower1", "resources/sunflower.gif", 100, 1, 1, 1));
-        towerTypes.add(new TowerType("tower2", "tower2", "resources/pea.gif", 200, 1, 1, 1));
-        towerTypes.add(new TowerType("tower3", "tower3", "resources/mushroom.gif", 300, 1, 1, 1));
+        towerTypes.add(new TowerType("tower1", "tower1",
+                new File("src/main/resources/sunflower.gif")
+                        .toURI()
+                        .toString(),
+                100, 1, 1, 1));
+        towerTypes.add(new TowerType("tower2", "tower2",
+                new File("src/main/resources/sunflower.gif")
+                        .toURI()
+                        .toString(),
+                200, 1, 1, 1));
+        towerTypes.add(new TowerType("tower3", "tower3",
+                new File("src/main/resources/mushroom.gif")
+                        .toURI()
+                        .toString(),
+                300, 1, 1, 1));
         TowerMeunScreen towerMenu = new TowerMeunScreen(WIDTH , (int)(HEIGHT/4 +0.5));
         towerMenu.setTowerTypes(towerTypes);
         mainWindow.setScene(towerMenu.getScene());
         mainWindow.show();
-    }
+     }
 
     public static void main(String[] args) {
         launch(args);
