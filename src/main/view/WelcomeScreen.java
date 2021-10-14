@@ -20,8 +20,6 @@ public class WelcomeScreen {
     private Button startButton;
     private Label label;
 
-    public WelcomeScreen() { }
-
     public WelcomeScreen(int width, int height) {
         this.width = width;
         this.height = height;
@@ -38,14 +36,16 @@ public class WelcomeScreen {
         VBox vBox = new VBox(label, startButton);
         vBox.setAlignment(Pos.CENTER);
         vBox.setMinSize(40, 70);
-        System.out.println(System.getProperty("user.dir"));
+
         Image image = new Image(new File("src/main/resources/TowerDefenseLogo.jpeg").toURI().toString());
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         label.setAlignment(Pos.TOP_CENTER);
+
         root.getChildren().add(imageView);
         root.getChildren().add(vBox);
+
         Scene scene = new Scene(root, width, height);
         return scene;
     }

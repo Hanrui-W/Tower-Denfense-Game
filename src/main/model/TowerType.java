@@ -25,11 +25,12 @@ public class TowerType {
 
     @Override
     public String toString() {
-        return "TowerType{"
-                + "cost=" + cost
-                + "attackDamage=" + attackDamage
-                + ", attackSpeed=" + attackSpeed
-                + ", attackMode=" + attackMode
+        return "TowerType {\n"
+                + "image path: " + imagePath + "\n"
+                + "cost=" + cost + "\n"
+                + "attackDamage=" + attackDamage + "\n"
+                + ", attackSpeed=" + attackSpeed + "\n"
+                + ", attackMode=" + attackMode + "\n"
                 + '}';
     }
 
