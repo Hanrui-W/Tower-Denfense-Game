@@ -12,7 +12,7 @@ import model.TowerType;
 import view.InitConfigScreen;
 import view.InitGameScreen;
 import view.WelcomeScreen;
-import view.TowerMeunScreen;
+import view.TowerMenuScreen;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class Controller extends Application {
                         .toURI()
                         .toString(),
                 300, 1, 1, 1));
-        TowerMeunScreen towerMenu = new TowerMeunScreen(WIDTH , (int)(HEIGHT/4 +0.5));
+        TowerMenuScreen towerMenu = new TowerMenuScreen(WIDTH , (int)(HEIGHT/4 +0.5));
         towerMenu.setTowerTypes(towerTypes);
         mainWindow.setScene(towerMenu.getScene());
         mainWindow.show();

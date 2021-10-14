@@ -14,22 +14,22 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 
-public class TowerMeunScreen {
-    private final int meunWidth;
-    private final int meunHeight;
+public class TowerMenuScreen {
+    private final int menuWidth;
+    private final int menuHeight;
     private ArrayList<TowerType> towerTypes;
     private ArrayList<Button> buttons;
     private ArrayList<Label> labels;
 
-    public TowerMeunScreen(int meunWidth, int meunHeight) {
-        this.meunWidth = meunWidth;
-        this.meunHeight = meunHeight;
+    public TowerMenuScreen(int menuWidth, int menuHeight) {
+        this.menuWidth = menuWidth;
+        this.menuHeight = menuHeight;
         this.setTowerTypes(new ArrayList<>());
     }
 
-    public TowerMeunScreen(int meunWidth, int meunHeight, ArrayList<TowerType> towerTypes) {
-        this.meunWidth = meunWidth;
-        this.meunHeight = meunHeight;
+    public TowerMenuScreen(int meunWidth, int meunHeight, ArrayList<TowerType> towerTypes) {
+        this.menuWidth = meunWidth;
+        this.menuHeight = meunHeight;
         this.towerTypes = towerTypes;
     }
 
@@ -39,8 +39,8 @@ public class TowerMeunScreen {
         this.labels = new ArrayList<>();
         for (TowerType towerType : towerTypes) {
             ImageView image = new ImageView(new Image(towerType.getImagePath()));
-            image.setFitHeight(this.meunHeight*0.6);
-            image.setFitWidth((int)(this.meunWidth /towerTypes.size()));
+            image.setFitHeight(this.menuHeight *0.6);
+            image.setFitWidth((int)(this.menuWidth /towerTypes.size()));
             Label nameLabel = new Label(towerType.getName() + "\nCost: " + towerType.getCost(), image);
             nameLabel.setStyle("-fx-border-color: green; -fx-border-width: 2");
             nameLabel.setContentDisplay(ContentDisplay.TOP);
@@ -75,7 +75,7 @@ public class TowerMeunScreen {
             vbox.setAlignment(Pos.CENTER);
             hBox.getChildren().add(vbox);
         }
-        Scene scene = new Scene(hBox, meunWidth, meunHeight);
+        Scene scene = new Scene(hBox, menuWidth, menuHeight);
         return scene;
     }
 
