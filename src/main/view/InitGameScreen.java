@@ -29,7 +29,7 @@ public class InitGameScreen {
     private boolean placedTower;
     private boolean purchasedTower;
 
-    public InitGameScreen(int width, int height) {
+    public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers) {
         this.width = width;
         this.height = height;
         moneyLabel = new Label("Funds: ");
@@ -39,24 +39,9 @@ public class InitGameScreen {
         placedTower = false;
         purchasedTower = false;
 
-        listOfTowers = new ArrayList<>();
+        this.listOfTowers = listOfTowers;
         buttons = new ArrayList<>();
         labels = new ArrayList<>();
-        listOfTowers.add(new TowerType("Flowy Flower", "tower1",
-                new File("src/main/resources/sunflower.gif")
-                        .toURI()
-                        .toString(),
-                100, 1, 1, 1));
-        listOfTowers.add(new TowerType("Pew Pew Pea", "tower2",
-                new File("src/main/resources/pea.gif")
-                        .toURI()
-                        .toString(),
-                200, 1, 1, 1));
-        listOfTowers.add(new TowerType("Wag Wag Mushroom", "tower3",
-                new File("src/main/resources/mushroom.gif")
-                        .toURI()
-                        .toString(),
-                300, 1, 1, 1));
     }
 
     public Scene getScene() {
@@ -130,5 +115,29 @@ public class InitGameScreen {
             hBox.getChildren().add(vbox);
         }
         return hBox;
+    }
+
+    public ArrayList<Button> getButtons() {
+        return buttons;
+    }
+
+    public void setPurchasedTower(boolean purchased) {
+        purchasedTower = purchased;
+    }
+
+    public boolean getPurchased() {
+        return purchasedTower;
+    }
+
+    public void setPlacedTower(boolean set) {
+        placedTower = set;
+    }
+
+    public boolean getPlaced() {
+        return placedTower;
+    }
+
+    public ArrayList<TowerType> getListOfTowers() {
+        return listOfTowers;
     }
 }

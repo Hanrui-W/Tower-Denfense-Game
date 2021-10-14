@@ -8,9 +8,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.GameDifficultyLevel;
 import model.Model;
+import model.TowerType;
 import view.InitConfigScreen;
 import view.InitGameScreen;
 import view.WelcomeScreen;
+
+import java.io.File;
+import java.util.ArrayList;
 
 
 public class Controller extends Application {
@@ -65,10 +69,91 @@ public class Controller extends Application {
     }
 
     public void goToInitGameScreen() {
-        InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT);
+        ArrayList<TowerType> listOfTowers = new ArrayList<>();
+        listOfTowers.add(new TowerType("Flowy Flower", "tower1",
+                new File("src/main/resources/sunflower.gif")
+                        .toURI()
+                        .toString(),
+                100, 1, 1, 1));
+        listOfTowers.add(new TowerType("Pew Pew Pea", "tower2",
+                new File("src/main/resources/pea.gif")
+                        .toURI()
+                        .toString(),
+                200, 1, 1, 1));
+        listOfTowers.add(new TowerType("Wag Wag Mushroom", "tower3",
+                new File("src/main/resources/mushroom.gif")
+                        .toURI()
+                        .toString(),
+                300, 1, 1, 1));
+
+        InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT, listOfTowers);
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
         mainWindow.setScene(screen.getScene());
+
+        ArrayList<Button> buttons = screen.getButtons();
+        Button towerOne = buttons.get(0);
+        Button towerTwo = buttons.get(1);
+        Button towerThree = buttons.get(1);
+
+        towerOne.setOnAction(e -> {
+            if (screen.getPurchased()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Have not placed purchased tower");
+                alert.setContentText("Must place purchased tower to continue.");
+                alert.showAndWait();
+            } else  if (model.getMoney() < listOfTowers.get(0).getCost()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Insufficient funds.");
+                alert.setContentText("You do not have enough funds to purchase this tower.");
+                alert.showAndWait();
+            } else {
+                model.setMoney(model.getMoney() - listOfTowers.get(0).getCost());
+                screen.setMoneyValue(model.getMoney());
+                screen.setPurchasedTower(true);
+            }
+        });
+
+        towerTwo.setOnAction(e -> {
+            if (screen.getPurchased()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Have not placed purchased tower");
+                alert.setContentText("Must place purchased tower to continue.");
+                alert.showAndWait();
+            } else  if (model.getMoney() < listOfTowers.get(1).getCost()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Insufficient funds.");
+                alert.setContentText("You do not have enough funds to purchase this tower.");
+                alert.showAndWait();
+            } else {
+                model.setMoney(model.getMoney() - listOfTowers.get(1).getCost());
+                screen.setMoneyValue(model.getMoney());
+            }
+        });
+
+        towerThree.setOnAction(e -> {
+            if (screen.getPurchased()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Have not placed purchased tower");
+                alert.setContentText("Must place purchased tower to continue.");
+                alert.showAndWait();
+            } else  if (model.getMoney() < listOfTowers.get(2).getCost()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Insufficient funds.");
+                alert.setContentText("You do not have enough funds to purchase this tower.");
+                alert.showAndWait();
+            } else {
+                model.setMoney(model.getMoney() - listOfTowers.get(2).getCost());
+                screen.setMoneyValue(model.getMoney());
+            }
+        });
+
         mainWindow.show();
     }
 

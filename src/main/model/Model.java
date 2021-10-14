@@ -52,6 +52,10 @@ public class Model {
         return player.getMoney();
     }
 
+    public void setMoney(int money) {
+        this.player.setMoney(money);
+    }
+
     public int[][] getMap() {
         return map.getMap();
     }
