@@ -122,6 +122,8 @@ public class Controller extends Application {
                 purchasedTower = new Image(new File("src/main/resources/sunflower.gif")
                         .toURI()
                         .toString());
+                screen.setMessageLabel("You purchased flowy\n"
+                        +  "flower");
             }
         });
 
@@ -145,6 +147,8 @@ public class Controller extends Application {
                 purchasedTower = new Image(new File("src/main/resources/pea.gif")
                         .toURI()
                         .toString());
+                screen.setMessageLabel("You purchased pew\n"
+                        +  "pew pea");
             }
         });
 
@@ -168,6 +172,8 @@ public class Controller extends Application {
                 purchasedTower = new Image(new File("src/main/resources/mushroom.gif")
                         .toURI()
                         .toString());
+                screen.setMessageLabel("You purchased wag\n"
+                        +  "wag mushroom");
             }
         });
 
