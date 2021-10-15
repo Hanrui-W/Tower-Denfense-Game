@@ -62,8 +62,7 @@ public class InitGameScreen {
         // Create a tower menu down below
         HBox towerMenu = getTowerMenu();
         VBox bottomSupport = new VBox(mapView, new HBox(textualPrompts, towerMenu));
-        Scene scene = new Scene(bottomSupport, width, height);
-        return scene;
+        return new Scene(bottomSupport, width, height);
     }
 
     public void initMap(int[][] map) {
@@ -72,7 +71,7 @@ public class InitGameScreen {
                 switch (map[i][j]) {
                     case 0:
                         Rectangle empty = new Rectangle(SQUARE_WIDTH, SQUARE_WIDTH);
-                        empty.setFill(Color.GRAY);
+                        empty.setFill(Color.WHITE);
                         mapView.add(empty, j, i);
                         break;
                     case 1:
@@ -81,12 +80,6 @@ public class InitGameScreen {
                         mapView.add(path, j, i);
                         break;
                     case 2:
-                        Rectangle avail = new Rectangle(SQUARE_WIDTH, SQUARE_WIDTH);
-                        avail.setFill(Color.GRAY);
-                        mapView.add(avail, j, i);
-                        availableSites.add(avail);
-                        break;
-                    case 3:
                         Rectangle pedestal = new Rectangle(SQUARE_WIDTH, SQUARE_WIDTH);
                         pedestal.setFill(Color.GRAY);
                         Image monument = new Image(new File("src/main/resources/mario.png")

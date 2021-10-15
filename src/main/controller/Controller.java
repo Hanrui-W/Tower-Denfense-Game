@@ -180,15 +180,14 @@ public class Controller extends Application {
         for (Node node : screen.getMap().getChildren()) {
             node.setOnMouseClicked(t -> screen.getMap().getChildren().forEach(c -> {
                 Rectangle tile = (Rectangle) node;
-                if (screen.getPurchased() && tile.getFill() == Color.GRAY) {
+                if (screen.getPurchased() && tile.getFill() == Color.WHITE) {
                     tile.setFill(new ImagePattern(purchasedTower));
-                    System.out.println(true);
                     screen.setPurchasedTower(false);
                     screen.setMessageLabel("");
                 } else if (screen.getPurchased() && tile.getFill() == Color.YELLOW) {
                     screen.setMessageLabel("You cannot place tower\n"
                             +  "on the path. Click\n"
-                            + "on the grey tiles.");
+                            + "on the while areas.");
                 }
             }));
         }
