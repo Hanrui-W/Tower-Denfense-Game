@@ -1,11 +1,21 @@
 package controller;
 
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import javafx.scene.input.MouseEvent;
 import model.GameDifficultyLevel;
 import model.Model;
 import model.TowerType;
@@ -74,17 +84,17 @@ public class Controller extends Application {
                 new File("src/main/resources/sunflower.gif")
                         .toURI()
                         .toString(),
-                100, 1, 1, 1));
+                model.getTowerPriceBaseValue(), 1, 1, 1));
         listOfTowers.add(new TowerType("Pew Pew Pea", "tower2",
                 new File("src/main/resources/pea.gif")
                         .toURI()
                         .toString(),
-                200, 1, 1, 1));
+                model.getTowerPriceBaseValue() * 2, 1, 1, 1));
         listOfTowers.add(new TowerType("Wag Wag Mushroom", "tower3",
                 new File("src/main/resources/mushroom.gif")
                         .toURI()
                         .toString(),
-                300, 1, 1, 1));
+                model.getTowerPriceBaseValue() * 3, 1, 1, 1));
 
         InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT, listOfTowers);
         screen.setHealthValue(model.getMonumentHealth());
@@ -94,7 +104,7 @@ public class Controller extends Application {
         ArrayList<Button> buttons = screen.getButtons();
         Button towerOne = buttons.get(0);
         Button towerTwo = buttons.get(1);
-        Button towerThree = buttons.get(1);
+        Button towerThree = buttons.get(2);
 
         towerOne.setOnAction(e -> {
             if (screen.getPurchased()) {
@@ -132,6 +142,7 @@ public class Controller extends Application {
             } else {
                 model.setMoney(model.getMoney() - listOfTowers.get(1).getCost());
                 screen.setMoneyValue(model.getMoney());
+                screen.setPurchasedTower(true);
             }
         });
 
@@ -151,10 +162,33 @@ public class Controller extends Application {
             } else {
                 model.setMoney(model.getMoney() - listOfTowers.get(2).getCost());
                 screen.setMoneyValue(model.getMoney());
+                screen.setPurchasedTower(true);
             }
         });
 
-        mainWindow.show();
+        ImageView map = screen.getMap();
+        map.setPickOnBounds(true);
+        map.setOnMouseClicked(event -> {
+            if (screen.getPurchased()) {
+                double x = event.getSceneX();
+                double y = event.getSceneY();
+
+                ImageView image = new ImageView(new File("src/main/resources/mushroom.gif")
+                        .toURI()
+                        .toString());
+
+                int row = ((int) x) / 50;
+                int col = ((int) y) / 50;
+
+                image.setFitHeight(50);
+                image.setFitWidth(50);
+                image.setY(y);
+                image.setX(x);
+                System.out.println(row + " " + col);
+                screen.getGridPane().add(image, 0, 2);
+                screen.setPurchasedTower(false);
+            }
+        });
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package view;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -7,10 +8,9 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.Node;
 import model.TowerType;
 
 import java.io.File;
@@ -19,15 +19,16 @@ import java.util.ArrayList;
 public class InitGameScreen {
     private final int width;
     private final int height;
-    private Label moneyLabel;
-    private Label moneyValue;
-    private Label healthLabel;
-    private Label healthValue;
-    private ArrayList<TowerType> listOfTowers;
-    private ArrayList<Button> buttons;
-    private ArrayList<Label> labels;
-    private boolean placedTower;
+    private final Label moneyLabel;
+    private final Label moneyValue;
+    private final Label healthLabel;
+    private final Label healthValue;
+    private final ArrayList<TowerType> listOfTowers;
+    private final ArrayList<Button> buttons;
+    private final ArrayList<Label> labels;
     private boolean purchasedTower;
+    private ImageView map;
+    private GridPane bottomSupport;
 
     public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers) {
         this.width = width;
@@ -36,7 +37,6 @@ public class InitGameScreen {
         moneyValue = new Label("100");
         healthLabel = new Label("Monument Health: ");
         healthValue = new Label("100");
-        placedTower = false;
         purchasedTower = false;
 
         this.listOfTowers = listOfTowers;
@@ -45,7 +45,7 @@ public class InitGameScreen {
     }
 
     public Scene getScene() {
-        ImageView map = new ImageView(new File("src/main/resources/SimpleMap.png").toURI().toString());
+        map = new ImageView(new File("src/main/resources/SimpleMap.png").toURI().toString());
         map.setFitHeight(height * 0.8);
         map.setFitWidth(width);
 
@@ -53,9 +53,10 @@ public class InitGameScreen {
         monument.setFitHeight(80);
         monument.setFitWidth(80);
 
-        GridPane bottomSupport = new GridPane();
+        bottomSupport = new GridPane();
 
         bottomSupport.getChildren().add(map);
+
         bottomSupport.add(monument, 0, 0);
 
         HBox bottomPanel = new HBox();
@@ -129,15 +130,11 @@ public class InitGameScreen {
         return purchasedTower;
     }
 
-    public void setPlacedTower(boolean set) {
-        placedTower = set;
+    public ImageView getMap() {
+        return map;
     }
 
-    public boolean getPlaced() {
-        return placedTower;
-    }
-
-    public ArrayList<TowerType> getListOfTowers() {
-        return listOfTowers;
+    public GridPane getGridPane() {
+        return bottomSupport;
     }
 }

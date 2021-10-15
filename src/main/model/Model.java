@@ -9,6 +9,7 @@ public class Model {
     private GameSetting setting;
     private Monument monument;
     private LinkedList<TowerType> towerTypes;
+    private int towerPriceBaseValue;
 
     public Model() {
         player = new Player();
@@ -28,18 +29,22 @@ public class Model {
         case EASY:
             player.setMoney(1000);
             monument.setHealth(1000);
+            towerPriceBaseValue = 50;
             break;
         case MEDIUM:
             player.setMoney(700);
             monument.setHealth(500);
+            towerPriceBaseValue = 100;
             break;
         case HARD:
             player.setMoney(500);
             monument.setHealth(250);
+            towerPriceBaseValue = 150;
             break;
         case HELL:
             player.setMoney(300);
             monument.setHealth(125);
+            towerPriceBaseValue = 200;
             break;
         default:
             break;
@@ -70,5 +75,13 @@ public class Model {
 
     public String getPlayerName() {
         return player.getName();
+    }
+
+    public void setTowerPriceBaseValue(int price) {
+        towerPriceBaseValue = price;
+    }
+
+    public int getTowerPriceBaseValue() {
+        return towerPriceBaseValue;
     }
 }
