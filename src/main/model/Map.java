@@ -10,8 +10,8 @@ public class Map {
     private ArrayList<GameObject>[] enemyPaths;
     private Monument monument;
 
-    private static final int DEFAULT_WIDTH = 50;
-    private static final int DEFAULT_HEIGHT = 40;
+    private static final int DEFAULT_WIDTH = 15;
+    private static final int DEFAULT_HEIGHT = 10;
     private static final int DEFAULT_PATHS = 1;
 
     public Map() {
@@ -22,11 +22,21 @@ public class Map {
     public Map(ArrayList<GameObject> gameObjects, int[][] map,
                ArrayList<GameObject>[] enemyPaths, Monument monument) {
         this.gameObjects = gameObjects;
-        this.map = map;
-        this.mapWidth = this.map[0].length;
-        this.mapHeight = this.map.length;
         this.enemyPaths = enemyPaths;
         this.monument = monument;
+        int[][] temp = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0,0,0,1,1,1,1,3},
+                        {0,0,1,1,1,0,0,0,0,0,1,2,0,0,0},
+                        {0,0,1,2,1,0,0,0,0,0,1,0,0,0,0},
+                        {1,1,1,2,1,0,0,0,0,0,1,0,0,0,0},
+                        {0,0,0,0,1,1,1,1,1,2,1,0,0,0,0},
+                        {0,0,0,0,0,0,0,0,1,1,1,0,0,0,0},
+                        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},};
+        this.map = temp;
+        this.mapWidth = this.map[0].length;
+        this.mapHeight = this.map.length;
     }
 
     public ArrayList<GameObject>[] getEnemyPaths() {

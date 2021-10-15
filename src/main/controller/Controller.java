@@ -99,6 +99,7 @@ public class Controller extends Application {
         InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT, listOfTowers);
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
+        screen.initMap(model.getMap());
         mainWindow.setScene(screen.getScene());
 
         ArrayList<Button> buttons = screen.getButtons();
@@ -165,30 +166,30 @@ public class Controller extends Application {
                 screen.setPurchasedTower(true);
             }
         });
-
-        ImageView map = screen.getMap();
-        map.setPickOnBounds(true);
-        map.setOnMouseClicked(event -> {
-            if (screen.getPurchased()) {
-                double x = event.getSceneX();
-                double y = event.getSceneY();
-
-                ImageView image = new ImageView(new File("src/main/resources/mushroom.gif")
-                        .toURI()
-                        .toString());
-
-                int row = ((int) x) / 50;
-                int col = ((int) y) / 50;
-
-                image.setFitHeight(50);
-                image.setFitWidth(50);
-                image.setY(y);
-                image.setX(x);
-                System.out.println(row + " " + col);
-                screen.getGridPane().add(image, 0, 2);
-                screen.setPurchasedTower(false);
-            }
-        });
+//
+//        ImageView map = screen.getMap();
+//        map.setPickOnBounds(true);
+//        map.setOnMouseClicked(event -> {
+//            if (screen.getPurchased()) {
+//                double x = event.getSceneX();
+//                double y = event.getSceneY();
+//
+//                ImageView image = new ImageView(new File("src/main/resources/mushroom.gif")
+//                        .toURI()
+//                        .toString());
+//
+//                int row = ((int) x) / 50;
+//                int col = ((int) y) / 50;
+//
+//                image.setFitHeight(50);
+//                image.setFitWidth(50);
+//                image.setY(y);
+//                image.setX(x);
+//                System.out.println(row + " " + col);
+//                screen.getGridPane().add(image, 0, 2);
+//                screen.setPurchasedTower(false);
+//            }
+//        });
     }
 
     public static void main(String[] args) {
