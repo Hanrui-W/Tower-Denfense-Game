@@ -1,28 +1,22 @@
 package controller;
 
 import javafx.application.Application;
-import javafx.event.Event;
-import javafx.fxml.FXML;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.scene.layout.Pane;
-import javafx.scene.input.MouseEvent;
 import model.GameDifficultyLevel;
 import model.Model;
 import model.TowerType;
 import view.InitConfigScreen;
 import view.InitGameScreen;
 import view.WelcomeScreen;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -32,6 +26,7 @@ public class Controller extends Application {
     private Model model;
     private static final int WIDTH = 960;
     private static final int HEIGHT = 720;
+    private Image purchasedTower;
 
     public void start(Stage stage) {
         mainWindow = stage;
@@ -124,6 +119,9 @@ public class Controller extends Application {
                 model.setMoney(model.getMoney() - listOfTowers.get(0).getCost());
                 screen.setMoneyValue(model.getMoney());
                 screen.setPurchasedTower(true);
+                purchasedTower = new Image(new File("src/main/resources/sunflower.gif")
+                        .toURI()
+                        .toString());
             }
         });
 
@@ -144,6 +142,9 @@ public class Controller extends Application {
                 model.setMoney(model.getMoney() - listOfTowers.get(1).getCost());
                 screen.setMoneyValue(model.getMoney());
                 screen.setPurchasedTower(true);
+                purchasedTower = new Image(new File("src/main/resources/pea.gif")
+                        .toURI()
+                        .toString());
             }
         });
 
@@ -164,32 +165,27 @@ public class Controller extends Application {
                 model.setMoney(model.getMoney() - listOfTowers.get(2).getCost());
                 screen.setMoneyValue(model.getMoney());
                 screen.setPurchasedTower(true);
+                purchasedTower = new Image(new File("src/main/resources/mushroom.gif")
+                        .toURI()
+                        .toString());
             }
         });
-//
-//        ImageView map = screen.getMap();
-//        map.setPickOnBounds(true);
-//        map.setOnMouseClicked(event -> {
-//            if (screen.getPurchased()) {
-//                double x = event.getSceneX();
-//                double y = event.getSceneY();
-//
-//                ImageView image = new ImageView(new File("src/main/resources/mushroom.gif")
-//                        .toURI()
-//                        .toString());
-//
-//                int row = ((int) x) / 50;
-//                int col = ((int) y) / 50;
-//
-//                image.setFitHeight(50);
-//                image.setFitWidth(50);
-//                image.setY(y);
-//                image.setX(x);
-//                System.out.println(row + " " + col);
-//                screen.getGridPane().add(image, 0, 2);
-//                screen.setPurchasedTower(false);
-//            }
-//        });
+
+        for (Node node : screen.getMap().getChildren()) {
+            node.setOnMouseClicked(t -> screen.getMap().getChildren().forEach(c -> {
+                Rectangle tile = (Rectangle) node;
+                if (screen.getPurchased() && tile.getFill() == Color.GRAY) {
+                    tile.setFill(new ImagePattern(purchasedTower));
+                    System.out.println(true);
+                    screen.setPurchasedTower(false);
+                    screen.setMessageLabel("");
+                } else if (screen.getPurchased() && tile.getFill() == Color.YELLOW) {
+                    screen.setMessageLabel("You cannot place tower\n"
+                            +  "on the path. Click\n"
+                            + "on the grey tiles.");
+                }
+            }));
+        }
     }
 
     public static void main(String[] args) {

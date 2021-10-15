@@ -1,6 +1,5 @@
 package view;
 
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.Node;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import model.TowerType;
 
@@ -29,9 +29,9 @@ public class InitGameScreen {
     private final ArrayList<Button> buttons;
     private final ArrayList<Label> labels;
     private boolean purchasedTower;
-    private VBox bottomSupport;
-    private GridPane mapView;
-    private ArrayList<Node> availableSites;
+    private final GridPane mapView;
+    private final ArrayList<Node> availableSites;
+    private final Label messageLabel;
 
     public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers) {
         this.width = width;
@@ -41,6 +41,7 @@ public class InitGameScreen {
         moneyValue = new Label("100");
         healthLabel = new Label("Monument Health: ");
         healthValue = new Label("100");
+        messageLabel = new Label();
         purchasedTower = false;
 
         this.listOfTowers = listOfTowers;
@@ -52,23 +53,15 @@ public class InitGameScreen {
     }
 
     public Scene getScene() {
-//        map = new ImageView(new File("src/main/resources/SimpleMap.png").toURI().toString());
-//        map.setFitHeight(height * 0.8);
-//        map.setFitWidth(width);
-
-//
-//        bottomSupport.getChildren().add(map);
-//
-//        bottomSupport.add(monument, 0, 0);
-
         HBox moneyPrompt = new HBox(moneyLabel, moneyValue);
         HBox healthPrompt = new HBox(healthLabel, healthValue);
+        HBox messagePrompt = new HBox(messageLabel);
 
-        VBox textualPrompts = new VBox(moneyPrompt, healthPrompt);
+        VBox textualPrompts = new VBox(moneyPrompt, healthPrompt, messagePrompt);
 
         // Create a tower menu down below
         HBox towerMenu = getTowerMenu();
-        bottomSupport = new VBox(mapView, new HBox(textualPrompts, towerMenu));
+        VBox bottomSupport = new VBox(mapView, new HBox(textualPrompts, towerMenu));
         Scene scene = new Scene(bottomSupport, width, height);
         return scene;
     }
@@ -94,10 +87,15 @@ public class InitGameScreen {
                         availableSites.add(avail);
                         break;
                     case 3:
-                        ImageView monument = new ImageView(new File("src/main/resources/mario.png").toURI().toString());
-                        monument.setFitHeight(SQUARE_WIDTH);
-                        monument.setFitWidth(SQUARE_WIDTH);
-                        mapView.add(monument, j, i);
+                        Rectangle pedestal = new Rectangle(SQUARE_WIDTH, SQUARE_WIDTH);
+                        pedestal.setFill(Color.GRAY);
+                        Image monument = new Image(new File("src/main/resources/mario.png")
+                                .toURI()
+                                .toString());
+
+                        // The monument is now sitting on a square tile instead of being an image view.
+                        pedestal.setFill(new ImagePattern(monument));
+                        mapView.add(pedestal, j, i);
                         break;
                     default:
                         break;
@@ -105,6 +103,7 @@ public class InitGameScreen {
             }
         }
     }
+
     public void setMoneyValue(int money) {
         moneyValue.setText(String.valueOf(money));
     }
@@ -160,4 +159,7 @@ public class InitGameScreen {
         return mapView;
     }
 
+    public void setMessageLabel(String message) {
+        messageLabel.setText(message);
+    }
 }

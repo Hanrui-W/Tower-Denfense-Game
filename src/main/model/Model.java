@@ -10,6 +10,7 @@ public class Model {
     private Monument monument;
     private LinkedList<TowerType> towerTypes;
     private int towerPriceBaseValue;
+    private int purchasedType;
 
     public Model() {
         player = new Player();
@@ -83,5 +84,13 @@ public class Model {
 
     public int getTowerPriceBaseValue() {
         return towerPriceBaseValue;
+    }
+
+    public  void setPurchasedType(int type) {
+        purchasedType = type;
+    }
+
+    public int getPurchasedType() {
+        return purchasedType;
     }
 }

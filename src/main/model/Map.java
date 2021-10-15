@@ -9,13 +9,21 @@ public class Map {
     private int mapHeight;
     private ArrayList<GameObject>[] enemyPaths;
     private Monument monument;
-
-    private static final int DEFAULT_WIDTH = 15;
-    private static final int DEFAULT_HEIGHT = 10;
     private static final int DEFAULT_PATHS = 1;
+    private final static int[][] defaultPath =
+            {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0,0,1,1,1,1,3},
+            {0,0,1,1,1,0,0,0,0,0,1,2,0,0,0},
+            {0,0,1,2,1,0,0,0,0,0,1,0,0,0,0},
+            {1,1,1,2,1,0,0,0,0,0,1,0,0,0,0},
+            {0,0,0,0,1,1,1,1,1,2,1,0,0,0,0},
+            {0,0,0,0,0,0,0,0,1,1,1,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
 
     public Map() {
-        this(new ArrayList<>(), new int[Map.DEFAULT_HEIGHT][Map.DEFAULT_WIDTH],
+        this(new ArrayList<>(), defaultPath,
                 new ArrayList[Map.DEFAULT_PATHS], new Monument());
     }
 
@@ -24,17 +32,7 @@ public class Map {
         this.gameObjects = gameObjects;
         this.enemyPaths = enemyPaths;
         this.monument = monument;
-        int[][] temp = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0,0,1,1,1,1,3},
-                        {0,0,1,1,1,0,0,0,0,0,1,2,0,0,0},
-                        {0,0,1,2,1,0,0,0,0,0,1,0,0,0,0},
-                        {1,1,1,2,1,0,0,0,0,0,1,0,0,0,0},
-                        {0,0,0,0,1,1,1,1,1,2,1,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,1,1,1,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},};
-        this.map = temp;
+        this.map = map;
         this.mapWidth = this.map[0].length;
         this.mapHeight = this.map.length;
     }

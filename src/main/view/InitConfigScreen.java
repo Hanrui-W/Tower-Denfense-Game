@@ -9,16 +9,15 @@ import javafx.util.StringConverter;
 import model.GameDifficultyLevel;
 
 public class InitConfigScreen {
-    private int width;
-    private int height;
-    private Button nextButton;
-    private Label titleLabel;
-    private Label nameLabel;
-    private Label difficultyLabel;
-    private TextField nameText;
-    private ChoiceBox<GameDifficultyLevel> difficultyChoiceBox;
+    private final int width;
+    private final int height;
+    private final Button nextButton;
+    private final Label titleLabel;
+    private final Label nameLabel;
+    private final Label difficultyLabel;
+    private final TextField nameText;
+    private final ChoiceBox<GameDifficultyLevel> difficultyChoiceBox;
 
-    public InitConfigScreen() { }
     public InitConfigScreen(int width, int height) {
         this.width = width;
         this.height = height;
