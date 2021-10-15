@@ -19,6 +19,7 @@ import view.InitGameScreen;
 import view.WelcomeScreen;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Controller extends Application {
@@ -180,7 +181,7 @@ public class Controller extends Application {
         for (Node node : screen.getMap().getChildren()) {
             node.setOnMouseClicked(t -> screen.getMap().getChildren().forEach(c -> {
                 Rectangle tile = (Rectangle) node;
-                if (screen.getPurchased() && tile.getFill() == Color.WHITE) {
+                if (screen.getPurchased() && Objects.equals(tile.getFill(), Color.rgb(0, 200, 0, 0.3))) {
                     tile.setFill(new ImagePattern(purchasedTower));
                     screen.setPurchasedTower(false);
                     screen.setMessageLabel("");
@@ -188,6 +189,21 @@ public class Controller extends Application {
                     screen.setMessageLabel("You cannot place tower\n"
                             +  "on the path. Click\n"
                             + "on the while areas.");
+                }
+            }));
+        }
+
+        for (Node node : screen.getMap().getChildren()) {
+            node.setOnMouseEntered(t -> screen.getMap().getChildren().forEach(c -> {
+                Rectangle tile = (Rectangle) node;
+                if (screen.getPurchased() && tile.getFill() == Color.WHITE) {
+                    tile.setFill(Color.rgb(0, 200, 0, 0.3));
+                }
+            }));
+            node.setOnMouseExited(t -> screen.getMap().getChildren().forEach(c ->{
+                Rectangle tile = (Rectangle) node;
+                if (Objects.equals(tile.getFill(), Color.rgb(0, 200, 0, 0.3))) {
+                    tile.setFill(Color.WHITE);
                 }
             }));
         }
