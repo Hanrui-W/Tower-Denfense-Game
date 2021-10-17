@@ -22,6 +22,54 @@ public class milestoneThreeTest extends ApplicationTest {
     }
 
     @Test
+    public void testEasyLevelTowerCosts() {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Easy");
+        this.clickOn("Next");
+        FxAssert.verifyThat("Cost: 50", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("Cost: 100", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("Cost: 150", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testMediumLevelTowerCosts() {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Medium");
+        this.clickOn("Next");
+        FxAssert.verifyThat("Cost: 100", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("Cost: 200", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("Cost: 300", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testHardLevelTowerCosts() {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Hard");
+        this.clickOn("Next");
+        FxAssert.verifyThat("Cost: 150", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("Cost: 300", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("Cost: 450", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testHellLevelTowerCosts() {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Hell");
+        this.clickOn("Next");
+        FxAssert.verifyThat("Cost: 200", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("Cost: 400", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("Cost: 600", NodeMatchers.isNotNull());
+    }
+
+    @Test
     public void testPurchaseTower() {
         this.clickOn("Start");
         this.write("George P. Burdell");
