@@ -80,17 +80,17 @@ public class Controller extends Application {
                 new File("src/main/resources/sunflower.gif")
                         .toURI()
                         .toString(),
-                model.getTowerPriceBaseValue(), 1, 1, 1));
+                model.getTowerPriceBaseValue(), 1, 1, 1, 1));
         listOfTowers.add(new TowerType("Pew Pew Pea", "tower2",
                 new File("src/main/resources/pea.gif")
                         .toURI()
                         .toString(),
-                model.getTowerPriceBaseValue() * 2, 1, 1, 1));
+                model.getTowerPriceBaseValue() * 2, 2, 2, 2, 2));
         listOfTowers.add(new TowerType("Wag Wag Mushroom", "tower3",
                 new File("src/main/resources/mushroom.gif")
                         .toURI()
                         .toString(),
-                model.getTowerPriceBaseValue() * 3, 1, 1, 1));
+                model.getTowerPriceBaseValue() * 3, 3, 3, 3, 3));
 
         InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT, listOfTowers);
         screen.setHealthValue(model.getMonumentHealth());
@@ -107,7 +107,7 @@ public class Controller extends Application {
             if (screen.getPurchased()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Have not placed purchased tower");
+                alert.setHeaderText("Have not placed purchased tower.");
                 alert.setContentText("Must place purchased tower to continue.");
                 alert.showAndWait();
             } else  if (model.getMoney() < listOfTowers.get(0).getCost()) {
@@ -181,13 +181,15 @@ public class Controller extends Application {
         for (Node node : screen.getMap().getChildren()) {
             node.setOnMouseClicked(t -> screen.getMap().getChildren().forEach(c -> {
                 Rectangle tile = (Rectangle) node;
-                if (screen.getPurchased() && Objects.equals(tile.getFill(), Color.rgb(0, 200, 0, 0.3))) {
+                if (screen.getPurchased() && tile.getStyleClass().contains("available")) {
                     tile.setFill(new ImagePattern(purchasedTower));
+                    tile.getStyleClass().remove("available");
+                    tile.getStyleClass().add("unavailable");
                     screen.setPurchasedTower(false);
-                    screen.setMessageLabel("");
-                } else if (screen.getPurchased() && tile.getFill() == Color.YELLOW) {
-                    screen.setMessageLabel("You cannot place tower\n"
-                            +  "on the path. Click\n"
+                    screen.setMessageLabel("Tower is placed.");
+                } else if (screen.getPurchased() && tile.getStyleClass().contains("unavailable")) {
+                    screen.setMessageLabel("It is not available.\n"
+                            +  "Place the tower\n"
                             + "on the while areas.");
                 }
             }));

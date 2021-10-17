@@ -8,12 +8,13 @@ public class TowerType {
     private double attackDamage;
     private double attackSpeed;
     private double attackMode;
+    private int range;
 
     public TowerType() {
     }
 
     public TowerType(String name, String description, String imagePath, int cost, double attackDamage,
-                     double attackSpeed, double attackMode) {
+                     double attackSpeed, double attackMode, int range) {
         this.name = name;
         this.description = description;
         this.imagePath = imagePath;
@@ -21,6 +22,7 @@ public class TowerType {
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
         this.attackMode = attackMode;
+        this.range = range;
     }
 
     @Override
@@ -88,5 +90,9 @@ public class TowerType {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public int getRange() {
+        return range;
     }
 }

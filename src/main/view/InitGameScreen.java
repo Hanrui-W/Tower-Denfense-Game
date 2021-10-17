@@ -70,16 +70,19 @@ public class InitGameScreen {
                     case 0:
                         Rectangle empty = new Rectangle(SQUARE_WIDTH, SQUARE_WIDTH);
                         empty.setFill(Color.WHITE);
+                        empty.getStyleClass().add("available");
                         mapView.add(empty, j, i);
                         break;
                     case 1:
                         Rectangle path = new Rectangle(SQUARE_WIDTH, SQUARE_WIDTH);
                         path.setFill(Color.YELLOW);
+                        path.getStyleClass().add("unavailable");
                         mapView.add(path, j, i);
                         break;
                     case 2:
                         Rectangle pedestal = new Rectangle(SQUARE_WIDTH, SQUARE_WIDTH);
                         pedestal.setFill(Color.GRAY);
+                        pedestal.getStyleClass().add("unavailable");
                         Image monument = new Image(new File("src/main/resources/mario.png")
                                 .toURI()
                                 .toString());
@@ -119,8 +122,8 @@ public class InitGameScreen {
             imageLabel.setAlignment(Pos.CENTER);
 
             Label cost = new Label("Cost: " + towerType.getCost());
-            Label attack = new Label("Attack: 1");
-            Label range = new Label("Range: 1");
+            Label attack = new Label("Attack: " + towerType.getAttackDamage());
+            Label range = new Label("Range: " + towerType.getRange());
 
             VBox vBox = new VBox();
             vBox.getChildren().add(imageLabel);
