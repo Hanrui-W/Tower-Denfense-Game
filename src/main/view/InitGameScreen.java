@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.Node;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import model.TowerType;
@@ -98,15 +97,6 @@ public class InitGameScreen {
         }
     }
 
-    public void setMoneyValue(int money) {
-        moneyValue.setText(String.valueOf(money));
-    }
-
-    public void setHealthValue(int health) {
-        healthValue.setText(String.valueOf(health));
-    }
-
-
     public HBox getTowerMenu() {
         int menuWidth = this.width / 10 * 5;
         int menuHeight = this.height / 6;
@@ -171,5 +161,13 @@ public class InitGameScreen {
 
     public void setMessageLabel(String message) {
         messageLabel.setText(message);
+    }
+
+    public void setMoneyValue(int money) {
+        moneyValue.setText(String.valueOf(money));
+    }
+
+    public void setHealthValue(int health) {
+        healthValue.setText(String.valueOf(health));
     }
 }

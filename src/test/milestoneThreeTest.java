@@ -1,13 +1,9 @@
 import controller.Controller;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
-import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.matcher.base.NodeMatchers;
-import org.testfx.api.FxRobot;
-
+import org.testfx.matcher.base.NodeMatchers;;
 
 public class milestoneThreeTest extends ApplicationTest {
     private Stage stage;
@@ -129,6 +125,7 @@ public class milestoneThreeTest extends ApplicationTest {
         this.clickOn("Purchase");
         this.clickOn("Purchase");
         FxAssert.verifyThat("Have not placed purchased tower.", NodeMatchers.isNotNull());
+        this.clickOn("OK");
     }
 
     @Test
@@ -169,5 +166,6 @@ public class milestoneThreeTest extends ApplicationTest {
         FxAssert.verifyThat("100", NodeMatchers.isNotNull());
         this.clickOn("Purchase");
         FxAssert.verifyThat("Insufficient funds.", NodeMatchers.isNotNull());
+        this.clickOn("OK");
     }
 }
