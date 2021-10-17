@@ -27,10 +27,9 @@ public class InitGameScreen {
     private final Label healthValue;
     private final ArrayList<TowerType> listOfTowers;
     private final ArrayList<Button> buttons;
-    private final ArrayList<Label> labels;
+    private final ArrayList<VBox> vBoxes;
     private boolean purchasedTower;
     private final GridPane mapView;
-    private final ArrayList<Node> availableSites;
     private final Label messageLabel;
 
     public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers) {
@@ -46,10 +45,9 @@ public class InitGameScreen {
 
         this.listOfTowers = listOfTowers;
         buttons = new ArrayList<>();
-        labels = new ArrayList<>();
+        vBoxes = new ArrayList<>();
 
         mapView = new GridPane();
-        availableSites = new ArrayList<>();
     }
 
     public Scene getScene() {
@@ -114,13 +112,29 @@ public class InitGameScreen {
             ImageView image = new ImageView(new Image(towerType.getImagePath()));
             image.setFitHeight(menuHeight * 0.6);
             image.setFitWidth(menuWidth / listOfTowers.size());
-            Label nameLabel = new Label(towerType.getName() + "\n"
-                    + "Cost: " + towerType.getCost(), image);
-            nameLabel.setStyle("-fx-border-color: green; -fx-border-width: 2");
-            nameLabel.setContentDisplay(ContentDisplay.TOP);
-            nameLabel.setTextFill(Color.BLACK);
-            nameLabel.setAlignment(Pos.CENTER);
-            this.labels.add(nameLabel);
+            Label imageLabel = new Label(towerType.getName(), image);
+            imageLabel.setStyle("-fx-border-color: green; -fx-border-width: 2");
+            imageLabel.setContentDisplay(ContentDisplay.TOP);
+            imageLabel.setTextFill(Color.BLACK);
+            imageLabel.setAlignment(Pos.CENTER);
+
+            Label cost = new Label("Cost: " + towerType.getCost());
+            Label attack = new Label("Attack: 1");
+            Label range = new Label("Range: 1");
+
+            VBox vBox = new VBox();
+            vBox.getChildren().add(imageLabel);
+            vBox.getChildren().add(cost);
+            vBox.getChildren().add(attack);
+            vBox.getChildren().add(range);
+
+            String cssLayout = "-fx-border-color: green;\n" +
+                    "-fx-border-insets: 5;\n" +
+                    "-fx-border-width: 3;\n";
+
+            vBox.setStyle(cssLayout);
+
+            this.vBoxes.add(vBox);
 
             Button button = new Button("Purchase");
             this.buttons.add(button);
@@ -128,7 +142,7 @@ public class InitGameScreen {
         HBox hBox = new HBox();
         for (int i = 0; i < listOfTowers.size(); i++) {
             VBox vbox = new VBox();
-            vbox.getChildren().add(this.labels.get(i));
+            vbox.getChildren().add(this.vBoxes.get(i));
             vbox.getChildren().add(this.buttons.get(i));
             vbox.setAlignment(Pos.CENTER);
             hBox.getChildren().add(vbox);
