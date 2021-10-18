@@ -3,11 +3,11 @@ import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.matcher.base.NodeMatchers;;
+import org.testfx.matcher.base.NodeMatchers;
 
-public class milestoneThreeTest extends ApplicationTest {
+public class MilestoneThreeTest extends ApplicationTest {
     private Stage stage;
-    public milestoneThreeTest() {
+    public MilestoneThreeTest() {
 
     }
 

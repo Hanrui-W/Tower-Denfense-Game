@@ -42,7 +42,11 @@ public class Enemy extends GameObject {
         this.speed = speed;
     }
 
-    public double getLevel() { return level; }
+    public double getLevel() {
+        return level;
+    }
 
-    public void setLevel(double level) { this.level = level; }
+    public void setLevel(double level) {
+        this.level = level;
+    }
 }

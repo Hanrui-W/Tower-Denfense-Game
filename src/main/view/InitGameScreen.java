@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class InitGameScreen {
     private final int width;
     private final int height;
-    private final int SQUARE_WIDTH;
+    private final int squareWidth;
     private final Label moneyLabel;
     private final Label moneyValue;
     private final Label healthLabel;
@@ -34,7 +34,7 @@ public class InitGameScreen {
     public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers) {
         this.width = width;
         this.height = height;
-        this.SQUARE_WIDTH = width / 20;
+        this.squareWidth = width / 20;
         moneyLabel = new Label("Funds: ");
         moneyValue = new Label("100");
         healthLabel = new Label("Monument Health: ");
@@ -66,32 +66,32 @@ public class InitGameScreen {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
                 switch (map[i][j]) {
-                    case 0:
-                        Rectangle empty = new Rectangle(SQUARE_WIDTH, SQUARE_WIDTH);
-                        empty.setFill(Color.WHITE);
-                        empty.getStyleClass().add("available");
-                        mapView.add(empty, j, i);
-                        break;
-                    case 1:
-                        Rectangle path = new Rectangle(SQUARE_WIDTH, SQUARE_WIDTH);
-                        path.setFill(Color.YELLOW);
-                        path.getStyleClass().add("unavailable");
-                        mapView.add(path, j, i);
-                        break;
-                    case 2:
-                        Rectangle pedestal = new Rectangle(SQUARE_WIDTH, SQUARE_WIDTH);
-                        pedestal.setFill(Color.GRAY);
-                        pedestal.getStyleClass().add("unavailable");
-                        Image monument = new Image(new File("src/main/resources/mario.png")
-                                .toURI()
-                                .toString());
+                case 0:
+                    Rectangle empty = new Rectangle(squareWidth, squareWidth);
+                    empty.setFill(Color.WHITE);
+                    empty.getStyleClass().add("available");
+                    mapView.add(empty, j, i);
+                    break;
+                case 1:
+                    Rectangle path = new Rectangle(squareWidth, squareWidth);
+                    path.setFill(Color.YELLOW);
+                    path.getStyleClass().add("unavailable");
+                    mapView.add(path, j, i);
+                    break;
+                case 2:
+                    Rectangle pedestal = new Rectangle(squareWidth, squareWidth);
+                    pedestal.setFill(Color.GRAY);
+                    pedestal.getStyleClass().add("unavailable");
+                    Image monument = new Image(new File("src/main/resources/mario.png")
+                            .toURI()
+                            .toString());
 
-                        // The monument is now sitting on a square tile instead of being an image view.
-                        pedestal.setFill(new ImagePattern(monument));
-                        mapView.add(pedestal, j, i);
-                        break;
-                    default:
-                        break;
+                    // The monument is now sitting on a square tile instead of being an image view.
+                    pedestal.setFill(new ImagePattern(monument));
+                    mapView.add(pedestal, j, i);
+                    break;
+                default:
+                    break;
                 }
             }
         }
@@ -121,9 +121,9 @@ public class InitGameScreen {
             vBox.getChildren().add(attack);
             vBox.getChildren().add(range);
 
-            String cssLayout = "-fx-border-color: green;\n" +
-                    "-fx-border-insets: 5;\n" +
-                    "-fx-border-width: 3;\n";
+            String cssLayout = "-fx-border-color: green;\n"
+                    + "-fx-border-insets: 5;\n"
+                    + "-fx-border-width: 3;\n";
 
             vBox.setStyle(cssLayout);
 

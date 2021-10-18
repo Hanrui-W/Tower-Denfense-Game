@@ -11,9 +11,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-import java.io.File;
-
-
 public class WelcomeScreen {
     private int width;
     private int height;
@@ -37,7 +34,7 @@ public class WelcomeScreen {
         vBox.setAlignment(Pos.CENTER);
         vBox.setMinSize(40, 70);
 
-        Image image = new Image(new File("src/main/resources/TowerDefenseLogo.jpeg").toURI().toString());
+        Image image = new Image("resources/TowerDefenseLogo.jpeg");
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);

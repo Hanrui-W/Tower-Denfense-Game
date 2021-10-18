@@ -76,17 +76,17 @@ public class Controller extends Application {
 
     public void goToInitGameScreen() {
         ArrayList<TowerType> listOfTowers = new ArrayList<>();
-        listOfTowers.add(new TowerType("Flowy Flower", "tower1",
+        listOfTowers.add(new TowerType("Flowy Flower",
                 new File("src/main/resources/sunflower.gif")
                         .toURI()
                         .toString(),
                 model.getTowerPriceBaseValue(), 1, 1, 1, 1));
-        listOfTowers.add(new TowerType("Pew Pew Pea", "tower2",
+        listOfTowers.add(new TowerType("Pew Pew Pea",
                 new File("src/main/resources/pea.gif")
                         .toURI()
                         .toString(),
                 model.getTowerPriceBaseValue() * 2, 2, 2, 2, 2));
-        listOfTowers.add(new TowerType("Wag Wag Mushroom", "tower3",
+        listOfTowers.add(new TowerType("Wag Wag Mushroom",
                 new File("src/main/resources/mushroom.gif")
                         .toURI()
                         .toString(),
@@ -135,7 +135,7 @@ public class Controller extends Application {
                 alert.setHeaderText("Have not placed purchased tower");
                 alert.setContentText("Must place purchased tower to continue.");
                 alert.showAndWait();
-            } else  if (model.getMoney() < listOfTowers.get(1).getCost()) {
+            } else if (model.getMoney() < listOfTowers.get(1).getCost()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Insufficient funds.");
@@ -160,7 +160,7 @@ public class Controller extends Application {
                 alert.setHeaderText("Have not placed purchased tower");
                 alert.setContentText("Must place purchased tower to continue.");
                 alert.showAndWait();
-            } else  if (model.getMoney() < listOfTowers.get(2).getCost()) {
+            } else if (model.getMoney() < listOfTowers.get(2).getCost()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Insufficient funds.");
@@ -202,7 +202,7 @@ public class Controller extends Application {
                     tile.setFill(Color.rgb(0, 200, 0, 0.3));
                 }
             }));
-            node.setOnMouseExited(t -> screen.getMap().getChildren().forEach(c ->{
+            node.setOnMouseExited(t -> screen.getMap().getChildren().forEach(c -> {
                 Rectangle tile = (Rectangle) node;
                 if (Objects.equals(tile.getFill(), Color.rgb(0, 200, 0, 0.3))) {
                     tile.setFill(Color.WHITE);

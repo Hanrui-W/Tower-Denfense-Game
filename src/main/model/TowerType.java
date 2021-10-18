@@ -2,7 +2,6 @@ package model;
 
 public class TowerType {
     private String name;
-    private String description;
     private String imagePath;
     private int cost;
     private double attackDamage;
@@ -13,10 +12,9 @@ public class TowerType {
     public TowerType() {
     }
 
-    public TowerType(String name, String description, String imagePath, int cost, double attackDamage,
+    public TowerType(String name, String imagePath, int cost, double attackDamage,
                      double attackSpeed, double attackMode, int range) {
         this.name = name;
-        this.description = description;
         this.imagePath = imagePath;
         this.cost = cost;
         this.attackDamage = attackDamage;
@@ -74,14 +72,6 @@ public class TowerType {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getImagePath() {
