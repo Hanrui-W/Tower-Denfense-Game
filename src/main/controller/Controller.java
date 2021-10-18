@@ -77,19 +77,19 @@ public class Controller extends Application {
     public void goToInitGameScreen() {
         ArrayList<TowerType> listOfTowers = new ArrayList<>();
         listOfTowers.add(new TowerType("Flowy Flower",
-                new File("src/main/resources/sunflower.gif")
+                new Image(new File("src/main/resources/sunflower.gif")
                         .toURI()
-                        .toString(),
+                        .toString()),
                 model.getTowerPriceBaseValue(), 1, 1, 1, 1));
         listOfTowers.add(new TowerType("Pew Pew Pea",
-                new File("src/main/resources/pea.gif")
+                new Image(new File("src/main/resources/pea.gif")
                         .toURI()
-                        .toString(),
+                        .toString()),
                 model.getTowerPriceBaseValue() * 2, 2, 2, 2, 2));
         listOfTowers.add(new TowerType("Wag Wag Mushroom",
-                new File("src/main/resources/mushroom.gif")
+                new Image(new File("src/main/resources/mushroom.gif")
                         .toURI()
-                        .toString(),
+                        .toString()),
                 model.getTowerPriceBaseValue() * 3, 3, 3, 3, 3));
 
         InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT, listOfTowers);
@@ -120,9 +120,7 @@ public class Controller extends Application {
                 model.setMoney(model.getMoney() - listOfTowers.get(0).getCost());
                 screen.setMoneyValue(model.getMoney());
                 screen.setPurchasedTower(true);
-                purchasedTower = new Image(new File("src/main/resources/sunflower.gif")
-                        .toURI()
-                        .toString());
+                purchasedTower = listOfTowers.get(0).getImage();
                 screen.setMessageLabel("You purchased flowy\n"
                         +  "flower");
             }
@@ -145,9 +143,7 @@ public class Controller extends Application {
                 model.setMoney(model.getMoney() - listOfTowers.get(1).getCost());
                 screen.setMoneyValue(model.getMoney());
                 screen.setPurchasedTower(true);
-                purchasedTower = new Image(new File("src/main/resources/pea.gif")
-                        .toURI()
-                        .toString());
+                purchasedTower = listOfTowers.get(1).getImage();
                 screen.setMessageLabel("You purchased pew\n"
                         +  "pew pea");
             }
@@ -170,9 +166,7 @@ public class Controller extends Application {
                 model.setMoney(model.getMoney() - listOfTowers.get(2).getCost());
                 screen.setMoneyValue(model.getMoney());
                 screen.setPurchasedTower(true);
-                purchasedTower = new Image(new File("src/main/resources/mushroom.gif")
-                        .toURI()
-                        .toString());
+                purchasedTower = listOfTowers.get(2).getImage();
                 screen.setMessageLabel("You purchased wag\n"
                         +  "wag mushroom");
             }

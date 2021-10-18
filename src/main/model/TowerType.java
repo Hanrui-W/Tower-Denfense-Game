@@ -1,8 +1,10 @@
 package model;
 
+import javafx.scene.image.Image;
+
 public class TowerType {
     private String name;
-    private String imagePath;
+    private Image image;
     private int cost;
     private double attackDamage;
     private double attackSpeed;
@@ -12,10 +14,10 @@ public class TowerType {
     public TowerType() {
     }
 
-    public TowerType(String name, String imagePath, int cost, double attackDamage,
+    public TowerType(String name, Image image, int cost, double attackDamage,
                      double attackSpeed, double attackMode, int range) {
         this.name = name;
-        this.imagePath = imagePath;
+        this.image = image;
         this.cost = cost;
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
@@ -26,7 +28,6 @@ public class TowerType {
     @Override
     public String toString() {
         return "TowerType {\n"
-                + "image path: " + imagePath + "\n"
                 + "cost=" + cost + "\n"
                 + "attackDamage=" + attackDamage + "\n"
                 + ", attackSpeed=" + attackSpeed + "\n"
@@ -74,12 +75,16 @@ public class TowerType {
         this.name = name;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
     }
 
     public int getRange() {

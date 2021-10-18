@@ -102,7 +102,7 @@ public class InitGameScreen {
         int menuHeight = this.height / 6;
 
         for (TowerType towerType : listOfTowers) {
-            ImageView image = new ImageView(new Image(towerType.getImagePath()));
+            ImageView image = new ImageView(towerType.getImage());
             image.setFitHeight(menuHeight * 0.6);
             image.setFitWidth(menuWidth / listOfTowers.size());
             Label imageLabel = new Label(towerType.getName(), image);
