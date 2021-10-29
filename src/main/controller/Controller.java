@@ -34,6 +34,8 @@ public class Controller extends Application {
         mainWindow.setTitle("Game");
         model = new Model();
         initWelcomeScreen();
+        // delete later
+        goToInitGameScreen();
     }
 
     public void initWelcomeScreen() {
@@ -92,11 +94,12 @@ public class Controller extends Application {
                         .toString()),
                 model.getTowerPriceBaseValue() * 3, 3, 3, 3, 3));
 
-        InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT, listOfTowers);
+        InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT, listOfTowers, model.getLevel());
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
         screen.initMap(model.getMap());
         mainWindow.setScene(screen.getScene());
+        screen.getPathTransition().play();
 
         ArrayList<Button> buttons = screen.getButtons();
         Button towerOne = buttons.get(0);

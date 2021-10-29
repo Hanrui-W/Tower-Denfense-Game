@@ -10,6 +10,7 @@ public class Model {
     private Monument monument;
     private LinkedList<TowerType> towerTypes;
     private int towerPriceBaseValue;
+    private GameDifficultyLevel level;
 
     public Model() {
         player = new Player();
@@ -24,6 +25,7 @@ public class Model {
         if (name == null || name.equals("")) {
             return false;
         }
+        this.level = level;
         player.setName(name);
         switch (level) {
         case EASY:
@@ -46,11 +48,15 @@ public class Model {
             monument.setHealth(125);
             towerPriceBaseValue = 200;
             break;
-        default:
-            break;
+            default:
+                break;
         }
         setting.setLevel(level);
         return true;
+    }
+
+    public GameDifficultyLevel getLevel() {
+        return level;
     }
 
     public int getMoney() {
