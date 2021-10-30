@@ -12,7 +12,7 @@ public class MilestoneThreeTest extends ApplicationTest {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         stage = primaryStage;
         Controller controller = new Controller();
         controller.start(primaryStage);

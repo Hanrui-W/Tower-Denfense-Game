@@ -78,23 +78,26 @@ public class Controller extends Application {
 
     public void goToInitGameScreen() {
         ArrayList<TowerType> listOfTowers = new ArrayList<>();
+
         listOfTowers.add(new TowerType("Flowy Flower",
                 new Image(new File("src/main/resources/sunflower.gif")
                         .toURI()
                         .toString()),
                 model.getTowerPriceBaseValue(), 1, 1, 1, 1));
+
         listOfTowers.add(new TowerType("Pew Pew Pea",
                 new Image(new File("src/main/resources/pea.gif")
                         .toURI()
                         .toString()),
                 model.getTowerPriceBaseValue() * 2, 2, 2, 2, 2));
+
         listOfTowers.add(new TowerType("Wag Wag Mushroom",
                 new Image(new File("src/main/resources/mushroom.gif")
                         .toURI()
                         .toString()),
                 model.getTowerPriceBaseValue() * 3, 3, 3, 3, 3));
 
-        InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT, listOfTowers, model.getLevel());
+        InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT, listOfTowers);
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
         screen.initMap(model.getMap());
@@ -102,78 +105,35 @@ public class Controller extends Application {
         screen.getPathTransition().play();
 
         ArrayList<Button> buttons = screen.getButtons();
-        Button towerOne = buttons.get(0);
-        Button towerTwo = buttons.get(1);
-        Button towerThree = buttons.get(2);
+        ArrayList<String> towerNames = new ArrayList<>();
+        towerNames.add("flowy flower");
+        towerNames.add("pew pew pea");
+        towerNames.add("wag wag mushroom");
 
-        towerOne.setOnAction(e -> {
-            if (screen.getPurchased()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Have not placed purchased tower.");
-                alert.setContentText("Must place purchased tower to continue.");
-                alert.showAndWait();
-            } else  if (model.getMoney() < listOfTowers.get(0).getCost()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Insufficient funds.");
-                alert.setContentText("You do not have enough funds to purchase this tower.");
-                alert.showAndWait();
-            } else {
-                model.setMoney(model.getMoney() - listOfTowers.get(0).getCost());
-                screen.setMoneyValue(model.getMoney());
-                screen.setPurchasedTower(true);
-                purchasedTower = listOfTowers.get(0).getImage();
-                screen.setMessageLabel("You purchased flowy\n"
-                        +  "flower");
-            }
-        });
-
-        towerTwo.setOnAction(e -> {
-            if (screen.getPurchased()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Have not placed purchased tower");
-                alert.setContentText("Must place purchased tower to continue.");
-                alert.showAndWait();
-            } else if (model.getMoney() < listOfTowers.get(1).getCost()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Insufficient funds.");
-                alert.setContentText("You do not have enough funds to purchase this tower.");
-                alert.showAndWait();
-            } else {
-                model.setMoney(model.getMoney() - listOfTowers.get(1).getCost());
-                screen.setMoneyValue(model.getMoney());
-                screen.setPurchasedTower(true);
-                purchasedTower = listOfTowers.get(1).getImage();
-                screen.setMessageLabel("You purchased pew\n"
-                        +  "pew pea");
-            }
-        });
-
-        towerThree.setOnAction(e -> {
-            if (screen.getPurchased()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Have not placed purchased tower");
-                alert.setContentText("Must place purchased tower to continue.");
-                alert.showAndWait();
-            } else if (model.getMoney() < listOfTowers.get(2).getCost()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Insufficient funds.");
-                alert.setContentText("You do not have enough funds to purchase this tower.");
-                alert.showAndWait();
-            } else {
-                model.setMoney(model.getMoney() - listOfTowers.get(2).getCost());
-                screen.setMoneyValue(model.getMoney());
-                screen.setPurchasedTower(true);
-                purchasedTower = listOfTowers.get(2).getImage();
-                screen.setMessageLabel("You purchased wag\n"
-                        +  "wag mushroom");
-            }
-        });
+        for (Button button : buttons) {
+            button.setOnAction(e -> {
+                if (screen.getPurchased()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Have not placed purchased tower.");
+                    alert.setContentText("Must place purchased tower to continue.");
+                    alert.showAndWait();
+                } else  if (model.getMoney() < listOfTowers.get(buttons.indexOf(button)).getCost()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Insufficient funds.");
+                    alert.setContentText("You do not have enough funds to purchase this tower.");
+                    alert.showAndWait();
+                } else {
+                    model.setMoney(model.getMoney() - listOfTowers.get(buttons.indexOf(button)).getCost());
+                    screen.setMoneyValue(model.getMoney());
+                    screen.setPurchasedTower(true);
+                    purchasedTower = listOfTowers.get(buttons.indexOf(button)).getImage();
+                    screen.setMessageLabel("You purchased\n"
+                            +  towerNames.get(buttons.indexOf(button)));
+                }
+            });
+        }
 
         for (Node node : screen.getMap().getChildren()) {
             node.setOnMouseClicked(t -> screen.getMap().getChildren().forEach(c -> {

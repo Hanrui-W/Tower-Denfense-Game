@@ -12,11 +12,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.*;
-import model.Enemy;
-import model.GameDifficultyLevel;
-import model.GameObject;
 import model.TowerType;
-import javafx.scene.shape.Polyline;
 import javafx.animation.*;
 import javafx.util.Duration;
 
@@ -37,19 +33,17 @@ public class InitGameScreen {
     private boolean purchasedTower;
     private final GridPane mapView;
     private final Label messageLabel;
-    private final GameDifficultyLevel level;
-    private ArrayList<Node> enemyPath;
-    PathTransition pathTransition;
+    private final ArrayList<Rectangle> enemyPath;
+    private PathTransition pathTransition;
 
-    public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers, GameDifficultyLevel level) {
+    public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers) {
         this.width = width;
         this.height = height;
         this.squareWidth = width / 20;
-        this.level = level;
         moneyLabel = new Label("Funds: ");
-        moneyValue = new Label("100");
+        moneyValue = new Label(null);
         healthLabel = new Label("Monument Health: ");
-        healthValue = new Label("100");
+        healthValue = new Label(null);
         messageLabel = new Label();
         purchasedTower = false;
         enemyPath = new ArrayList<>();
@@ -68,34 +62,50 @@ public class InitGameScreen {
 
         VBox textualPrompts = new VBox(moneyPrompt, healthPrompt, messagePrompt);
 
-        // Create a tower menu down below
         HBox towerMenu = getTowerMenu();
-        mapView.add(EnemyMove(), 2, 1);
+        mapView.add(EnemyMove(), 0, 5);
         VBox bottomSupport = new VBox(mapView, new HBox(textualPrompts, towerMenu));
         return new Scene(bottomSupport, width, height);
     }
 
     public Node EnemyMove() {
-        Rectangle rect = new Rectangle(50, 50, 50, 50);
+        Rectangle rect = new Rectangle(
+                enemyPath.get(9).getX(),
+                enemyPath.get(9).getY(),
+                enemyPath.get(9).getWidth(),
+                enemyPath.get(9).getHeight());
+
         rect.setFill(Color.VIOLET);
         pathTransition = new PathTransition();
         pathTransition.setDuration(Duration.millis(10000));
         pathTransition.setNode(rect);
         Path path = new Path();
         MoveTo start = new MoveTo();
-        start.xProperty().bind(enemyPath.get(0).layoutXProperty());
-        start.yProperty().bind(enemyPath.get(0).layoutYProperty());
+        start.xProperty().bind(enemyPath.get(11).xProperty());
+        start.yProperty().bind(enemyPath.get(11).yProperty());
+
+
         path.getElements().add(start);
+
+        LineTo lineTo = new LineTo();
+        lineTo.xProperty().bind(enemyPath.get(0).layoutXProperty());
+        lineTo.yProperty().bind(enemyPath.get(0).layoutYProperty());
+        path.getElements().add(lineTo);
+
+
+        /**
         for (Node node : enemyPath) {
             LineTo lineTo = new LineTo();
             lineTo.xProperty().bind(node.layoutXProperty());
             lineTo.yProperty().bind(node.layoutYProperty());
             path.getElements().add(lineTo);
+            System.out.println(node.layoutXProperty());
+            System.out.println(node.layoutYProperty());
         }
-//        path.getElements().add (new MoveTo (0f, 80f));
-//        path.getElements().add (new LineTo (650f, 80f));
+         */
+
         pathTransition.setPath(path);
-        pathTransition.setCycleCount(1);
+        pathTransition.setCycleCount(3);
         return rect;
     }
 
@@ -108,26 +118,26 @@ public class InitGameScreen {
                         empty.setFill(Color.WHITE);
                         empty.getStyleClass().add("available");
                         mapView.add(empty, j, i);
-                    break;
-                case 1:
-                    Rectangle path = new Rectangle(squareWidth, squareWidth);
-                    path.setFill(Color.YELLOW);
-                    path.getStyleClass().add("unavailable");
-                    mapView.add(path, j, i);
-                    enemyPath.add(path);
-                    break;
-                case 2:
-                    Rectangle pedestal = new Rectangle(squareWidth, squareWidth);
-                    pedestal.setFill(Color.GRAY);
-                    pedestal.getStyleClass().add("unavailable");
-                    Image monument = new Image(new File("src/main/resources/mario.png")
+                        break;
+                    case 1:
+                        Rectangle path = new Rectangle(squareWidth, squareWidth);
+                        path.setFill(Color.YELLOW);
+                        path.getStyleClass().add("unavailable");
+                        mapView.add(path, j, i);
+                        enemyPath.add(path);
+                        break;
+                    case 2:
+                        Rectangle pedestal = new Rectangle(squareWidth, squareWidth);
+                        pedestal.setFill(Color.GRAY);
+                        pedestal.getStyleClass().add("unavailable");
+                        Image monument = new Image(new File("src/main/resources/mario.png")
                             .toURI()
                             .toString());
 
-                    // The monument is now sitting on a square tile instead of being an image view.
-                    pedestal.setFill(new ImagePattern(monument));
-                    mapView.add(pedestal, j, i);
-                    break;
+                        // The monument is now sitting on a square tile instead of being an image view.
+                        pedestal.setFill(new ImagePattern(monument));
+                        mapView.add(pedestal, j, i);
+                        break;
                     default:
                         break;
                 }
