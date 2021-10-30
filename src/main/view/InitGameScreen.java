@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.*;
+import model.Enemy;
 import model.TowerType;
 import javafx.animation.*;
 import javafx.util.Duration;
@@ -63,37 +64,26 @@ public class InitGameScreen {
         VBox textualPrompts = new VBox(moneyPrompt, healthPrompt, messagePrompt);
 
         HBox towerMenu = getTowerMenu();
-        mapView.add(EnemyMove(), 0, 5);
+        mapView.add(EnemyMove(), 0, 0);
         VBox bottomSupport = new VBox(mapView, new HBox(textualPrompts, towerMenu));
         return new Scene(bottomSupport, width, height);
     }
 
     public Node EnemyMove() {
         Rectangle rect = new Rectangle(
-                enemyPath.get(9).getX(),
-                enemyPath.get(9).getY(),
-                enemyPath.get(9).getWidth(),
-                enemyPath.get(9).getHeight());
-
+                enemyPath.get(0).getX(),
+                enemyPath.get(0).getY(),
+                enemyPath.get(0).getWidth(),
+                enemyPath.get(0).getHeight());
         rect.setFill(Color.VIOLET);
         pathTransition = new PathTransition();
         pathTransition.setDuration(Duration.millis(10000));
         pathTransition.setNode(rect);
         Path path = new Path();
         MoveTo start = new MoveTo();
-        start.xProperty().bind(enemyPath.get(11).xProperty());
-        start.yProperty().bind(enemyPath.get(11).yProperty());
-
-
+        start.xProperty().bind(enemyPath.get(1).xProperty());
+        start.yProperty().bind(enemyPath.get(1).yProperty());
         path.getElements().add(start);
-
-        LineTo lineTo = new LineTo();
-        lineTo.xProperty().bind(enemyPath.get(0).layoutXProperty());
-        lineTo.yProperty().bind(enemyPath.get(0).layoutYProperty());
-        path.getElements().add(lineTo);
-
-
-        /**
         for (Node node : enemyPath) {
             LineTo lineTo = new LineTo();
             lineTo.xProperty().bind(node.layoutXProperty());
@@ -102,10 +92,9 @@ public class InitGameScreen {
             System.out.println(node.layoutXProperty());
             System.out.println(node.layoutYProperty());
         }
-         */
 
         pathTransition.setPath(path);
-        pathTransition.setCycleCount(3);
+        pathTransition.setCycleCount(1);
         return rect;
     }
 
@@ -124,7 +113,6 @@ public class InitGameScreen {
                         path.setFill(Color.YELLOW);
                         path.getStyleClass().add("unavailable");
                         mapView.add(path, j, i);
-                        enemyPath.add(path);
                         break;
                     case 2:
                         Rectangle pedestal = new Rectangle(squareWidth, squareWidth);
@@ -142,6 +130,38 @@ public class InitGameScreen {
                         break;
                 }
             }
+        }
+        Node[][] gridPaneArray = new Node[map.length][map[0].length];
+        for (Node node : mapView.getChildren()) {
+            gridPaneArray[GridPane.getRowIndex(node)][GridPane.getColumnIndex(node)] = node;
+        }
+        int row = 0;
+        while (row < map.length && map[row][0] != 1) {
+            row++;
+        }
+        int col = 0;
+        while (col < map[0].length - 1) {
+//            System.out.println("row: " + row + " col: " + col + ": " + map[row][col]);
+            enemyPath.add((Rectangle) gridPaneArray[row][col]);
+            if (map[row][col + 1] == 1) {
+                col++;
+                continue;
+            }
+            if (row < map.length - 1 && map[row - 1][col] == 1) {
+                while (row < map.length - 1 && map[row - 1][col] == 1) {
+                    enemyPath.add((Rectangle) gridPaneArray[row][col]);
+                    row--;
+                }
+                continue;
+            }
+            if (row - 1 > 0 && map[row + 1][col] == 1) {
+                while (row - 1 > 0 && map[row + 1][col] == 1) {
+                    enemyPath.add((Rectangle) gridPaneArray[row][col]);
+                    row++;
+                }
+                continue;
+            }
+            break;
         }
     }
 
