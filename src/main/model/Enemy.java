@@ -1,19 +1,22 @@
 package model;
 
+import java.awt.image.PackedColorModel;
+
 public class Enemy extends GameObject {
-    private double speed;
+    private double speed; // square per second
+    private double attackDamage;
     private double health;
-    private double level;
+    private GameDifficultyLevel level;
 
     public Enemy() {
-        this(0, 0, 0.0, 1, 1);
+        this(GameDifficultyLevel.EASY, 1, 1, 0);
     }
 
-    public Enemy(int xPosition, int yPosition, double speed, double health, double level) {
-        super(xPosition, yPosition);
+    public Enemy(GameDifficultyLevel level, double speed, double health, double attackDamage) {
         this.level = level;
-        this.speed = speed + (level * 5);
-        this.health = health + (level * 100);
+        this.speed = speed + level.ordinal() * 0.5;
+        this.health = health + level.ordinal() * 100;
+        this.attackDamage = attackDamage + level.ordinal() * 0.7;
     }
 
     public String toString() {
@@ -42,11 +45,19 @@ public class Enemy extends GameObject {
         this.speed = speed;
     }
 
-    public double getLevel() {
+    public GameDifficultyLevel getLevel() {
         return level;
     }
 
-    public void setLevel(double level) {
+    public void setLevel(GameDifficultyLevel level) {
         this.level = level;
+    }
+
+    public double getAttackDamage() {
+        return attackDamage;
+    }
+
+    public void setAttackDamage(double attackDamage) {
+        this.attackDamage = attackDamage;
     }
 }
