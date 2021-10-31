@@ -128,8 +128,7 @@ public class Controller extends Application {
                         pathTransition.pause();
                     }
                     // SIMPLE GAME OVER ALERT(should go to gameover screen here)
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Game Over");
+                    goToGameOverScreen(false);
                 } else {
                     model.setMonumentHealth(model.getMonumentHealth() - (int) model.getEnemies().get(finalI).getAttackDamage());
                     screen.setHealthValue(model.getMonumentHealth());
