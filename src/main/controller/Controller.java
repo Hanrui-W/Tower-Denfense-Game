@@ -2,6 +2,7 @@ package controller;
 
 import javafx.animation.PathTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -17,6 +18,7 @@ import model.Enemy;
 import model.GameDifficultyLevel;
 import model.Model;
 import model.TowerType;
+import view.GameOverScreen;
 import view.InitConfigScreen;
 import view.InitGameScreen;
 import view.WelcomeScreen;
@@ -199,6 +201,22 @@ public class Controller extends Application {
                 }
             }));
         }
+    }
+
+    public void goToGameOverScreen(boolean isWin) {
+        GameOverScreen screen = new GameOverScreen(WIDTH, HEIGHT);
+        Button restartButton = screen.getRestartButton();
+        restartButton.setOnAction(e -> {
+            initWelcomeScreen();
+        });
+        Button exitButton = screen.getExitButton();
+        exitButton.setOnAction(e -> {
+            Platform.exit();
+        });
+        screen.setWin(isWin);
+
+        mainWindow.setScene(screen.getScene());
+        mainWindow.show();
     }
 
     public static void main(String[] args) {
