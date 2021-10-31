@@ -102,9 +102,17 @@ public class Controller extends Application {
 
         //use for initializing enemies
         LinkedList<Enemy> listOfEnemies = new LinkedList<>();
-        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY, 3, 100, 500));
-        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY, 4, 100, 220));
-        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY, 5, 100, 50));
+        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY,
+                3,
+                model.getEnemyHealth(),
+                model.getEnemyDamage()));
+        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY, 4,
+                model.getEnemyHealth(),
+                model.getEnemyDamage()));
+        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY,
+                5,
+                model.getEnemyHealth(),
+                model.getEnemyDamage()));
         model.setEnemies(listOfEnemies);
 
         InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT, listOfTowers);
