@@ -27,11 +27,14 @@ public class MilestoneFourTest extends ApplicationTest {
         this.clickOn("Easy");
         this.clickOn("Easy");
         this.clickOn("Next");
+        this.clickOn("Start Combat");
 
         Thread.sleep(12500);
 
         FxAssert.verifyThat("Monument Health: ", NodeMatchers.isNotNull());
         FxAssert.verifyThat("700", NodeMatchers.isNotNull());
+
+        Thread.sleep(25000);
     }
 
     @Test
@@ -41,11 +44,14 @@ public class MilestoneFourTest extends ApplicationTest {
         this.clickOn("Easy");
         this.clickOn("Medium");
         this.clickOn("Next");
+        this.clickOn("Start Combat");
 
         Thread.sleep(12500);
 
         FxAssert.verifyThat("Monument Health: ", NodeMatchers.isNotNull());
         FxAssert.verifyThat("350", NodeMatchers.isNotNull());
+
+        Thread.sleep(25000);
     }
 
     @Test
@@ -55,11 +61,14 @@ public class MilestoneFourTest extends ApplicationTest {
         this.clickOn("Easy");
         this.clickOn("Hard");
         this.clickOn("Next");
+        this.clickOn("Start Combat");
 
         Thread.sleep(12500);
 
         FxAssert.verifyThat("Monument Health: ", NodeMatchers.isNotNull());
         FxAssert.verifyThat("175", NodeMatchers.isNotNull());
+
+        Thread.sleep(25000);
     }
 
     @Test
@@ -69,10 +78,13 @@ public class MilestoneFourTest extends ApplicationTest {
         this.clickOn("Easy");
         this.clickOn("Hell");
         this.clickOn("Next");
+        this.clickOn("Start Combat");
 
         Thread.sleep(12500);
 
         FxAssert.verifyThat("Monument Health: ", NodeMatchers.isNotNull());
         FxAssert.verifyThat("89", NodeMatchers.isNotNull());
+
+        Thread.sleep(25000);
     }
 }

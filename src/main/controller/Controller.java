@@ -123,7 +123,9 @@ public class Controller extends Application {
         mainWindow.setScene(screen.getScene());
 
         //Call this method will start Enemies Animation
-        screen.playEnemiesAnimation();
+        Button combat = screen.getStartCombatStatus();
+
+        combat.setOnAction(e -> screen.playEnemiesAnimation());
 
         for (int i = 0; i < screen.getEnemiesPathAnimation().size(); i++) {
             PathTransition transition = screen.getEnemiesPathAnimation().get(i);

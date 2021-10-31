@@ -36,6 +36,7 @@ public class InitGameScreen {
     private boolean purchasedTower;
     private final GridPane mapView;
     private final Label messageLabel;
+    public final Button startCombat;
     private final ArrayList<Rectangle> enemyPath;
     private ArrayList<PathTransition> enemiesPathAnimation;
     private ArrayList<Node> enemiesAnimationNodes;
@@ -52,6 +53,7 @@ public class InitGameScreen {
         messageLabel = new Label();
         purchasedTower = false;
         enemyPath = new ArrayList<>();
+        startCombat = new Button("Start Combat");
 
         this.listOfTowers = listOfTowers;
         buttons = new ArrayList<>();
@@ -66,8 +68,9 @@ public class InitGameScreen {
         HBox moneyPrompt = new HBox(moneyLabel, moneyValue);
         HBox healthPrompt = new HBox(healthLabel, healthValue);
         HBox messagePrompt = new HBox(messageLabel);
+        HBox combatButton = new HBox(startCombat);
 
-        VBox textualPrompts = new VBox(moneyPrompt, healthPrompt, messagePrompt);
+        VBox textualPrompts = new VBox(moneyPrompt, healthPrompt, messagePrompt, combatButton);
 
         HBox towerMenu = getTowerMenu();
         for (Node enemiesAnimationNode : enemiesAnimationNodes) {
@@ -282,5 +285,9 @@ public class InitGameScreen {
 
     public void setEnemiesAnimationNodes(ArrayList<Node> enemiesAnimationNodes) {
         this.enemiesAnimationNodes = enemiesAnimationNodes;
+    }
+
+    public Button getStartCombatStatus() {
+        return startCombat;
     }
 }
