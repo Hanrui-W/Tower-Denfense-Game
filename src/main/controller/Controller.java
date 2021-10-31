@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import model.Enemy;
@@ -127,10 +126,14 @@ public class Controller extends Application {
                     for (PathTransition pathTransition : screen.getEnemiesPathAnimation()) {
                         pathTransition.pause();
                     }
-                    // SIMPLE GAME OVER ALERT(should go to gameover screen here)
+                    // SIMPLE GAME OVER ALERT(should go to game over screen here)
                     goToGameOverScreen(false);
                 } else {
-                    model.setMonumentHealth(model.getMonumentHealth() - (int) model.getEnemies().get(finalI).getAttackDamage());
+                    model.setMonumentHealth(model.getMonumentHealth()
+                            - (int) model
+                            .getEnemies()
+                            .get(finalI)
+                            .getAttackDamage());
                     screen.setHealthValue(model.getMonumentHealth());
                     transition.play();
                 }
@@ -178,7 +181,8 @@ public class Controller extends Application {
                     tile.getStyleClass().add("unavailable");
                     screen.setPurchasedTower(false);
                     screen.setMessageLabel("Tower is placed.");
-                } else if (screen.getPurchased() && tile.getStyleClass().contains("unavailable")) {
+                } else if (screen.getPurchased() && (tile.getStyleClass().contains("unavailable")
+                        || (tile.getStyleClass().contains("padding")))) {
                     screen.setMessageLabel("It is not available.\n"
                             +  "Place the tower\n"
                             + "on the while areas.");

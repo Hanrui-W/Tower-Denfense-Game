@@ -85,7 +85,10 @@ public class InitGameScreen {
                     enemyPath.get(0).getWidth(),
                     enemyPath.get(0).getHeight()
             );
+
             rect.setFill(Color.VIOLET);
+            rect.getStyleClass().add("Enemy " + listOfEnemies.indexOf(enemy));
+
             PathTransition enemyAnimation = new PathTransition();
             enemyAnimation.setDuration(Duration.millis(enemyPath.size() / enemy.getSpeed() * 1000));
             Path path = new Path();
@@ -114,50 +117,25 @@ public class InitGameScreen {
         }
     }
 
-//    public Node EnemyMove() {
-//        Rectangle rect = new Rectangle(
-//                enemyPath.get(0).getX(),
-//                enemyPath.get(0).getY(),
-//                enemyPath.get(0).getWidth(),
-//                enemyPath.get(0).getHeight());
-//        rect.setFill(Color.VIOLET);
-//        pathTransition = new PathTransition();
-//        pathTransition.setDuration(Duration.millis(2500));
-//        pathTransition.setNode(rect);
-//        Path path = new Path();
-//        MoveTo start = new MoveTo();
-//        start.xProperty().bind(enemyPath.get(1).xProperty());
-//        start.yProperty().bind(enemyPath.get(1).yProperty());
-//        path.getElements().add(start);
-//        for (Node node : enemyPath) {
-//            LineTo lineTo = new LineTo();
-//            lineTo.xProperty().bind(node.layoutXProperty());
-//            lineTo.yProperty().bind(node.layoutYProperty());
-//            path.getElements().add(lineTo);
-//        }
-//
-//        pathTransition.setPath(path);
-//        pathTransition.setCycleCount(1);
-//        return rect;
-//    }
-
     public void initMap(int[][] map) {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
                 switch (map[i][j]) {
-                    case 0:
+                        case 0:
                         Rectangle empty = new Rectangle(squareWidth, squareWidth);
                         empty.setFill(Color.WHITE);
                         empty.getStyleClass().add("available");
                         mapView.add(empty, j, i);
                         break;
-                    case 1:
+
+                        case 1:
                         Rectangle path = new Rectangle(squareWidth, squareWidth);
                         path.setFill(Color.YELLOW);
                         path.getStyleClass().add("unavailable");
                         mapView.add(path, j, i);
                         break;
-                    case 2:
+
+                        case 2:
                         Rectangle pedestal = new Rectangle(squareWidth, squareWidth);
                         pedestal.setFill(Color.GRAY);
                         pedestal.getStyleClass().add("unavailable");
@@ -169,6 +147,12 @@ public class InitGameScreen {
                         pedestal.setFill(new ImagePattern(monument));
                         mapView.add(pedestal, j, i);
                         break;
+
+                        case 3:
+                            Rectangle padding = new Rectangle(squareWidth, squareWidth);
+                            padding.setFill(Color.YELLOW);
+                            padding.getStyleClass().add("Padding");
+                            mapView.add(padding, j, i);
                     default:
                         break;
                 }
@@ -183,7 +167,7 @@ public class InitGameScreen {
             row++;
         }
         int col = 0;
-        while (col < map[0].length - 1) {
+        while (col < map[0].length) {
             enemyPath.add((Rectangle) gridPaneArray[row][col]);
             if (map[row][col + 1] == 1) {
                 while (col < map[0].length && map[row][col + 1] == 1) {
@@ -193,14 +177,14 @@ public class InitGameScreen {
                 continue;
             }
             if (row > 0 && map[row - 1][col] == 1) {
-                while (row > 0 && map[row - 1][col] == 1) {
+                while (row > 0 && (map[row - 1][col] == 1 || map[row - 1][col] == 2)) {
                     enemyPath.add((Rectangle) gridPaneArray[row][col]);
                     row--;
                 }
                 continue;
             }
             if (row < map.length - 1 && map[row + 1][col] == 1) {
-                while (row < map.length - 1 && map[row + 1][col] == 1) {
+                while (row < map.length - 1 && (map[row + 1][col] == 1 || map[row + 1][col] == 2)) {
                     enemyPath.add((Rectangle) gridPaneArray[row][col]);
                     row++;
                 }
