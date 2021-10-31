@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.animation.PathTransition;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -9,8 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import model.Enemy;
 import model.GameDifficultyLevel;
 import model.Model;
 import model.TowerType;
@@ -19,6 +22,7 @@ import view.InitGameScreen;
 import view.WelcomeScreen;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Objects;
 
 
@@ -34,8 +38,6 @@ public class Controller extends Application {
         mainWindow.setTitle("Game");
         model = new Model();
         initWelcomeScreen();
-        // delete later
-        goToInitGameScreen();
     }
 
     public void initWelcomeScreen() {
@@ -97,12 +99,43 @@ public class Controller extends Application {
                         .toString()),
                 model.getTowerPriceBaseValue() * 3, 3, 3, 3, 3));
 
+        //use for initializing enemies
+        LinkedList<Enemy> listOfEnemies = new LinkedList<>();
+        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY, 3, 100, 500));
+        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY, 4, 100, 220));
+        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY, 5, 100, 50));
+        model.setEnemies(listOfEnemies);
+
         InitGameScreen screen = new InitGameScreen(WIDTH, HEIGHT, listOfTowers);
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
         screen.initMap(model.getMap());
+        screen.setEnemiesAnimation(model.getEnemies());
         mainWindow.setScene(screen.getScene());
-        screen.getPathTransition().play();
+
+        //Call this method will start Enemies Animation
+        screen.playEnemiesAnimation();
+
+        for (int i = 0; i < screen.getEnemiesPathAnimation().size(); i++) {
+            PathTransition transition = screen.getEnemiesPathAnimation().get(i);
+            int finalI = i;
+            transition.setOnFinished(e -> {
+                if (model.getMonumentHealth() <= model.getEnemies().get(finalI).getAttackDamage()) {
+                    //GAME OVER HERE
+                    for (PathTransition pathTransition : screen.getEnemiesPathAnimation()) {
+                        pathTransition.pause();
+                    }
+                    // SIMPLE GAME OVER ALERT(should go to gameover screen here)
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Game Over");
+                } else {
+                    model.setMonumentHealth(model.getMonumentHealth() - (int) model.getEnemies().get(finalI).getAttackDamage());
+                    screen.setHealthValue(model.getMonumentHealth());
+                    transition.play();
+                }
+
+            });
+        }
 
         ArrayList<Button> buttons = screen.getButtons();
         ArrayList<String> towerNames = new ArrayList<>();

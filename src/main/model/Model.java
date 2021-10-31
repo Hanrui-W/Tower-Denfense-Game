@@ -28,26 +28,26 @@ public class Model {
         this.level = level;
         player.setName(name);
         switch (level) {
-        case EASY:
-            player.setMoney(1000);
-            monument.setHealth(1000);
-            towerPriceBaseValue = 50;
-            break;
-        case MEDIUM:
-            player.setMoney(700);
-            monument.setHealth(500);
-            towerPriceBaseValue = 100;
-            break;
-        case HARD:
-            player.setMoney(500);
-            monument.setHealth(250);
-            towerPriceBaseValue = 150;
-            break;
-        case HELL:
-            player.setMoney(300);
-            monument.setHealth(125);
-            towerPriceBaseValue = 200;
-            break;
+            case EASY:
+                player.setMoney(1000);
+                monument.setHealth(1000);
+                towerPriceBaseValue = 50;
+                break;
+            case MEDIUM:
+                player.setMoney(700);
+                monument.setHealth(500);
+                towerPriceBaseValue = 100;
+                break;
+            case HARD:
+                player.setMoney(500);
+                monument.setHealth(250);
+                towerPriceBaseValue = 150;
+                break;
+            case HELL:
+                player.setMoney(300);
+                monument.setHealth(125);
+                towerPriceBaseValue = 200;
+                break;
             default:
                 break;
         }
@@ -75,6 +75,10 @@ public class Model {
         return monument.getHealth();
     }
 
+    public void setMonumentHealth(int health) {
+        monument.setHealth(health);
+    }
+
     public LinkedList<TowerType> getTowerTypes() {
         return towerTypes;
     }
@@ -89,5 +93,13 @@ public class Model {
 
     public int getTowerPriceBaseValue() {
         return towerPriceBaseValue;
+    }
+
+    public LinkedList<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public void setEnemies(LinkedList<Enemy> enemies) {
+        this.enemies = enemies;
     }
 }

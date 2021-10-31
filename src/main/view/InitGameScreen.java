@@ -1,5 +1,6 @@
 package view;
 
+import com.sun.javafx.scene.layout.PaneHelper;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -19,6 +20,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class InitGameScreen {
     private final int width;
@@ -35,7 +37,9 @@ public class InitGameScreen {
     private final GridPane mapView;
     private final Label messageLabel;
     private final ArrayList<Rectangle> enemyPath;
-    private PathTransition pathTransition;
+    private ArrayList<PathTransition> enemiesPathAnimation;
+    private ArrayList<Node> enemiesAnimationNodes;
+    public Path tmp_path;
 
     public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers) {
         this.width = width;
@@ -54,6 +58,8 @@ public class InitGameScreen {
         vBoxes = new ArrayList<>();
 
         mapView = new GridPane();
+        enemiesAnimationNodes = new ArrayList<>();
+        enemiesPathAnimation = new ArrayList<>();
     }
 
     public Scene getScene() {
@@ -64,39 +70,76 @@ public class InitGameScreen {
         VBox textualPrompts = new VBox(moneyPrompt, healthPrompt, messagePrompt);
 
         HBox towerMenu = getTowerMenu();
-        mapView.add(EnemyMove(), 0, 0);
+        for (Node enemiesAnimationNode : enemiesAnimationNodes) {
+            mapView.add(enemiesAnimationNode, 0, 0);
+        }
         VBox bottomSupport = new VBox(mapView, new HBox(textualPrompts, towerMenu));
         return new Scene(bottomSupport, width, height);
     }
 
-    public Node EnemyMove() {
-        Rectangle rect = new Rectangle(
-                enemyPath.get(0).getX(),
-                enemyPath.get(0).getY(),
-                enemyPath.get(0).getWidth(),
-                enemyPath.get(0).getHeight());
-        rect.setFill(Color.VIOLET);
-        pathTransition = new PathTransition();
-        pathTransition.setDuration(Duration.millis(10000));
-        pathTransition.setNode(rect);
-        Path path = new Path();
-        MoveTo start = new MoveTo();
-        start.xProperty().bind(enemyPath.get(1).xProperty());
-        start.yProperty().bind(enemyPath.get(1).yProperty());
-        path.getElements().add(start);
-        for (Node node : enemyPath) {
-            LineTo lineTo = new LineTo();
-            lineTo.xProperty().bind(node.layoutXProperty());
-            lineTo.yProperty().bind(node.layoutYProperty());
-            path.getElements().add(lineTo);
-            System.out.println(node.layoutXProperty());
-            System.out.println(node.layoutYProperty());
+    public void setEnemiesAnimation(LinkedList<Enemy> listOfEnemies) {
+        for (Enemy enemy : listOfEnemies) {
+            Rectangle rect = new Rectangle(
+                    enemyPath.get(0).getX(),
+                    enemyPath.get(0).getY(),
+                    enemyPath.get(0).getWidth(),
+                    enemyPath.get(0).getHeight()
+            );
+            rect.setFill(Color.VIOLET);
+            PathTransition enemyAnimation = new PathTransition();
+            enemyAnimation.setDuration(Duration.millis(enemyPath.size() / enemy.getSpeed() * 1000));
+            Path path = new Path();
+            MoveTo start = new MoveTo();
+            start.xProperty().bind(enemyPath.get(0).xProperty());
+            start.yProperty().bind(enemyPath.get(0).yProperty());
+            path.getElements().add(start);
+            for (Node node : enemyPath) {
+                LineTo lineTo = new LineTo();
+                lineTo.xProperty().bind(node.layoutXProperty());
+                lineTo.yProperty().bind(node.layoutYProperty());
+                path.getElements().add(lineTo);
+            }
+            tmp_path = path;
+            enemyAnimation.setPath(path);
+            enemyAnimation.setCycleCount(1);
+            enemyAnimation.setNode(rect);
+            enemiesAnimationNodes.add(rect);
+            enemiesPathAnimation.add(enemyAnimation);
         }
-
-        pathTransition.setPath(path);
-        pathTransition.setCycleCount(1);
-        return rect;
     }
+
+    public void playEnemiesAnimation() {
+        for (PathTransition pathTransition : enemiesPathAnimation) {
+            pathTransition.play();
+        }
+    }
+
+//    public Node EnemyMove() {
+//        Rectangle rect = new Rectangle(
+//                enemyPath.get(0).getX(),
+//                enemyPath.get(0).getY(),
+//                enemyPath.get(0).getWidth(),
+//                enemyPath.get(0).getHeight());
+//        rect.setFill(Color.VIOLET);
+//        pathTransition = new PathTransition();
+//        pathTransition.setDuration(Duration.millis(2500));
+//        pathTransition.setNode(rect);
+//        Path path = new Path();
+//        MoveTo start = new MoveTo();
+//        start.xProperty().bind(enemyPath.get(1).xProperty());
+//        start.yProperty().bind(enemyPath.get(1).yProperty());
+//        path.getElements().add(start);
+//        for (Node node : enemyPath) {
+//            LineTo lineTo = new LineTo();
+//            lineTo.xProperty().bind(node.layoutXProperty());
+//            lineTo.yProperty().bind(node.layoutYProperty());
+//            path.getElements().add(lineTo);
+//        }
+//
+//        pathTransition.setPath(path);
+//        pathTransition.setCycleCount(1);
+//        return rect;
+//    }
 
     public void initMap(int[][] map) {
         for (int i = 0; i < map.length; i++) {
@@ -119,8 +162,8 @@ public class InitGameScreen {
                         pedestal.setFill(Color.GRAY);
                         pedestal.getStyleClass().add("unavailable");
                         Image monument = new Image(new File("src/main/resources/mario.png")
-                            .toURI()
-                            .toString());
+                                .toURI()
+                                .toString());
 
                         // The monument is now sitting on a square tile instead of being an image view.
                         pedestal.setFill(new ImagePattern(monument));
@@ -141,21 +184,23 @@ public class InitGameScreen {
         }
         int col = 0;
         while (col < map[0].length - 1) {
-//            System.out.println("row: " + row + " col: " + col + ": " + map[row][col]);
             enemyPath.add((Rectangle) gridPaneArray[row][col]);
             if (map[row][col + 1] == 1) {
-                col++;
+                while (col < map[0].length && map[row][col + 1] == 1) {
+                    enemyPath.add((Rectangle) gridPaneArray[row][col]);
+                    col++;
+                }
                 continue;
             }
-            if (row < map.length - 1 && map[row - 1][col] == 1) {
-                while (row < map.length - 1 && map[row - 1][col] == 1) {
+            if (row > 0 && map[row - 1][col] == 1) {
+                while (row > 0 && map[row - 1][col] == 1) {
                     enemyPath.add((Rectangle) gridPaneArray[row][col]);
                     row--;
                 }
                 continue;
             }
-            if (row - 1 > 0 && map[row + 1][col] == 1) {
-                while (row - 1 > 0 && map[row + 1][col] == 1) {
+            if (row < map.length - 1 && map[row + 1][col] == 1) {
+                while (row < map.length - 1 && map[row + 1][col] == 1) {
                     enemyPath.add((Rectangle) gridPaneArray[row][col]);
                     row++;
                 }
@@ -163,14 +208,6 @@ public class InitGameScreen {
             }
             break;
         }
-    }
-
-    public PathTransition getPathTransition() {
-        return pathTransition;
-    }
-
-    public void setPathTransition(PathTransition pathTransition) {
-        this.pathTransition = pathTransition;
     }
 
     public HBox getTowerMenu() {
@@ -245,5 +282,21 @@ public class InitGameScreen {
 
     public void setHealthValue(int health) {
         healthValue.setText(String.valueOf(health));
+    }
+
+    public ArrayList<PathTransition> getEnemiesPathAnimation() {
+        return enemiesPathAnimation;
+    }
+
+    public void setEnemiesPathAnimation(ArrayList<PathTransition> enemiesPathAnimation) {
+        this.enemiesPathAnimation = enemiesPathAnimation;
+    }
+
+    public ArrayList<Node> getEnemiesAnimationNodes() {
+        return enemiesAnimationNodes;
+    }
+
+    public void setEnemiesAnimationNodes(ArrayList<Node> enemiesAnimationNodes) {
+        this.enemiesAnimationNodes = enemiesAnimationNodes;
     }
 }
