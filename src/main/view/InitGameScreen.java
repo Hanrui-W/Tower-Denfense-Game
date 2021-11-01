@@ -95,7 +95,7 @@ public class InitGameScreen {
             rect.setVisible(false);
 
             rect.setFill(Color.VIOLET);
-            rect.getStyleClass().add("Enemy " + listOfEnemies.indexOf(enemy));
+            rect.getStyleClass().add("enemy");
 
             PathTransition enemyAnimation = new PathTransition();
             enemyAnimation.setDuration(Duration.millis(enemyPath.size() / enemy.getSpeed() * 1000));
