@@ -29,7 +29,7 @@ public class MilestoneFourTest extends ApplicationTest {
         this.clickOn("Hell");
         this.clickOn("Next");
 
-        FxAssert.verifyThat("Start Combat", NodeMatchers.isInvisible());
+        FxAssert.verifyThat("Start Combat", NodeMatchers.isVisible());
     }
 
     @Test
