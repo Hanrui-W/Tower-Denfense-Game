@@ -1,13 +1,12 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import model.GameDifficultyLevel;
 import model.Model;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ModelTest {
 
-    private final Model model = new Model();
+    private final Model model = Model.getInstance();
 
     @Test
     void testInitGame() {

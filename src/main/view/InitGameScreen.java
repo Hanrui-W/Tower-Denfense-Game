@@ -1,6 +1,6 @@
 package view;
 
-import com.sun.javafx.scene.layout.PaneHelper;
+import javafx.animation.PathTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -9,14 +9,18 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.*;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import model.Enemy;
 import model.TowerType;
-import javafx.animation.*;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.util.ArrayList;

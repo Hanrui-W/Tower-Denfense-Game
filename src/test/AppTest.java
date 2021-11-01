@@ -1,4 +1,4 @@
-import controller.Controller;
+import controller.AppLauncher;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.Test;
@@ -13,8 +13,8 @@ public class AppTest extends ApplicationTest {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Controller controller = new Controller();
-        controller.start(primaryStage);
+        AppLauncher launcher = new AppLauncher();
+        launcher.start(primaryStage);
     }
 
     @Test

@@ -3,6 +3,9 @@ package model;
 import java.util.LinkedList;
 
 public class Model {
+
+    private static Model model = new Model();
+
     private Player player;
     private Map map;
     private LinkedList<Enemy> enemies;
@@ -13,14 +16,19 @@ public class Model {
     private GameDifficultyLevel level;
     private int enemyHealth;
     private int enemyDamage;
+    private boolean isWin;
 
-    public Model() {
+    private Model() {
         player = new Player();
         map = new Map();
         enemies = new LinkedList<>();
         setting = new GameSetting();
         monument = new Monument();
         towerTypes = new LinkedList<>();
+    }
+
+    public static Model getInstance() {
+        return model;
     }
 
     public boolean initGame(String name, GameDifficultyLevel level) {
@@ -119,5 +127,13 @@ public class Model {
 
     public int getEnemyDamage() {
         return enemyDamage;
+    }
+
+    public boolean isWin() {
+        return isWin;
+    }
+
+    public void setWin(boolean win) {
+        isWin = win;
     }
 }

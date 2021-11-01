@@ -1,4 +1,4 @@
-import controller.Controller;
+import controller.AppLauncher;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
@@ -14,8 +14,8 @@ public class MilestoneThreeTest extends ApplicationTest {
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
-        Controller controller = new Controller();
-        controller.start(primaryStage);
+        AppLauncher launcher = new AppLauncher();
+        launcher.start(primaryStage);
     }
 
     @Test
