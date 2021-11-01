@@ -1,6 +1,7 @@
 import controller.AppLauncher;
 import javafx.stage.Stage;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
@@ -28,9 +29,22 @@ public class MilestoneFourTest extends ApplicationTest {
         this.clickOn("Hell");
         this.clickOn("Next");
 
-        this.clickOn("Start Combat");
+        FxAssert.verifyThat("Start Combat", NodeMatchers.isInvisible());
     }
 
+    @Test
+    public void testEnemyAppearance() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Hell");
+        this.clickOn("Next");
+
+        FxAssert.verifyThat(".enemy", NodeMatchers.isInvisible());
+        this.clickOn("Start Combat");
+        FxAssert.verifyThat(".enemy", NodeMatchers.isVisible());
+
+    }
     @Test
     public void testEasyEnemyDamage() throws Exception {
         this.clickOn("Start");
@@ -132,6 +146,33 @@ public class MilestoneFourTest extends ApplicationTest {
     }
 
     @Test
+    public void testValueBeingResetAfterRestart() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Hell");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+
+        FxAssert.verifyThat("Monument Health: ", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("125", NodeMatchers.isNotNull());
+
+        Thread.sleep(37500);
+
+        FxAssert.verifyThat("Game Over", NodeMatchers.isNotNull());
+
+        this.clickOn("Restart");
+        this.clickOn("Start");
+        this.write("George");
+        this.clickOn("Easy");
+        this.clickOn("Hell");
+        this.clickOn("Next");
+
+        FxAssert.verifyThat("Monument Health: ", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("125", NodeMatchers.isNotNull());
+    }
+
+    @Test
     public void testExitGame() throws Exception {
         this.clickOn("Start");
         this.write("George P. Burdell");
@@ -144,9 +185,9 @@ public class MilestoneFourTest extends ApplicationTest {
 
         FxAssert.verifyThat("Game Over", NodeMatchers.isNotNull());
 
+        Assertions.assertTrue(stage.isShowing());
         this.clickOn("Exit");
+        Assertions.assertFalse(stage.isShowing());
     }
-
-
 
 }
