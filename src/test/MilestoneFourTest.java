@@ -21,6 +21,17 @@ public class MilestoneFourTest extends ApplicationTest {
     }
 
     @Test
+    public void testStartCombatButton() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Hell");
+        this.clickOn("Next");
+
+        this.clickOn("Start Combat");
+    }
+
+    @Test
     public void testEasyEnemyDamage() throws Exception {
         this.clickOn("Start");
         this.write("George P. Burdell");
@@ -87,4 +98,55 @@ public class MilestoneFourTest extends ApplicationTest {
 
         Thread.sleep(25000);
     }
+
+    @Test
+    public void testLoseGame() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Hell");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+
+        Thread.sleep(37500);
+
+        FxAssert.verifyThat("Game Over", NodeMatchers.isNotNull());
+        FxAssert.verifyThat("You Lose", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testRestartGame() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Hell");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+
+        Thread.sleep(37500);
+
+        FxAssert.verifyThat("Game Over", NodeMatchers.isNotNull());
+
+        this.clickOn("Restart");
+        FxAssert.verifyThat("Welcome Screen", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testExitGame() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Hell");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+
+        Thread.sleep(37500);
+
+        FxAssert.verifyThat("Game Over", NodeMatchers.isNotNull());
+
+        this.clickOn("Exit");
+    }
+
+
+
 }
