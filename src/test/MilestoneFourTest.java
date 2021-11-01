@@ -146,7 +146,4 @@ public class MilestoneFourTest extends ApplicationTest {
 
         this.clickOn("Exit");
     }
-
-
-
 }
