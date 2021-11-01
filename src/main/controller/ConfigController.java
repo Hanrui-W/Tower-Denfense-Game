@@ -8,7 +8,7 @@ import model.GameDifficultyLevel;
 import model.Model;
 import view.InitConfigScreen;
 
-public class ConfigController implements IController{
+public class ConfigController implements IController {
     public ConfigController(int width, int height) {
         initScreen(width, height);
     }

@@ -1,11 +1,10 @@
 package controller;
 
-import javafx.application.Platform;
 import javafx.scene.control.Button;
 import model.Model;
 import view.GameOverScreen;
 
-public class GameOverController implements IController{
+public class GameOverController implements IController {
     public GameOverController(int width, int height) {
         initScreen(width, height);
     }
@@ -18,7 +17,7 @@ public class GameOverController implements IController{
         });
         Button exitButton = screen.getExitButton();
         exitButton.setOnAction(e -> {
-            Platform.exit();
+            AppLauncher.getMainWindow().close();
         });
         screen.setWin(Model.getInstance().isWin());
 

@@ -40,7 +40,7 @@ public class InitGameScreen {
     private boolean purchasedTower;
     private final GridPane mapView;
     private final Label messageLabel;
-    public final Button startCombat;
+    private final Button startCombat;
     private final ArrayList<Rectangle> enemyPath;
     private ArrayList<PathTransition> enemiesPathAnimation;
     private ArrayList<Node> enemiesAnimationNodes;
@@ -95,7 +95,7 @@ public class InitGameScreen {
             rect.setVisible(false);
 
             rect.setFill(Color.VIOLET);
-            rect.getStyleClass().add("Enemy " + listOfEnemies.indexOf(enemy));
+            rect.getStyleClass().add("enemy");
 
             PathTransition enemyAnimation = new PathTransition();
             enemyAnimation.setDuration(Duration.millis(enemyPath.size() / enemy.getSpeed() * 1000));
@@ -135,40 +135,42 @@ public class InitGameScreen {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
                 switch (map[i][j]) {
-                        case 0:
-                        Rectangle empty = new Rectangle(squareWidth, squareWidth);
-                        empty.setFill(Color.WHITE);
-                        empty.getStyleClass().add("available");
-                        mapView.add(empty, j, i);
-                        break;
+                case 0:
+                    Rectangle empty = new Rectangle(squareWidth, squareWidth);
+                    empty.setFill(Color.WHITE);
+                    empty.getStyleClass().add("available");
+                    mapView.add(empty, j, i);
+                    break;
 
-                        case 1:
-                        Rectangle path = new Rectangle(squareWidth, squareWidth);
-                        path.setFill(Color.YELLOW);
-                        path.getStyleClass().add("unavailable");
-                        mapView.add(path, j, i);
-                        break;
+                case 1:
+                    Rectangle path = new Rectangle(squareWidth, squareWidth);
+                    path.setFill(Color.YELLOW);
+                    path.getStyleClass().add("unavailable");
+                    mapView.add(path, j, i);
+                    break;
 
-                        case 2:
-                        Rectangle pedestal = new Rectangle(squareWidth, squareWidth);
-                        pedestal.setFill(Color.GRAY);
-                        pedestal.getStyleClass().add("unavailable");
-                        Image monument = new Image(new File("src/main/resources/mario.png")
-                                .toURI()
-                                .toString());
-                            monumentNode = pedestal;
-                        // The monument is now sitting on a square tile instead of being an image view.
-                        pedestal.setFill(new ImagePattern(monument));
-                        mapView.add(pedestal, j, i);
-                        break;
+                case 2:
+                    Rectangle pedestal = new Rectangle(squareWidth, squareWidth);
+                    pedestal.setFill(Color.GRAY);
+                    pedestal.getStyleClass().add("unavailable");
+                    Image monument = new Image(new File("src/main/resources/mario.png")
+                            .toURI()
+                            .toString());
+                    monumentNode = pedestal;
+                    // The monument is now sitting on a square tile instead of being an image view.
+                    pedestal.setFill(new ImagePattern(monument));
+                    mapView.add(pedestal, j, i);
+                    break;
 
-                        case 3:
-                            Rectangle padding = new Rectangle(squareWidth, squareWidth);
-                            padding.setFill(Color.YELLOW);
-                            padding.getStyleClass().add("Padding");
-                            mapView.add(padding, j, i);
-                    default:
-                        break;
+                case 3:
+                    Rectangle padding = new Rectangle(squareWidth, squareWidth);
+                    padding.setFill(Color.YELLOW);
+                    padding.getStyleClass().add("Padding");
+                    mapView.add(padding, j, i);
+                    break;
+
+                default:
+                    break;
                 }
             }
         }
