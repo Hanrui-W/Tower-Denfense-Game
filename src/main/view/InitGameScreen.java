@@ -44,7 +44,7 @@ public class InitGameScreen {
     private final ArrayList<Rectangle> enemyPath;
     private ArrayList<PathTransition> enemiesPathAnimation;
     private ArrayList<Node> enemiesAnimationNodes;
-    public Path tmp_path;
+    private Node monumentNode;
 
     public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers) {
         this.width = width;
@@ -92,6 +92,7 @@ public class InitGameScreen {
                     enemyPath.get(0).getWidth(),
                     enemyPath.get(0).getHeight()
             );
+            rect.setVisible(false);
 
             rect.setFill(Color.VIOLET);
             rect.getStyleClass().add("Enemy " + listOfEnemies.indexOf(enemy));
@@ -109,7 +110,10 @@ public class InitGameScreen {
                 lineTo.yProperty().bind(node.layoutYProperty());
                 path.getElements().add(lineTo);
             }
-            tmp_path = path;
+            LineTo end = new LineTo();
+            end.xProperty().bind(monumentNode.layoutXProperty());
+            end.yProperty().bind(monumentNode.layoutYProperty());
+            path.getElements().add(end);
             enemyAnimation.setPath(path);
             enemyAnimation.setCycleCount(1);
             enemyAnimation.setNode(rect);
@@ -119,6 +123,9 @@ public class InitGameScreen {
     }
 
     public void playEnemiesAnimation() {
+        for (Node enemiesAnimationNode : enemiesAnimationNodes) {
+            enemiesAnimationNode.setVisible(true);
+        }
         for (PathTransition pathTransition : enemiesPathAnimation) {
             pathTransition.play();
         }
@@ -149,7 +156,7 @@ public class InitGameScreen {
                         Image monument = new Image(new File("src/main/resources/mario.png")
                                 .toURI()
                                 .toString());
-
+                            monumentNode = pedestal;
                         // The monument is now sitting on a square tile instead of being an image view.
                         pedestal.setFill(new ImagePattern(monument));
                         mapView.add(pedestal, j, i);
