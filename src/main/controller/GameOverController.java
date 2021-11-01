@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 import model.Model;
 import view.GameOverScreen;
 
-public class GameOverController implements IController{
+public class GameOverController implements IController {
     public GameOverController(int width, int height) {
         initScreen(width, height);
     }

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Objects;
 
-public class GameController implements IController{
+public class GameController implements IController {
     private Model model;
     private Image purchasedTower;
     public GameController(int width, int height) {
@@ -108,23 +108,24 @@ public class GameController implements IController{
 
         for (Button button : buttons) {
             button.setOnAction(e -> {
+                TowerType tower = listOfTowers.get(buttons.indexOf(button));
                 if (screen.getPurchased()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Have not placed purchased tower.");
                     alert.setContentText("Must place purchased tower to continue.");
                     alert.showAndWait();
-                } else if (model.getMoney() < listOfTowers.get(buttons.indexOf(button)).getCost()) {
+                } else if (model.getMoney() < tower.getCost()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Insufficient funds.");
                     alert.setContentText("You do not have enough funds to purchase this tower.");
                     alert.showAndWait();
                 } else {
-                    model.setMoney(model.getMoney() - listOfTowers.get(buttons.indexOf(button)).getCost());
+                    model.setMoney(model.getMoney() - tower.getCost());
                     screen.setMoneyValue(model.getMoney());
                     screen.setPurchasedTower(true);
-                    purchasedTower = listOfTowers.get(buttons.indexOf(button)).getImage();
+                    purchasedTower = tower.getImage();
                     screen.setMessageLabel("You purchased\n"
                             + towerNames.get(buttons.indexOf(button)));
                 }

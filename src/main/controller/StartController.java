@@ -3,7 +3,7 @@ package controller;
 import javafx.scene.control.Button;
 import view.WelcomeScreen;
 
-public class StartController implements IController{
+public class StartController implements IController {
     public StartController(int width, int height) {
         initScreen(width, height);
     }

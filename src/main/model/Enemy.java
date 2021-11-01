@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.image.PackedColorModel;
-
 public class Enemy extends GameObject {
     private double speed; // square per second
     private double attackDamage;
