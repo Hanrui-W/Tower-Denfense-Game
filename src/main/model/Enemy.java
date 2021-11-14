@@ -1,30 +1,35 @@
 package model;
 
 public class Enemy extends GameObject {
-    private double speed; // square per second
-    private double attackDamage;
-    private double health;
-    private GameDifficultyLevel level;
+    protected double attackDamage;
+    protected double health;
+    protected int iteration;
+    protected int counter;
 
-    public Enemy() {
-        this(GameDifficultyLevel.EASY, 1, 1, 0);
-    }
-
-    public Enemy(GameDifficultyLevel level, double speed, double health, double attackDamage) {
-        this.level = level;
-        this.speed = speed + level.ordinal() * 0.5;
-        this.health = health + level.ordinal() * 100;
-        this.attackDamage = attackDamage + level.ordinal() * 0.7;
+    public Enemy(double health, double attackDamage, int iteration) {
+        this.health = health;
+        this.attackDamage = attackDamage;
+        this.iteration = iteration;
+        this.counter = 0;
     }
 
     public String toString() {
         return "Enemy {"
                 + "xPosition=" + getxPosition()
                 + ", yPosition=" + getyPosition()
-                + ", speed=" + speed
                 + ", health=" + health
-                + ", level=" + level
                 + '}';
+    }
+
+    public boolean moveEnemy() {
+        counter++;
+
+        if (counter >= iteration) {
+            counter = 0;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public double getHealth() {
@@ -35,20 +40,12 @@ public class Enemy extends GameObject {
         this.health = health;
     }
 
-    public double getSpeed() {
-        return speed;
+    public double getIteration() {
+        return iteration;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
-
-    public GameDifficultyLevel getLevel() {
-        return level;
-    }
-
-    public void setLevel(GameDifficultyLevel level) {
-        this.level = level;
+    public void setIteration(int iteration) {
+        this.iteration = iteration;
     }
 
     public double getAttackDamage() {

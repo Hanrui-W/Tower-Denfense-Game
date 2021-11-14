@@ -85,6 +85,7 @@ public class InitGameScreen {
         }
         for (Enemy enemy : listOfEnemies) {
             Rectangle rect = gridPaneArray[enemy.getxPosition()][enemy.getyPosition()];
+
             rect.getStyleClass().add("enemy");
             rect.setFill(Color.VIOLET);
         }
@@ -115,12 +116,6 @@ public class InitGameScreen {
                     // The monument is now sitting on a square tile instead of being an image view.
                     rect.setFill(new ImagePattern(monumentImage));
                     break;
-
-                case 3:
-                    rect.setFill(Color.YELLOW);
-                    rect.getStyleClass().add("Padding");
-                    break;
-
                 default:
                     break;
                 }
@@ -167,7 +162,7 @@ public class InitGameScreen {
         for (TowerType towerType : listOfTowers) {
             ImageView image = new ImageView(towerType.getImage());
             image.setFitHeight(menuHeight * 0.6);
-            image.setFitWidth(menuWidth / listOfTowers.size());
+            image.setFitWidth(menuWidth / (double) listOfTowers.size());
             Label imageLabel = new Label(towerType.getName(), image);
             imageLabel.setStyle("-fx-border-color: green; -fx-border-width: 2");
             imageLabel.setContentDisplay(ContentDisplay.TOP);
@@ -236,5 +231,13 @@ public class InitGameScreen {
 
     public Button getStartCombatStatus() {
         return startCombat;
+    }
+
+    public ArrayList<Rectangle> getEnemyPath() {
+        return enemyPath;
+    }
+
+    public Rectangle[][] getGridPaneArray() {
+        return gridPaneArray;
     }
 }

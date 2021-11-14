@@ -179,8 +179,16 @@ public class GameController implements IController {
             }));
         }
     }
+
     public void update() {
         model.setMoney(model.getMoney() + 10);
         screen.setMoneyValue(model.getMoney());
+    }
+
+    public void moveEachEnemy(Enemy enemy, int xPosition, int yPosition) {
+        if (enemy.moveEnemy()) {
+            enemy.setxPosition(xPosition);
+            enemy.setyPosition(yPosition);
+        }
     }
 }
