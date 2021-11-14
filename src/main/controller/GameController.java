@@ -67,14 +67,12 @@ public class GameController implements IController {
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
         screen.initMap(model.getMap());
-        screen.setEnemiesAnimation(model.getEnemies());
         AppLauncher.getMainWindow().setScene(screen.getScene());
 
         //Call this method will start Enemies Animation
         Button combat = screen.getStartCombatStatus();
 
         combat.setOnAction(e -> {
-            screen.playEnemiesAnimation();
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -89,30 +87,6 @@ public class GameController implements IController {
             combat.setOnAction(null);
         });
 
-        for (int i = 0; i < screen.getEnemiesPathAnimation().size(); i++) {
-            PathTransition transition = screen.getEnemiesPathAnimation().get(i);
-            int finalI = i;
-            transition.setOnFinished(e -> {
-                if (model.getMonumentHealth() <= model.getEnemies().get(finalI).getAttackDamage()) {
-                    //GAME OVER HERE
-                    for (PathTransition pathTransition : screen.getEnemiesPathAnimation()) {
-                        pathTransition.pause();
-                    }
-                    // SIMPLE GAME OVER ALERT(should go to game over screen here)
-                    model.setWin(false);
-                    AppLauncher.goToGameOverScreen();
-                } else {
-                    model.setMonumentHealth(model.getMonumentHealth()
-                            - (int) model
-                            .getEnemies()
-                            .get(finalI)
-                            .getAttackDamage());
-                    screen.setHealthValue(model.getMonumentHealth());
-                    transition.play();
-                }
-
-            });
-        }
 
         ArrayList<Button> buttons = screen.getButtons();
         ArrayList<String> towerNames = new ArrayList<>();
@@ -179,8 +153,13 @@ public class GameController implements IController {
             }));
         }
     }
+
     public void update() {
         model.setMoney(model.getMoney() + 10);
         screen.setMoneyValue(model.getMoney());
+    }
+
+    public void generateNewEnemy(List<Enemy> listOfEnemies) {
+
     }
 }
