@@ -48,21 +48,6 @@ public class GameController implements IController {
                         .toString()),
                 model.getTowerPriceBaseValue() * 3, 3, 3, 3, 3));
 
-        //use for initializing enemies
-        LinkedList<Enemy> listOfEnemies = new LinkedList<>();
-        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY,
-                3,
-                model.getEnemyHealth(),
-                model.getEnemyDamage()));
-        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY, 4,
-                model.getEnemyHealth(),
-                model.getEnemyDamage()));
-        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY,
-                5,
-                model.getEnemyHealth(),
-                model.getEnemyDamage()));
-        model.setEnemies(listOfEnemies);
-
         screen = new InitGameScreen(width, height, listOfTowers);
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
@@ -157,9 +142,6 @@ public class GameController implements IController {
     public void update() {
         model.setMoney(model.getMoney() + 10);
         screen.setMoneyValue(model.getMoney());
-    }
-
-    public void generateNewEnemy(List<Enemy> listOfEnemies) {
-
+        model.setTime(model.getTime() + 1);
     }
 }
