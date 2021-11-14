@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.animation.PathTransition;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -15,13 +16,12 @@ import model.TowerType;
 import view.InitGameScreen;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Objects;
+import java.util.*;
 
 public class GameController implements IController {
     private Model model;
     private Image purchasedTower;
+    private InitGameScreen screen;
     public GameController(int width, int height) {
         model = Model.getInstance();
         initScreen(width, height);
@@ -63,7 +63,7 @@ public class GameController implements IController {
                 model.getEnemyDamage()));
         model.setEnemies(listOfEnemies);
 
-        InitGameScreen screen = new InitGameScreen(width, height, listOfTowers);
+        screen = new InitGameScreen(width, height, listOfTowers);
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
         screen.initMap(model.getMap());
@@ -73,7 +73,21 @@ public class GameController implements IController {
         //Call this method will start Enemies Animation
         Button combat = screen.getStartCombatStatus();
 
-        combat.setOnAction(e -> screen.playEnemiesAnimation());
+        combat.setOnAction(e -> {
+            screen.playEnemiesAnimation();
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            update();
+                        }
+                    });
+                }
+            }, 0, 1000);
+            combat.setOnAction(null);
+        });
 
         for (int i = 0; i < screen.getEnemiesPathAnimation().size(); i++) {
             PathTransition transition = screen.getEnemiesPathAnimation().get(i);
@@ -164,5 +178,9 @@ public class GameController implements IController {
                 }
             }));
         }
+    }
+    public void update() {
+        model.setMoney(model.getMoney() + 10);
+        screen.setMoneyValue(model.getMoney());
     }
 }
