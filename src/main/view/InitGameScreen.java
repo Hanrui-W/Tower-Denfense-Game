@@ -39,12 +39,11 @@ public class InitGameScreen {
     private final ArrayList<VBox> vBoxes;
     private boolean purchasedTower;
     private final GridPane mapView;
+    private Rectangle[][] gridPaneArray;
+    private Rectangle monument;
     private final Label messageLabel;
     private final Button startCombat;
     private final ArrayList<Rectangle> enemyPath;
-    private ArrayList<PathTransition> enemiesPathAnimation;
-    private ArrayList<Node> enemiesAnimationNodes;
-    private Node monumentNode;
 
     public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers) {
         this.width = width;
@@ -64,8 +63,6 @@ public class InitGameScreen {
         vBoxes = new ArrayList<>();
 
         mapView = new GridPane();
-        enemiesAnimationNodes = new ArrayList<>();
-        enemiesPathAnimation = new ArrayList<>();
     }
 
     public Scene getScene() {
@@ -77,106 +74,59 @@ public class InitGameScreen {
         VBox textualPrompts = new VBox(moneyPrompt, healthPrompt, messagePrompt, combatButton);
 
         HBox towerMenu = getTowerMenu();
-        for (Node enemiesAnimationNode : enemiesAnimationNodes) {
-            mapView.add(enemiesAnimationNode, 0, 0);
-        }
         VBox bottomSupport = new VBox(mapView, new HBox(textualPrompts, towerMenu));
         return new Scene(bottomSupport, width, height);
     }
 
-    public void setEnemiesAnimation(LinkedList<Enemy> listOfEnemies) {
+    public void updateEnemiesPosition(LinkedList<Enemy> listOfEnemies) {
+        for (Rectangle rect : enemyPath) {
+            rect.getStyleClass().remove("enemy");
+            rect.setFill(Color.YELLOW);
+        }
         for (Enemy enemy : listOfEnemies) {
-            Rectangle rect = new Rectangle(
-                    enemyPath.get(0).getX(),
-                    enemyPath.get(0).getY(),
-                    enemyPath.get(0).getWidth(),
-                    enemyPath.get(0).getHeight()
-            );
-            rect.setVisible(false);
-
-            rect.setFill(Color.VIOLET);
+            Rectangle rect = gridPaneArray[enemy.getxPosition()][enemy.getyPosition()];
             rect.getStyleClass().add("enemy");
-
-            PathTransition enemyAnimation = new PathTransition();
-            enemyAnimation.setDuration(Duration.millis(enemyPath.size() / enemy.getSpeed() * 1000));
-            Path path = new Path();
-            MoveTo start = new MoveTo();
-            start.xProperty().bind(enemyPath.get(0).xProperty());
-            start.yProperty().bind(enemyPath.get(0).yProperty());
-            path.getElements().add(start);
-            for (Node node : enemyPath) {
-                LineTo lineTo = new LineTo();
-                lineTo.xProperty().bind(node.layoutXProperty());
-                lineTo.yProperty().bind(node.layoutYProperty());
-                path.getElements().add(lineTo);
-            }
-            LineTo end = new LineTo();
-            end.xProperty().bind(monumentNode.layoutXProperty());
-            end.yProperty().bind(monumentNode.layoutYProperty());
-            path.getElements().add(end);
-            enemyAnimation.setPath(path);
-            enemyAnimation.setCycleCount(1);
-            enemyAnimation.setNode(rect);
-            enemiesAnimationNodes.add(rect);
-            enemiesPathAnimation.add(enemyAnimation);
-        }
-    }
-
-    public void playEnemiesAnimation() {
-        for (Node enemiesAnimationNode : enemiesAnimationNodes) {
-            enemiesAnimationNode.setVisible(true);
-        }
-        for (PathTransition pathTransition : enemiesPathAnimation) {
-            pathTransition.play();
+            rect.setFill(Color.VIOLET);
         }
     }
 
     public void initMap(int[][] map) {
+        gridPaneArray = new Rectangle[map.length][map[0].length];
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
+                Rectangle rect = new Rectangle(squareWidth, squareWidth);
                 switch (map[i][j]) {
                 case 0:
-                    Rectangle empty = new Rectangle(squareWidth, squareWidth);
-                    empty.setFill(Color.WHITE);
-                    empty.getStyleClass().add("available");
-                    mapView.add(empty, j, i);
+                    rect.setFill(Color.WHITE);
+                    rect.getStyleClass().add("available");
                     break;
 
                 case 1:
-                    Rectangle path = new Rectangle(squareWidth, squareWidth);
-                    path.setFill(Color.YELLOW);
-                    path.getStyleClass().add("unavailable");
-                    mapView.add(path, j, i);
+                    rect.setFill(Color.YELLOW);
+                    rect.getStyleClass().add("unavailable");
                     break;
 
                 case 2:
-                    Rectangle pedestal = new Rectangle(squareWidth, squareWidth);
-                    pedestal.setFill(Color.GRAY);
-                    pedestal.getStyleClass().add("unavailable");
-                    Image monument = new Image(new File("src/main/resources/mario.png")
+                    rect.setFill(Color.GRAY);
+                    rect.getStyleClass().add("unavailable");
+                    Image monumentImage = new Image(new File("src/main/resources/mario.png")
                             .toURI()
                             .toString());
-                    monumentNode = pedestal;
                     // The monument is now sitting on a square tile instead of being an image view.
-                    pedestal.setFill(new ImagePattern(monument));
-                    mapView.add(pedestal, j, i);
+                    rect.setFill(new ImagePattern(monumentImage));
                     break;
 
                 case 3:
-                    Rectangle padding = new Rectangle(squareWidth, squareWidth);
-                    padding.setFill(Color.YELLOW);
-                    padding.getStyleClass().add("Padding");
-                    mapView.add(padding, j, i);
+                    rect.setFill(Color.YELLOW);
+                    rect.getStyleClass().add("Padding");
                     break;
 
                 default:
                     break;
                 }
+                mapView.add(rect, j, i);
+                gridPaneArray[i][j] = rect;
             }
-        }
-        Node[][] gridPaneArray = new Node[map.length][map[0].length];
-        for (Node node : mapView.getChildren()) {
-            gridPaneArray[GridPane.getRowIndex(node)][GridPane.getColumnIndex(node)] = node;
         }
         int row = 0;
         while (row < map.length && map[row][0] != 1) {
@@ -184,24 +134,24 @@ public class InitGameScreen {
         }
         int col = 0;
         while (col < map[0].length) {
-            enemyPath.add((Rectangle) gridPaneArray[row][col]);
+            enemyPath.add(gridPaneArray[row][col]);
             if (map[row][col + 1] == 1) {
                 while (col < map[0].length && map[row][col + 1] == 1) {
-                    enemyPath.add((Rectangle) gridPaneArray[row][col]);
+                    enemyPath.add(gridPaneArray[row][col]);
                     col++;
                 }
                 continue;
             }
             if (row > 0 && map[row - 1][col] == 1) {
-                while (row > 0 && (map[row - 1][col] == 1 || map[row - 1][col] == 2)) {
-                    enemyPath.add((Rectangle) gridPaneArray[row][col]);
+                while (row > 0 && (map[row - 1][col] == 1)) {
+                    enemyPath.add(gridPaneArray[row][col]);
                     row--;
                 }
                 continue;
             }
             if (row < map.length - 1 && map[row + 1][col] == 1) {
-                while (row < map.length - 1 && (map[row + 1][col] == 1 || map[row + 1][col] == 2)) {
-                    enemyPath.add((Rectangle) gridPaneArray[row][col]);
+                while (row < map.length - 1 && (map[row + 1][col] == 1)) {
+                    enemyPath.add(gridPaneArray[row][col]);
                     row++;
                 }
                 continue;
@@ -282,22 +232,6 @@ public class InitGameScreen {
 
     public void setHealthValue(int health) {
         healthValue.setText(String.valueOf(health));
-    }
-
-    public ArrayList<PathTransition> getEnemiesPathAnimation() {
-        return enemiesPathAnimation;
-    }
-
-    public void setEnemiesPathAnimation(ArrayList<PathTransition> enemiesPathAnimation) {
-        this.enemiesPathAnimation = enemiesPathAnimation;
-    }
-
-    public ArrayList<Node> getEnemiesAnimationNodes() {
-        return enemiesAnimationNodes;
-    }
-
-    public void setEnemiesAnimationNodes(ArrayList<Node> enemiesAnimationNodes) {
-        this.enemiesAnimationNodes = enemiesAnimationNodes;
     }
 
     public Button getStartCombatStatus() {
