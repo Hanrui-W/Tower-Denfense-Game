@@ -129,7 +129,6 @@ public class InitGameScreen {
         }
         int col = 0;
         while (col < map[0].length) {
-            enemyPath.add(gridPaneArray[row][col]);
             if (map[row][col + 1] == 1) {
                 while (col < map[0].length && map[row][col + 1] == 1) {
                     enemyPath.add(gridPaneArray[row][col]);
@@ -153,6 +152,7 @@ public class InitGameScreen {
             }
             break;
         }
+        enemyPath.add(gridPaneArray[row][col]);
     }
 
     public HBox getTowerMenu() {

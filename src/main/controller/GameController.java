@@ -48,33 +48,16 @@ public class GameController implements IController {
                         .toString()),
                 model.getTowerPriceBaseValue() * 3, 3, 3, 3, 3));
 
-        //use for initializing enemies
-        LinkedList<Enemy> listOfEnemies = new LinkedList<>();
-        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY,
-                3,
-                model.getEnemyHealth(),
-                model.getEnemyDamage()));
-        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY, 4,
-                model.getEnemyHealth(),
-                model.getEnemyDamage()));
-        listOfEnemies.add(new Enemy(GameDifficultyLevel.EASY,
-                5,
-                model.getEnemyHealth(),
-                model.getEnemyDamage()));
-        model.setEnemies(listOfEnemies);
-
         screen = new InitGameScreen(width, height, listOfTowers);
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
         screen.initMap(model.getMap());
-        screen.setEnemiesAnimation(model.getEnemies());
         AppLauncher.getMainWindow().setScene(screen.getScene());
 
         //Call this method will start Enemies Animation
         Button combat = screen.getStartCombatStatus();
 
         combat.setOnAction(e -> {
-            screen.playEnemiesAnimation();
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -89,30 +72,6 @@ public class GameController implements IController {
             combat.setOnAction(null);
         });
 
-        for (int i = 0; i < screen.getEnemiesPathAnimation().size(); i++) {
-            PathTransition transition = screen.getEnemiesPathAnimation().get(i);
-            int finalI = i;
-            transition.setOnFinished(e -> {
-                if (model.getMonumentHealth() <= model.getEnemies().get(finalI).getAttackDamage()) {
-                    //GAME OVER HERE
-                    for (PathTransition pathTransition : screen.getEnemiesPathAnimation()) {
-                        pathTransition.pause();
-                    }
-                    // SIMPLE GAME OVER ALERT(should go to game over screen here)
-                    model.setWin(false);
-                    AppLauncher.goToGameOverScreen();
-                } else {
-                    model.setMonumentHealth(model.getMonumentHealth()
-                            - (int) model
-                            .getEnemies()
-                            .get(finalI)
-                            .getAttackDamage());
-                    screen.setHealthValue(model.getMonumentHealth());
-                    transition.play();
-                }
-
-            });
-        }
 
         ArrayList<Button> buttons = screen.getButtons();
         ArrayList<String> towerNames = new ArrayList<>();
@@ -183,6 +142,7 @@ public class GameController implements IController {
     public void update() {
         model.setMoney(model.getMoney() + 10);
         screen.setMoneyValue(model.getMoney());
+        model.setTime(model.getTime() + 1);
     }
 
     public void moveEachEnemy(Enemy enemy, int xPosition, int yPosition) {

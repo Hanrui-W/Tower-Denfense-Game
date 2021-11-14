@@ -8,7 +8,7 @@ public class Model {
 
     private Player player;
     private Map map;
-    private LinkedList<Enemy> enemies;
+    private LinkedList<Enemy> listOfEnemies;
     private GameSetting setting;
     private Monument monument;
     private LinkedList<TowerType> towerTypes;
@@ -16,15 +16,17 @@ public class Model {
     private GameDifficultyLevel level;
     private int enemyHealth;
     private int enemyDamage;
+    private int time;
     private boolean isWin;
 
     private Model() {
         player = new Player();
         map = new Map();
-        enemies = new LinkedList<>();
+        listOfEnemies = new LinkedList<>();
         setting = new GameSetting();
         monument = new Monument();
         towerTypes = new LinkedList<>();
+        time = 0;
     }
 
     public static Model getInstance() {
@@ -73,6 +75,13 @@ public class Model {
         return true;
     }
 
+    public void updateListOfEnemies() {
+
+    }
+    public void generateNewEnemy() {
+        if (time )
+    }
+
     public GameDifficultyLevel getLevel() {
         return level;
     }
@@ -113,16 +122,24 @@ public class Model {
         return towerPriceBaseValue;
     }
 
-    public LinkedList<Enemy> getEnemies() {
-        return enemies;
+    public LinkedList<Enemy> getListOfEnemies() {
+        return listOfEnemies;
     }
 
-    public void setEnemies(LinkedList<Enemy> enemies) {
-        this.enemies = enemies;
+    public void setListOfEnemies(LinkedList<Enemy> listOfEnemies) {
+        this.listOfEnemies = listOfEnemies;
     }
 
     public int getEnemyHealth() {
         return enemyHealth;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 
     public int getEnemyDamage() {
