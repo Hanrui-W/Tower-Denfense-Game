@@ -41,7 +41,10 @@ public class GameController implements IController {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            update();
+                            updateMoney();
+                            if (model.updateListOfEnemies()) {
+                                screen.updateEnemiesPosition(model.getListOfEnemies());
+                            }
                         }
                     });
                 }
@@ -119,16 +122,9 @@ public class GameController implements IController {
         }
     }
 
-    public void update() {
+    public void updateMoney() {
         model.setMoney(model.getMoney() + 10);
         screen.setMoneyValue(model.getMoney());
         model.setNewEnemyCounter(model.getNewEnemyCounter() + 1);
-    }
-
-    public void moveEachEnemy(Enemy enemy, int xPosition, int yPosition) {
-        if (enemy.moveEnemy()) {
-            enemy.setxPosition(xPosition);
-            enemy.setyPosition(yPosition);
-        }
     }
 }

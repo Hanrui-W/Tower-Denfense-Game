@@ -37,4 +37,14 @@ public class GameObject {
     public void setyPosition(int yPosition) {
         this.yPosition = yPosition;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof GameObject) {
+            return (this.xPosition == ((GameObject) object).getxPosition()
+                    && this.yPosition == ((GameObject) object).getyPosition());
+        } else {
+            return false;
+        }
+    }
 }

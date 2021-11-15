@@ -83,6 +83,23 @@ public class Model {
         return true;
     }
 
+    public boolean updateListOfEnemies() {
+        boolean updated = false;
+
+        for (Enemy enemy : listOfEnemies) {
+            if (enemy.moveEnemy()) {
+                for (int i = 0; i < map.getEnemyPath().size() - 1; i++) {
+                    if (map.getEnemyPath().get(i).equals(enemy)) {
+                        enemy.setxPosition(map.getEnemyPath().get(i + 1).getxPosition());
+                        enemy.setyPosition(map.getEnemyPath().get(i + 1).getyPosition());
+                        updated = true;
+                    }
+                }
+            }
+        }
+
+        return updated;
+    }
     public void initTowerTypes() {
         listOfTowerTypes.add(new TowerType("Flowy Flower",
                 new Image(new File("src/main/resources/sunflower.gif")
@@ -125,6 +142,9 @@ public class Model {
 
     public int[][] getMap() {
         return map.getMap();
+    }
+    public Map getMapObject() {
+        return map;
     }
 
     public int getMonumentHealth() {
