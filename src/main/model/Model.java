@@ -15,7 +15,6 @@ public class Model {
 
     private Player player;
     private Map map;
-    private GameSetting setting;
     private Monument monument;
     private LinkedList<Enemy> listOfEnemies;
     private ArrayList<Tower> listOfTowers;
@@ -31,7 +30,6 @@ public class Model {
     private Model() {
         player = new Player();
         map = new Map();
-        setting = new GameSetting();
         monument = new Monument();
         listOfEnemies = new LinkedList<>();
         listOfTowers = new ArrayList<>();
@@ -89,7 +87,6 @@ public class Model {
         default:
             break;
         }
-        setting.setLevel(level);
         initTowerTypes();
         return true;
     }

@@ -94,6 +94,7 @@ public class InitGameScreen {
             Label label = new Label(enemy.getHealth() + "");
             label.layoutXProperty().bind(rect.layoutXProperty());
             label.layoutYProperty().bind(rect.layoutYProperty());
+            label.setTextFill(Color.WHITE);
             enemyHealthLabels.add(label);
             rect.getStyleClass().add("enemy");
             rect.setFill(enemy.getColor());
