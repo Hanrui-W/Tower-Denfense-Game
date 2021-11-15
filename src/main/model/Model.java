@@ -36,7 +36,6 @@ public class Model {
         listOfEnemies = new LinkedList<>();
         listOfTowers = new ArrayList<>();
         listOfTowerTypes = new ArrayList<>();
-        initTowerTypes();
         newEnemyCounter = 0;
     }
 
@@ -91,6 +90,7 @@ public class Model {
             break;
         }
         setting.setLevel(level);
+        initTowerTypes();
         return true;
     }
 
