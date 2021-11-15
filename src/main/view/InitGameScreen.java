@@ -96,7 +96,7 @@ public class InitGameScreen {
 
     public void drawAttack(List<List<Integer>> list) {
         for (Line l : attackLine) {
-            mapView.getChildren().remove(l);
+            bottomSupport.getChildren().remove(l);
         }
         attackLine.clear();
         for (List<Integer> selist : list) {
@@ -110,7 +110,7 @@ public class InitGameScreen {
                     enemyRect.getLayoutY() + squareSide / 2));
         }
         for (Line l : attackLine) {
-            mapView.getChildren().add(l);
+            bottomSupport.getChildren().add(l);
         }
     }
 
