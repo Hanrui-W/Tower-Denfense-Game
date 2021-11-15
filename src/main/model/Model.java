@@ -105,7 +105,9 @@ public class Model {
                 }
                 if (enemy.equals(monument)) {
                     listOfEnemies.remove(j);
+                    j--;
                     monument.setHealth(monument.getHealth()-enemy.getAttackDamage());
+                    System.out.println(listOfEnemies.size());
                 }
             }
         }
@@ -133,22 +135,26 @@ public class Model {
     }
 
     public void generateNewEnemy() {
+        // Generate a new enemy after every 50 iterations of the timer
         if (newEnemyCounter++ < 50) {
             return;
         }
 
         newEnemyCounter = 0;
-
-        if (newEnemyCounter++ != 0) return;
-//        newEnemyCounter = 0;
-//        int enemyType = new Random().nextInt(3);
-        int enemyType = 0;
+        int enemyType = new Random().nextInt(3);
         switch (enemyType) {
             case 0:
                 listOfEnemies.add(new Enemy(enemyHealthBaseValue,
-                                            enemyDamageBaseValue,
-                                            10,
-                                            Color.VIOLET));
+                        enemyDamageBaseValue, 10, Color.VIOLET));
+                break;
+            case 1:
+                listOfEnemies.add(new Enemy((int) (enemyHealthBaseValue * 1.5),
+                        (int) (enemyDamageBaseValue * 0.5), 10, Color.RED));
+                break;
+
+            case 2:
+                listOfEnemies.add(new Enemy((int) (enemyHealthBaseValue * 0.5),
+                        enemyDamageBaseValue * 2, 10, Color.BLUE));
                 break;
             default:
                 break;

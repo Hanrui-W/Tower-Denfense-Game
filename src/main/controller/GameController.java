@@ -38,16 +38,10 @@ public class GameController implements IController {
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-//                            updateMoney();
-                            model.generateNewEnemy();
-                            if (model.updateListOfEnemies()) {
-                                Enemy enemy = model.getListOfEnemies().get(0);
-                                System.out.println(enemy.getxPosition()+","+enemy.getyPosition());
-                                screen.updateEnemiesPosition(model.getListOfEnemies());
-                            }
+                    Platform.runLater(() -> {
+                        model.generateNewEnemy();
+                        if (model.updateListOfEnemies()) {
+                            screen.updateEnemiesPosition(model.getListOfEnemies());
                         }
                     });
                 }
