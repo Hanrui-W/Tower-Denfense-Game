@@ -1,16 +1,20 @@
 package model;
 
-public class Enemy extends GameObject {
-    protected double attackDamage;
-    protected double health;
-    protected int iteration;
-    protected int counter;
+import javafx.scene.paint.Color;
 
-    public Enemy(double health, double attackDamage, int iteration) {
+public class Enemy extends GameObject {
+    private double attackDamage;
+    private double health;
+    private int iteration;
+    private int counter;
+    private Color color;
+
+    public Enemy(double health, double attackDamage, int iteration, Color color) {
         this.health = health;
         this.attackDamage = attackDamage;
         this.iteration = iteration;
         this.counter = 0;
+        this.color = color;
     }
 
     public String toString() {
@@ -54,5 +58,9 @@ public class Enemy extends GameObject {
 
     public void setAttackDamage(double attackDamage) {
         this.attackDamage = attackDamage;
+    }
+
+    public Color getColor() {
+        return this.color;
     }
 }

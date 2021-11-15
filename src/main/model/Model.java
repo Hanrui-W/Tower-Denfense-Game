@@ -166,6 +166,7 @@ public class Model {
     public ArrayList<Tower> getListOfTowers() {
         return listOfTowers;
     }
+
     public ArrayList<TowerType> getListOfTowerTypes() {
         return listOfTowerTypes;
     }
