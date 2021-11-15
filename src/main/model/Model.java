@@ -1,5 +1,9 @@
 package model;
 
+import javafx.scene.image.Image;
+
+import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Model {
@@ -8,10 +12,10 @@ public class Model {
 
     private Player player;
     private Map map;
-    private LinkedList<Enemy> listOfEnemies;
     private GameSetting setting;
     private Monument monument;
-    private LinkedList<TowerType> towerTypes;
+    private ArrayList<Tower> listOfTowers;
+    private ArrayList<TowerType> listOfTowerTypes;
     private int towerPriceBaseValue;
     private GameDifficultyLevel level;
     private int enemyHealth;
@@ -22,10 +26,11 @@ public class Model {
     private Model() {
         player = new Player();
         map = new Map();
-        listOfEnemies = new LinkedList<>();
         setting = new GameSetting();
         monument = new Monument();
-        towerTypes = new LinkedList<>();
+        listOfTowers = new ArrayList<>();
+        listOfTowerTypes = new ArrayList<>();
+        initTowerTypes();
         time = 0;
     }
 
@@ -75,11 +80,29 @@ public class Model {
         return true;
     }
 
-    public void updateListOfEnemies() {
+    public void initTowerTypes() {
+        listOfTowerTypes.add(new TowerType("Flowy Flower",
+                new Image(new File("src/main/resources/sunflower.gif")
+                        .toURI()
+                        .toString()),
+                model.getTowerPriceBaseValue(), 1, 1, 1, 1));
 
+        listOfTowerTypes.add(new TowerType("Pew Pew Pea",
+                new Image(new File("src/main/resources/pea.gif")
+                        .toURI()
+                        .toString()),
+                model.getTowerPriceBaseValue() * 2, 2, 2, 2, 2));
+
+        listOfTowerTypes.add(new TowerType("Wag Wag Mushroom",
+                new Image(new File("src/main/resources/mushroom.gif")
+                        .toURI()
+                        .toString()),
+                model.getTowerPriceBaseValue() * 3, 3, 3, 3, 3));
     }
     public void generateNewEnemy() {
-        if (time )
+        if (time % 50 == 0) {
+
+        }
     }
 
     public GameDifficultyLevel getLevel() {
@@ -106,8 +129,11 @@ public class Model {
         monument.setHealth(health);
     }
 
-    public LinkedList<TowerType> getTowerTypes() {
-        return towerTypes;
+    public ArrayList<Tower> getListOfTowers() {
+        return listOfTowers;
+    }
+    public ArrayList<TowerType> getListOfTowerTypes() {
+        return listOfTowerTypes;
     }
 
     public String getPlayerName() {
@@ -120,14 +146,6 @@ public class Model {
 
     public int getTowerPriceBaseValue() {
         return towerPriceBaseValue;
-    }
-
-    public LinkedList<Enemy> getListOfEnemies() {
-        return listOfEnemies;
-    }
-
-    public void setListOfEnemies(LinkedList<Enemy> listOfEnemies) {
-        this.listOfEnemies = listOfEnemies;
     }
 
     public int getEnemyHealth() {
@@ -152,5 +170,9 @@ public class Model {
 
     public void setWin(boolean win) {
         isWin = win;
+    }
+
+    public void addTower(Tower tower) {
+        listOfTowers.add(tower);
     }
 }

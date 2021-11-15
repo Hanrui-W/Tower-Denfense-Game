@@ -6,13 +6,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import model.Enemy;
-import model.GameDifficultyLevel;
-import model.Model;
-import model.TowerType;
+import model.*;
 import view.InitGameScreen;
 
 import java.io.File;
@@ -20,7 +18,7 @@ import java.util.*;
 
 public class GameController implements IController {
     private Model model;
-    private Image purchasedTower;
+    private TowerType purchasedTower;
     private InitGameScreen screen;
     public GameController(int width, int height) {
         model = Model.getInstance();
@@ -28,25 +26,7 @@ public class GameController implements IController {
     }
     @Override
     public void initScreen(int width, int height) {
-        ArrayList<TowerType> listOfTowers = new ArrayList<>();
-
-        listOfTowers.add(new TowerType("Flowy Flower",
-                new Image(new File("src/main/resources/sunflower.gif")
-                        .toURI()
-                        .toString()),
-                model.getTowerPriceBaseValue(), 1, 1, 1, 1));
-
-        listOfTowers.add(new TowerType("Pew Pew Pea",
-                new Image(new File("src/main/resources/pea.gif")
-                        .toURI()
-                        .toString()),
-                model.getTowerPriceBaseValue() * 2, 2, 2, 2, 2));
-
-        listOfTowers.add(new TowerType("Wag Wag Mushroom",
-                new Image(new File("src/main/resources/mushroom.gif")
-                        .toURI()
-                        .toString()),
-                model.getTowerPriceBaseValue() * 3, 3, 3, 3, 3));
+        ArrayList<TowerType> listOfTowers = model.getListOfTowerTypes();
 
         screen = new InitGameScreen(width, height, listOfTowers);
         screen.setHealthValue(model.getMonumentHealth());
@@ -98,7 +78,7 @@ public class GameController implements IController {
                     model.setMoney(model.getMoney() - tower.getCost());
                     screen.setMoneyValue(model.getMoney());
                     screen.setPurchasedTower(true);
-                    purchasedTower = tower.getImage();
+                    purchasedTower = tower;
                     screen.setMessageLabel("You purchased\n"
                             + towerNames.get(buttons.indexOf(button)));
                 }
@@ -109,9 +89,12 @@ public class GameController implements IController {
             node.setOnMouseClicked(t -> screen.getMap().getChildren().forEach(c -> {
                 Rectangle tile = (Rectangle) node;
                 if (screen.getPurchased() && tile.getStyleClass().contains("available")) {
-                    tile.setFill(new ImagePattern(purchasedTower));
+                    tile.setFill(new ImagePattern(purchasedTower.getImage()));
                     tile.getStyleClass().remove("available");
                     tile.getStyleClass().add("unavailable");
+                    model.addTower(new Tower(GridPane.getRowIndex(node),
+                                            GridPane.getColumnIndex(node),
+                                            purchasedTower));
                     screen.setPurchasedTower(false);
                     screen.setMessageLabel("Tower is placed.");
                 } else if (screen.getPurchased() && (tile.getStyleClass().contains("unavailable")
