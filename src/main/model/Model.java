@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 public class Model {
@@ -159,6 +160,34 @@ public class Model {
             default:
                 break;
         }
+    }
+
+    public List<List<Integer>> towerAttack() {
+        List<List<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < listOfEnemies.size(); i++) {
+            Enemy currentEnemy = listOfEnemies.get(i);
+            for (Tower tower : listOfTowers) {
+                double distance = Math.pow(Math.pow(Math.abs(tower.getxPosition() - currentEnemy.getxPosition()), 2)
+                        + Math.pow(Math.abs(tower.getyPosition() - currentEnemy.getyPosition()), 2), 0.5);
+                if (distance < tower.getType().getRange()) {
+                    currentEnemy.setHealth(currentEnemy.getHealth() - tower.getType().getAttackDamage());
+                    ArrayList<Integer> towerToEnemy = new ArrayList<>();
+                    towerToEnemy.add(tower.getxPosition());
+                    towerToEnemy.add(tower.getyPosition());
+                    towerToEnemy.add(currentEnemy.getxPosition());
+                    towerToEnemy.add(currentEnemy.getyPosition());
+                    list.add(towerToEnemy);
+                }
+
+                if (currentEnemy.getHealth() < 0) {
+                    listOfEnemies.remove(i);
+                    i--;
+                    setMoney(getMoney() + (int) (currentEnemy.getHealth() * 0.1));
+                }
+            }
+        }
+
+        return list;
     }
 
     public GameDifficultyLevel getLevel() {
