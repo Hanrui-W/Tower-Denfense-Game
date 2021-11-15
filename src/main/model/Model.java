@@ -56,7 +56,7 @@ public class Model {
             towerPriceBaseValue = 50;
             enemyHealthBaseValue = 50;
             enemyDamageBaseValue = 100;
-
+            enemyIterationBaseValue = 10;
             break;
         case MEDIUM:
             player.setMoney(700);
@@ -64,6 +64,7 @@ public class Model {
             towerPriceBaseValue = 100;
             enemyHealthBaseValue = 100;
             enemyDamageBaseValue = 50;
+            enemyIterationBaseValue = 10;
             break;
         case HARD:
             player.setMoney(500);
@@ -71,6 +72,7 @@ public class Model {
             towerPriceBaseValue = 150;
             enemyHealthBaseValue = 150;
             enemyDamageBaseValue = 25;
+            enemyIterationBaseValue = 10;
             break;
         case HELL:
             player.setMoney(300);
@@ -78,6 +80,7 @@ public class Model {
             towerPriceBaseValue = 200;
             enemyHealthBaseValue = 200;
             enemyDamageBaseValue = 12;
+            enemyIterationBaseValue = 10;
             break;
         default:
             break;
@@ -89,14 +92,20 @@ public class Model {
     public boolean updateListOfEnemies() {
         boolean updated = false;
 
-        for (Enemy enemy : listOfEnemies) {
+        for (int j = 0; j < listOfEnemies.size(); j++) {
+            Enemy enemy = listOfEnemies.get(j);
             if (enemy.moveEnemy()) {
                 for (int i = 0; i < map.getEnemyPath().size() - 1; i++) {
                     if (map.getEnemyPath().get(i).equals(enemy)) {
                         enemy.setxPosition(map.getEnemyPath().get(i + 1).getxPosition());
                         enemy.setyPosition(map.getEnemyPath().get(i + 1).getyPosition());
                         updated = true;
+                        break;
                     }
+                }
+                if (enemy.equals(monument)) {
+                    listOfEnemies.remove(j);
+                    monument.setHealth(monument.getHealth()-enemy.getAttackDamage());
                 }
             }
         }
@@ -129,12 +138,16 @@ public class Model {
         }
 
         newEnemyCounter = 0;
-        int enemyType = new Random().nextInt(3);
+
+        if (newEnemyCounter++ != 0) return;
+//        newEnemyCounter = 0;
+//        int enemyType = new Random().nextInt(3);
+        int enemyType = 0;
         switch (enemyType) {
             case 0:
                 listOfEnemies.add(new Enemy(enemyHealthBaseValue,
                                             enemyDamageBaseValue,
-                                            enemyIterationBaseValue,
+                                            10,
                                             Color.VIOLET));
                 break;
             default:
