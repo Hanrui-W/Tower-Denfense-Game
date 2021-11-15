@@ -81,7 +81,13 @@ public class GameController implements IController {
                     model.setMoney(model.getMoney() - tower.getCost());
                     screen.setMoneyValue(model.getMoney());
                     screen.setPurchasedTower(true);
-                    purchasedTower = tower;
+                    purchasedTower = new TowerType(tower.getName(),
+                            tower.getImage(),
+                            tower.getCost(),
+                            tower.getAttackDamage(),
+                            tower.getAttackSpeed(),
+                            tower.getAttackMode(),
+                            tower.getRange());
                     screen.setMessageLabel("You purchased\n"
                             + towerNames.get(buttons.indexOf(button)));
                 }
@@ -104,7 +110,7 @@ public class GameController implements IController {
                         || (tile.getStyleClass().contains("padding")))) {
                     screen.setMessageLabel("It is not available.\n"
                             + "Place the tower\n"
-                            + "on the while areas.");
+                            + "on the white areas.");
                 }
             }));
         }
