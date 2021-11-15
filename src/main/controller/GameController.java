@@ -41,18 +41,24 @@ public class GameController implements IController {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-//                            updateMoney();
+                            if (model.getMonumentHealth() <= 0) {
+                                AppLauncher.goToGameOverScreen();
+                            }
                             model.generateNewEnemy();
                             if (model.updateListOfEnemies()) {
                                 screen.updateEnemiesPosition(model.getListOfEnemies());
                                 List<List<Integer>> towerToEnemy = model.towerAttack();
                                 screen.drawAttack(towerToEnemy);
                                 screen.setHealthValue(model.getMonumentHealth());
+                                screen.setMoneyValue(model.getMoney());
                             }
                         }
                     });
+                    if (model.getMonumentHealth() <= 0) {
+                        this.cancel();
+                    }
                 }
-            }, 0, 10);
+            }, 0, 20);
             combat.setOnAction(null);
         });
 

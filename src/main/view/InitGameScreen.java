@@ -1,8 +1,6 @@
 package view;
 
-import javafx.animation.PathTransition;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -16,9 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.*;
-import javafx.util.Duration;
 import model.Enemy;
-import model.Tower;
 import model.TowerType;
 
 import java.io.File;
@@ -46,6 +42,7 @@ public class InitGameScreen {
     private final Button startCombat;
     private final ArrayList<Rectangle> enemyPath;
     private ArrayList<Line> attackLine;
+    private ArrayList<Label> enemyHealthLabels;
 
     public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers) {
         this.width = width;
@@ -59,6 +56,7 @@ public class InitGameScreen {
         purchasedTower = false;
         enemyPath = new ArrayList<>();
         attackLine = new ArrayList<>();
+        enemyHealthLabels = new ArrayList<>();
         startCombat = new Button("Start Combat");
 
         this.listOfTowers = listOfTowers;
@@ -83,14 +81,25 @@ public class InitGameScreen {
     }
 
     public void updateEnemiesPosition(LinkedList<Enemy> listOfEnemies) {
+        for (Label l : enemyHealthLabels) {
+            bottomSupport.getChildren().remove(l);
+        }
+        enemyHealthLabels.clear();
         for (Rectangle rect : enemyPath) {
             rect.getStyleClass().remove("enemy");
             rect.setFill(Color.YELLOW);
         }
         for (Enemy enemy : listOfEnemies) {
             Rectangle rect = gridPaneArray[enemy.getxPosition()][enemy.getyPosition()];
+            Label label = new Label(enemy.getHealth() + "");
+            label.layoutXProperty().bind(rect.layoutXProperty());
+            label.layoutYProperty().bind(rect.layoutYProperty());
+            enemyHealthLabels.add(label);
             rect.getStyleClass().add("enemy");
-            rect.setFill(Color.VIOLET);
+            rect.setFill(enemy.getColor());
+        }
+        for (Label l : enemyHealthLabels) {
+            bottomSupport.getChildren().add(l);
         }
     }
 
@@ -102,8 +111,6 @@ public class InitGameScreen {
         for (List<Integer> selist : list) {
             Rectangle towerRect = gridPaneArray[selist.get(0)][selist.get(1)];
             Rectangle enemyRect = gridPaneArray[selist.get(2)][selist.get(3)];
-            System.out.println(towerRect.getLayoutX()+","+towerRect.getLayoutY());
-            System.out.println(enemyRect.getLayoutX()+","+enemyRect.getLayoutY());
             attackLine.add(new Line(towerRect.getLayoutX() + squareSide / 2,
                     towerRect.getLayoutY() + squareSide / 2,
                     enemyRect.getLayoutX() + squareSide / 2,

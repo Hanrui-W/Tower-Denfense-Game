@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Model {
 
-    private static Model model = new Model();
+    private static Model model;
 
     private Player player;
     private Map map;
@@ -42,6 +42,10 @@ public class Model {
 
     public static Model getInstance() {
         return model;
+    }
+
+    public static void init() {
+        model = new Model();
     }
 
     public boolean initGame(String name, GameDifficultyLevel level) {
@@ -108,7 +112,6 @@ public class Model {
                     listOfEnemies.remove(j);
                     j--;
                     monument.setHealth(monument.getHealth()-enemy.getAttackDamage());
-                    System.out.println(listOfEnemies.size());
                 }
             }
         }
@@ -145,16 +148,22 @@ public class Model {
         switch (enemyType) {
             case 0:
                 listOfEnemies.add(new Enemy(enemyHealthBaseValue,
-                        enemyDamageBaseValue, 10, Color.VIOLET));
+                                            enemyDamageBaseValue,
+                                            enemyIterationBaseValue,
+                                            Color.VIOLET));
                 break;
             case 1:
                 listOfEnemies.add(new Enemy((int) (enemyHealthBaseValue * 1.5),
-                        (int) (enemyDamageBaseValue * 0.5), 10, Color.RED));
+                                            (int) (enemyDamageBaseValue * 0.5),
+                                            (int) (enemyIterationBaseValue * 0.5),
+                                            Color.RED));
                 break;
 
             case 2:
                 listOfEnemies.add(new Enemy((int) (enemyHealthBaseValue * 0.5),
-                        enemyDamageBaseValue * 2, 10, Color.BLUE));
+                                        enemyDamageBaseValue * 2,
+                                            (int) (enemyIterationBaseValue * 1.5),
+                                            Color.BLUE));
                 break;
             default:
                 break;
@@ -163,12 +172,13 @@ public class Model {
 
     public List<List<Integer>> towerAttack() {
         List<List<Integer>> list = new ArrayList<>();
+        ArrayList<Enemy> removedEnemies = new ArrayList<>();
         for (int i = 0; i < listOfEnemies.size(); i++) {
             Enemy currentEnemy = listOfEnemies.get(i);
             for (Tower tower : listOfTowers) {
                 double distance = Math.pow(Math.pow(Math.abs(tower.getxPosition() - currentEnemy.getxPosition()), 2)
                         + Math.pow(Math.abs(tower.getyPosition() - currentEnemy.getyPosition()), 2), 0.5);
-                if (distance < tower.getType().getRange()) {
+                if (distance <= tower.getType().getRange()) {
                     currentEnemy.setHealth(currentEnemy.getHealth() - tower.getType().getAttackDamage());
                     ArrayList<Integer> towerToEnemy = new ArrayList<>();
                     towerToEnemy.add(tower.getxPosition());
@@ -177,13 +187,15 @@ public class Model {
                     towerToEnemy.add(currentEnemy.getyPosition());
                     list.add(towerToEnemy);
                 }
-
-                if (currentEnemy.getHealth() < 0) {
-                    listOfEnemies.remove(i);
-                    i--;
-                    setMoney(getMoney() + (int) (currentEnemy.getHealth() * 0.1));
+                if (currentEnemy.getHealth() <= 0) {
+                    removedEnemies.add(currentEnemy);
                 }
             }
+        }
+        for (Enemy enemy : removedEnemies) {
+            listOfEnemies.remove(enemy);
+            System.out.println(enemy.getAttackDamage());
+            setMoney(getMoney() + (int) (enemy.getAttackDamage() * 0.1));
         }
 
         return list;
@@ -256,7 +268,7 @@ public class Model {
         this.newEnemyCounter = newEnemyCounter;
     }
 
-    public int getenemyDamageBaseValue() {
+    public int getEnemyDamageBaseValue() {
         return enemyDamageBaseValue;
     }
 
