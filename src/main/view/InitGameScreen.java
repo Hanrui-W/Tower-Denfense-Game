@@ -49,7 +49,7 @@ public class InitGameScreen {
         this.width = width;
         this.height = height;
         this.squareWidth = width / 20;
-        moneyLabel = new Label("Funds: ");
+        this.moneyLabel = new Label("Funds: ");
         moneyValue = new Label(null);
         healthLabel = new Label("Monument Health: ");
         healthValue = new Label(null);

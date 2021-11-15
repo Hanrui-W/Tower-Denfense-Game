@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.animation.PathTransition;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -9,10 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import model.Enemy;
-import model.GameDifficultyLevel;
-import model.Model;
-import model.TowerType;
+import model.*;
 import view.InitGameScreen;
 
 import java.io.File;
@@ -64,7 +60,10 @@ public class GameController implements IController {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            update();
+                            updateMoney();
+                            if (model.updateListOfEnemies()) {
+                                screen.updateEnemiesPosition(model.getListOfEnemies());
+                            }
                         }
                     });
                 }
@@ -139,16 +138,9 @@ public class GameController implements IController {
         }
     }
 
-    public void update() {
+    public void updateMoney() {
         model.setMoney(model.getMoney() + 10);
         screen.setMoneyValue(model.getMoney());
         model.setTime(model.getTime() + 1);
-    }
-
-    public void moveEachEnemy(Enemy enemy, int xPosition, int yPosition) {
-        if (enemy.moveEnemy()) {
-            enemy.setxPosition(xPosition);
-            enemy.setyPosition(yPosition);
-        }
     }
 }
