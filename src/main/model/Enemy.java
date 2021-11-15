@@ -3,13 +3,13 @@ package model;
 import javafx.scene.paint.Color;
 
 public class Enemy extends GameObject {
-    private double attackDamage;
+    private int attackDamage;
     private double health;
     private int iteration;
     private int counter;
     private Color color;
 
-    public Enemy(double health, double attackDamage, int iteration, Color color) {
+    public Enemy(double health, int attackDamage, int iteration, Color color) {
         this.health = health;
         this.attackDamage = attackDamage;
         this.iteration = iteration;
@@ -27,7 +27,6 @@ public class Enemy extends GameObject {
 
     public boolean moveEnemy() {
         counter++;
-
         if (counter >= iteration) {
             counter = 0;
             return true;
@@ -52,11 +51,11 @@ public class Enemy extends GameObject {
         this.iteration = iteration;
     }
 
-    public double getAttackDamage() {
+    public int getAttackDamage() {
         return attackDamage;
     }
 
-    public void setAttackDamage(double attackDamage) {
+    public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
     }
 

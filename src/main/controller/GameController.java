@@ -41,14 +41,17 @@ public class GameController implements IController {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            updateMoney();
+//                            updateMoney();
+                            model.generateNewEnemy();
                             if (model.updateListOfEnemies()) {
+                                Enemy enemy = model.getListOfEnemies().get(0);
+                                System.out.println(enemy.getxPosition()+","+enemy.getyPosition());
                                 screen.updateEnemiesPosition(model.getListOfEnemies());
                             }
                         }
                     });
                 }
-            }, 0, 1000);
+            }, 0, 10);
             combat.setOnAction(null);
         });
 

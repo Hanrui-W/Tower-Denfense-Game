@@ -85,7 +85,7 @@ public class InitGameScreen {
         }
         for (Enemy enemy : listOfEnemies) {
             Rectangle rect = gridPaneArray[enemy.getxPosition()][enemy.getyPosition()];
-
+            System.out.println(enemy.getxPosition());
             rect.getStyleClass().add("enemy");
             rect.setFill(Color.VIOLET);
         }
