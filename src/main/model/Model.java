@@ -1,6 +1,7 @@
 package model;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,8 +21,9 @@ public class Model {
     private ArrayList<TowerType> listOfTowerTypes;
     private int towerPriceBaseValue;
     private GameDifficultyLevel level;
-    private int enemyHealth;
-    private int enemyDamage;
+    private int enemyHealthBaseValue;
+    private int enemyDamageBaseValue;
+    private int enemyIterationBaseValue;
     private int newEnemyCounter;
     private boolean isWin;
 
@@ -52,29 +54,30 @@ public class Model {
             player.setMoney(1000);
             monument.setHealth(1000);
             towerPriceBaseValue = 50;
-            enemyHealth = 50;
-            enemyDamage = 100;
+            enemyHealthBaseValue = 50;
+            enemyDamageBaseValue = 100;
+
             break;
         case MEDIUM:
             player.setMoney(700);
             monument.setHealth(500);
             towerPriceBaseValue = 100;
-            enemyHealth = 100;
-            enemyDamage = 50;
+            enemyHealthBaseValue = 100;
+            enemyDamageBaseValue = 50;
             break;
         case HARD:
             player.setMoney(500);
             monument.setHealth(250);
             towerPriceBaseValue = 150;
-            enemyHealth = 150;
-            enemyDamage = 25;
+            enemyHealthBaseValue = 150;
+            enemyDamageBaseValue = 25;
             break;
         case HELL:
             player.setMoney(300);
             monument.setHealth(125);
             towerPriceBaseValue = 200;
-            enemyHealth = 200;
-            enemyDamage = 12;
+            enemyHealthBaseValue = 200;
+            enemyDamageBaseValue = 12;
             break;
         default:
             break;
@@ -121,10 +124,18 @@ public class Model {
     }
 
     public void generateNewEnemy() {
+        if (newEnemyCounter++ < 50) return;
+        newEnemyCounter = 0;
         int enemyType = new Random().nextInt(3);
         switch (enemyType) {
             case 0:
-                listOfEnemies.add(new Enemy(enemyHealth, enemyDamage, ))
+                listOfEnemies.add(new Enemy(enemyHealthBaseValue,
+                                            enemyDamageBaseValue,
+                                            enemyIterationBaseValue,
+                                            Color.VIOLET));
+                break;
+            default:
+                break;
         }
     }
 
@@ -183,8 +194,8 @@ public class Model {
         return towerPriceBaseValue;
     }
 
-    public int getEnemyHealth() {
-        return enemyHealth;
+    public int getEnemyHealthBaseValue() {
+        return enemyHealthBaseValue;
     }
 
     public int getNewEnemyCounter() {
@@ -195,8 +206,8 @@ public class Model {
         this.newEnemyCounter = newEnemyCounter;
     }
 
-    public int getEnemyDamage() {
-        return enemyDamage;
+    public int getenemyDamageBaseValue() {
+        return enemyDamageBaseValue;
     }
 
     public boolean isWin() {
