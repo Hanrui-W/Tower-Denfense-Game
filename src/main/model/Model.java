@@ -124,7 +124,10 @@ public class Model {
     }
 
     public void generateNewEnemy() {
-        if (newEnemyCounter++ < 50) return;
+        if (newEnemyCounter++ < 50) {
+            return;
+        }
+
         newEnemyCounter = 0;
         int enemyType = new Random().nextInt(3);
         switch (enemyType) {
