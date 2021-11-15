@@ -35,6 +35,7 @@ public class Map {
     }
 
     public void findPath(int[][] map) {
+        enemyPath = new ArrayList<>();
         int row = 0;
         while (row < map.length && map[row][0] != 1) {
             row++;

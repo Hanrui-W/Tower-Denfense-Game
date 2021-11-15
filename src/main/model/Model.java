@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Model {
 
@@ -21,7 +22,7 @@ public class Model {
     private GameDifficultyLevel level;
     private int enemyHealth;
     private int enemyDamage;
-    private int time;
+    private int newEnemyCounter;
     private boolean isWin;
 
     private Model() {
@@ -33,7 +34,7 @@ public class Model {
         listOfTowers = new ArrayList<>();
         listOfTowerTypes = new ArrayList<>();
         initTowerTypes();
-        time = 0;
+        newEnemyCounter = 0;
     }
 
     public static Model getInstance() {
@@ -87,23 +88,26 @@ public class Model {
                 new Image(new File("src/main/resources/sunflower.gif")
                         .toURI()
                         .toString()),
-                model.getTowerPriceBaseValue(), 1, 1, 1, 1));
+                towerPriceBaseValue, 1, 1, 1, 1));
 
         listOfTowerTypes.add(new TowerType("Pew Pew Pea",
                 new Image(new File("src/main/resources/pea.gif")
                         .toURI()
                         .toString()),
-                model.getTowerPriceBaseValue() * 2, 2, 2, 2, 2));
+                towerPriceBaseValue * 2, 2, 2, 2, 2));
 
         listOfTowerTypes.add(new TowerType("Wag Wag Mushroom",
                 new Image(new File("src/main/resources/mushroom.gif")
                         .toURI()
                         .toString()),
-                model.getTowerPriceBaseValue() * 3, 3, 3, 3, 3));
+                towerPriceBaseValue * 3, 3, 3, 3, 3));
     }
-    public void generateNewEnemy() {
-        if (time % 50 == 0) {
 
+    public void generateNewEnemy() {
+        int enemyType = new Random().nextInt(3);
+        switch (enemyType) {
+            case 0:
+                listOfEnemies.add(new Enemy(enemyHealth, enemyDamage, ))
         }
     }
 
@@ -138,7 +142,7 @@ public class Model {
     public void setListOfEnemies(LinkedList<Enemy> listOfEnemies) {
         this.listOfEnemies = listOfEnemies;
     }
-    
+
     public ArrayList<Tower> getListOfTowers() {
         return listOfTowers;
     }
@@ -162,12 +166,12 @@ public class Model {
         return enemyHealth;
     }
 
-    public int getTime() {
-        return time;
+    public int getNewEnemyCounter() {
+        return newEnemyCounter;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setNewEnemyCounter(int newEnemyCounter) {
+        this.newEnemyCounter = newEnemyCounter;
     }
 
     public int getEnemyDamage() {

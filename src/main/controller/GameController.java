@@ -1,11 +1,9 @@
 package controller;
 
-import javafx.animation.PathTransition;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -13,7 +11,6 @@ import javafx.scene.shape.Rectangle;
 import model.*;
 import view.InitGameScreen;
 
-import java.io.File;
 import java.util.*;
 
 public class GameController implements IController {
@@ -125,7 +122,7 @@ public class GameController implements IController {
     public void update() {
         model.setMoney(model.getMoney() + 10);
         screen.setMoneyValue(model.getMoney());
-        model.setTime(model.getTime() + 1);
+        model.setNewEnemyCounter(model.getNewEnemyCounter() + 1);
     }
 
     public void moveEachEnemy(Enemy enemy, int xPosition, int yPosition) {
