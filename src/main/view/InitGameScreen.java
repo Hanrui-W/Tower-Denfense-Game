@@ -11,25 +11,25 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.*;
 import javafx.util.Duration;
 import model.Enemy;
+import model.Tower;
 import model.TowerType;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class InitGameScreen {
     private final int width;
     private final int height;
-    private final int squareWidth;
+    private final int squareSide;
     private final Label moneyLabel;
     private final Label moneyValue;
     private final Label healthLabel;
@@ -38,17 +38,19 @@ public class InitGameScreen {
     private final ArrayList<Button> buttons;
     private final ArrayList<VBox> vBoxes;
     private boolean purchasedTower;
+    private Pane bottomSupport;
     private final GridPane mapView;
     private Rectangle[][] gridPaneArray;
     private Rectangle monument;
     private final Label messageLabel;
     private final Button startCombat;
     private final ArrayList<Rectangle> enemyPath;
+    private ArrayList<Line> attackLine;
 
     public InitGameScreen(int width, int height, ArrayList<TowerType> listOfTowers) {
         this.width = width;
         this.height = height;
-        this.squareWidth = width / 20;
+        this.squareSide = width / 20;
         this.moneyLabel = new Label("Funds: ");
         moneyValue = new Label(null);
         healthLabel = new Label("Monument Health: ");
@@ -56,6 +58,7 @@ public class InitGameScreen {
         messageLabel = new Label();
         purchasedTower = false;
         enemyPath = new ArrayList<>();
+        attackLine = new ArrayList<>();
         startCombat = new Button("Start Combat");
 
         this.listOfTowers = listOfTowers;
@@ -74,7 +77,8 @@ public class InitGameScreen {
         VBox textualPrompts = new VBox(moneyPrompt, healthPrompt, messagePrompt, combatButton);
 
         HBox towerMenu = getTowerMenu();
-        VBox bottomSupport = new VBox(mapView, new HBox(textualPrompts, towerMenu));
+        VBox vbox = new VBox(mapView, new HBox(textualPrompts, towerMenu));
+        bottomSupport = new Pane(vbox);
         return new Scene(bottomSupport, width, height);
     }
 
@@ -85,9 +89,28 @@ public class InitGameScreen {
         }
         for (Enemy enemy : listOfEnemies) {
             Rectangle rect = gridPaneArray[enemy.getxPosition()][enemy.getyPosition()];
-            System.out.println(enemy.getxPosition());
             rect.getStyleClass().add("enemy");
             rect.setFill(Color.VIOLET);
+        }
+    }
+
+    public void drawAttack(List<List<Integer>> list) {
+        for (Line l : attackLine) {
+            mapView.getChildren().remove(l);
+        }
+        attackLine.clear();
+        for (List<Integer> selist : list) {
+            Rectangle towerRect = gridPaneArray[selist.get(0)][selist.get(1)];
+            Rectangle enemyRect = gridPaneArray[selist.get(2)][selist.get(3)];
+            System.out.println(towerRect.getLayoutX()+","+towerRect.getLayoutY());
+            System.out.println(enemyRect.getLayoutX()+","+enemyRect.getLayoutY());
+            attackLine.add(new Line(towerRect.getLayoutX() + squareSide / 2,
+                    towerRect.getLayoutY() + squareSide / 2,
+                    enemyRect.getLayoutX() + squareSide / 2,
+                    enemyRect.getLayoutY() + squareSide / 2));
+        }
+        for (Line l : attackLine) {
+            mapView.getChildren().add(l);
         }
     }
 
@@ -95,7 +118,7 @@ public class InitGameScreen {
         gridPaneArray = new Rectangle[map.length][map[0].length];
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
-                Rectangle rect = new Rectangle(squareWidth, squareWidth);
+                Rectangle rect = new Rectangle(squareSide, squareSide);
                 switch (map[i][j]) {
                 case 0:
                     rect.setFill(Color.WHITE);

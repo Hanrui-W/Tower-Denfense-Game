@@ -44,9 +44,9 @@ public class GameController implements IController {
 //                            updateMoney();
                             model.generateNewEnemy();
                             if (model.updateListOfEnemies()) {
-                                Enemy enemy = model.getListOfEnemies().get(0);
-                                System.out.println(enemy.getxPosition()+","+enemy.getyPosition());
                                 screen.updateEnemiesPosition(model.getListOfEnemies());
+                                screen.drawAttack(model.getListOfTowers(), model.getListOfEnemies());
+                                screen.setHealthValue(model.getMonumentHealth());
                             }
                         }
                     });

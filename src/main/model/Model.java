@@ -105,6 +105,7 @@ public class Model {
                 }
                 if (enemy.equals(monument)) {
                     listOfEnemies.remove(j);
+                    j--;
                     monument.setHealth(monument.getHealth()-enemy.getAttackDamage());
                 }
             }
@@ -133,10 +134,9 @@ public class Model {
     }
 
     public void generateNewEnemy() {
-        if (newEnemyCounter++ != 0) return;
-//        newEnemyCounter = 0;
-//        int enemyType = new Random().nextInt(3);
-        int enemyType = 0;
+        if (newEnemyCounter++ < 50) return;
+        newEnemyCounter = 0;
+        int enemyType = new Random().nextInt(3);
         switch (enemyType) {
             case 0:
                 listOfEnemies.add(new Enemy(enemyHealthBaseValue,
