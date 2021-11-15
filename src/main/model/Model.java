@@ -14,6 +14,7 @@ public class Model {
     private Map map;
     private GameSetting setting;
     private Monument monument;
+    private LinkedList<Enemy> listOfEnemies;
     private ArrayList<Tower> listOfTowers;
     private ArrayList<TowerType> listOfTowerTypes;
     private int towerPriceBaseValue;
@@ -28,6 +29,7 @@ public class Model {
         map = new Map();
         setting = new GameSetting();
         monument = new Monument();
+        listOfEnemies = new LinkedList<>();
         listOfTowers = new ArrayList<>();
         listOfTowerTypes = new ArrayList<>();
         initTowerTypes();
@@ -129,6 +131,14 @@ public class Model {
         monument.setHealth(health);
     }
 
+    public LinkedList<Enemy> getListOfEnemies() {
+        return listOfEnemies;
+    }
+
+    public void setListOfEnemies(LinkedList<Enemy> listOfEnemies) {
+        this.listOfEnemies = listOfEnemies;
+    }
+    
     public ArrayList<Tower> getListOfTowers() {
         return listOfTowers;
     }
