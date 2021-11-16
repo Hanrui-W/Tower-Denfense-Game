@@ -131,6 +131,7 @@ public class InitGameScreen {
                 case 0:
                     rect.setFill(Color.WHITE);
                     rect.getStyleClass().add("available");
+//                    rect.getStyleClass().add(i+""+ j);
                     break;
 
                 case 1:
@@ -189,6 +190,7 @@ public class InitGameScreen {
     public HBox getTowerMenu() {
         int menuWidth = this.width / 10 * 5;
         int menuHeight = this.height / 6;
+        int index = 0;
 
         for (TowerType towerType : listOfTowers) {
             ImageView image = new ImageView(towerType.getImage());
@@ -219,7 +221,10 @@ public class InitGameScreen {
             this.vBoxes.add(vBox);
 
             Button button = new Button("Purchase");
+            button.getStyleClass().add("purchase" + index);
+
             this.buttons.add(button);
+            index++;
         }
         HBox hBox = new HBox();
         for (int i = 0; i < listOfTowers.size(); i++) {
