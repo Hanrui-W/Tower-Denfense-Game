@@ -66,91 +66,109 @@ public class MilestoneFiveTest extends ApplicationTest {
         ((GameController) launcher.getController()).getTimer().cancel();
     }
 
-//    @Test
-//    public void testGameOverMediumLevel() throws Exception {
-//        this.clickOn("Start");
-//        this.write("George P. Burdell");
-//        this.clickOn("Easy");
-//        this.clickOn("Medium");
-//        this.clickOn("Next");
-//        this.clickOn("Start Combat");
-//        this.clickOn(".purchase2");
-//        this.clickOn(".available");
-//        wait(5);
-//        FxAssert.verifyThat("Game Over", NodeMatchers.isNotNull());
-//    }
+    @Test
+    public void testEnemyAppearHellLevel() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Hell");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+        wait(5);
+        FxAssert.verifyThat(".enemy", NodeMatchers.isNotNull());
+        ((GameController) launcher.getController()).getTimer().cancel();
+    }
 
-//    @Test
-//    public void testAttackEnemyHardLevel() throws Exception {
-//        this.clickOn("Start");
-//        this.write("George P. Burdell");
-//        this.clickOn("Easy");
-//        this.clickOn("Hard");
-//        this.clickOn("Next");
-//        this.clickOn("Start Combat");
-//        this.clickOn(".purchase2");
-//        this.clickOn(".available");
-//        wait(5);
-//        FxAssert.verifyThat(".enemy", NodeMatchers.isNotNull());
-//    }
+    @Test
+    public void testGameOver() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+        wait(20);
+        FxAssert.verifyThat("Game Over", NodeMatchers.isNotNull());
+    }
 
-//    @Test
-//    public void testMoneyGainEasyLevel() throws Exception {
-//        this.clickOn("Start");
-//        this.write("George P. Burdell");
-//        this.clickOn("Next");
-//        this.clickOn("Start Combat");
-//        this.clickOn(".purchase2");
-//        this.clickOn(".available");
-//        this.clickOn(".purchase2");
-//        this.clickOn(".available");
-//        this.clickOn(".purchase2");
-//        this.clickOn(".available");
-//        this.clickOn(".purchase2");
-//        this.clickOn(".available");
-//        wait(5);
-//        FxAssert.verifyThat("Funds: ", NodeMatchers.isNotNull());
-//    }
+    @Test
+    public void testMoneyGainEasyLevel() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        wait(5);
+        FxAssert.verifyThat("Funds: ", NodeMatchers.isNotNull());
+        ((GameController) launcher.getController()).getTimer().cancel();
+    }
 
-//    @Test
-//    public void testMoneyGainMediumLevel() throws Exception {
-//        this.clickOn("Start");
-//        this.write("George P. Burdell");
-//        this.clickOn("Easy");
-//        this.clickOn("Medium");
-//        this.clickOn("Next");
-//        this.clickOn("Start Combat");
-//        this.clickOn(".purchase2");
-//        this.clickOn(".available");
-//        this.clickOn(".purchase2");
-//        this.clickOn(".available");
-//        this.clickOn(".purchase2");
-//        this.clickOn(".available");
-//        wait(5);
-//        FxAssert.verifyThat("Funds: ", NodeMatchers.isNotNull());
-//    }
+    @Test
+    public void testMoneyGainMediumLevel() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Medium");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        wait(5);
+        FxAssert.verifyThat("Funds: ", NodeMatchers.isNotNull());
+        ((GameController) launcher.getController()).getTimer().cancel();
+    }
 
-//    @Test
-//    public void testGameOverEasyLevel() throws Exception {
-//        this.clickOn("Start");
-//        this.write("George P. Burdell");
-//        this.clickOn("Easy");
-//        this.clickOn("Next");
-//        this.clickOn("Start Combat");
-//        this.clickOn(".purchase0");
-//        this.clickOn(".available");
-//        wait(18);
-//        FxAssert.verifyThat("Game Over", NodeMatchers.isVisible());
-//    }
-//
-//    @Test
-//    public void testGameOverMediumLevel() throws Exception {
-//        this.clickOn("Start");
-//        this.write("George P. Burdell");
-//        this.clickOn("Easy");
-//        this.clickOn("Medium");
-//        this.clickOn("Next");
-//        this.clickOn(".purchase0");
-//        this.clickOn(".available");
-//    }
+    @Test
+    public void testMoneyGainHardLevel() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Hard");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        wait(5);
+        FxAssert.verifyThat("Funds: ", NodeMatchers.isNotNull());
+        ((GameController) launcher.getController()).getTimer().cancel();
+    }
+
+    @Test
+    public void testMoneyGainHellLevel() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Hell");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+        this.clickOn(".purchase0");
+        this.clickOn(".available");
+        wait(3);
+        FxAssert.verifyThat("Funds: ", NodeMatchers.isNotNull());
+        ((GameController) launcher.getController()).getTimer().cancel();
+    }
+
+    @Test
+    public void testPlaceTowers() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Next");
+        this.clickOn(".purchase0");
+        this.clickOn(".available");
+        this.clickOn(".purchase1");
+        this.clickOn(".available");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        FxAssert.verifyThat(".unavailable: ", NodeMatchers.isNotNull());
+
+    }
+
+
 }
