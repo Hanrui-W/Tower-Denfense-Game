@@ -17,8 +17,10 @@ public class GameController implements IController {
     private Model model;
     private TowerType purchasedTower;
     private InitGameScreen screen;
+    private Timer timer;
     public GameController(int width, int height) {
         model = Model.getInstance();
+        timer = new Timer();
         initScreen(width, height);
     }
     @Override
@@ -35,7 +37,7 @@ public class GameController implements IController {
         Button combat = screen.getStartCombatStatus();
 
         combat.setOnAction(e -> {
-            new Timer().schedule(new TimerTask() {
+            timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     Platform.runLater(new Runnable() {
@@ -142,5 +144,9 @@ public class GameController implements IController {
         model.setMoney(model.getMoney() + 10);
         screen.setMoneyValue(model.getMoney());
         model.setNewEnemyCounter(model.getNewEnemyCounter() + 1);
+    }
+
+    public Timer getTimer() {
+        return timer;
     }
 }

@@ -34,12 +34,14 @@ public class AppLauncher extends Application {
 
     public static void goToInitGameScreen() {
         controller = new GameController(WIDTH, HEIGHT);
-
     }
 
     public static void goToGameOverScreen() {
         controller = new GameOverController(WIDTH, HEIGHT);
+    }
 
+    public IController getController() {
+        return controller;
     }
 
     public static void main(String[] args) {
