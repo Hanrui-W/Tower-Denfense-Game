@@ -8,7 +8,7 @@ import model.GameDifficultyLevel;
 import model.Model;
 import view.InitConfigScreen;
 
-public class ConfigController implements IController{
+public class ConfigController implements IController {
     public ConfigController(int width, int height) {
         initScreen(width, height);
     }
@@ -25,6 +25,7 @@ public class ConfigController implements IController{
         });
         Button nextButton = screen.getNextButton();
         nextButton.setOnAction(e -> {
+            Model.init();
             if (Model.getInstance().initGame(nameText.getText().trim(), box.getValue())) {
                 AppLauncher.goToInitGameScreen();
             } else {

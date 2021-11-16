@@ -29,7 +29,7 @@ public class MilestoneFourTest extends ApplicationTest {
         this.clickOn("Hell");
         this.clickOn("Next");
 
-        FxAssert.verifyThat("Start Combat", NodeMatchers.isInvisible());
+        FxAssert.verifyThat("Start Combat", NodeMatchers.isVisible());
     }
 
     @Test
@@ -44,6 +44,8 @@ public class MilestoneFourTest extends ApplicationTest {
         this.clickOn("Start Combat");
         FxAssert.verifyThat(".enemy", NodeMatchers.isVisible());
 
+
+        Thread.sleep(37500);
     }
     @Test
     public void testEasyEnemyDamage() throws Exception {

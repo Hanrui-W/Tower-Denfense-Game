@@ -7,42 +7,75 @@ public class Map {
     private int[][] map;
     private int mapWidth;
     private int mapHeight;
-    private ArrayList<GameObject>[] enemyPaths;
+    private ArrayList<GameObject> enemyPath;
     private Monument monument;
-    private static final int DEFAULT_PATHS = 1;
-    private static int[][] defaultPath =
-                    {{1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                    {3, 1, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 1},
-                    {3, 1, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 2},
-                    {3, 1, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0},
-                    {3, 1, 3, 3, 3, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0},
-                    {3, 1, 1, 1, 1, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0},
-                    {0, 0, 0, 3, 1, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0},
-                    {0, 0, 0, 3, 1, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0},
-                    {0, 0, 0, 3, 1, 3, 3, 3, 3, 3, 1, 0, 0, 0, 0},
-                    {0, 0, 0, 3, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}};
+    private static int[][] defaultMap =
+        {{1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2},
+        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0}};
 
     public Map() {
-        this(new ArrayList<>(), defaultPath,
-                new ArrayList[Map.DEFAULT_PATHS], new Monument());
+        this(new ArrayList<>(), defaultMap, new Monument());
     }
 
-    public Map(ArrayList<GameObject> gameObjects, int[][] map,
-               ArrayList<GameObject>[] enemyPaths, Monument monument) {
+    public Map(ArrayList<GameObject> gameObjects, int[][] map, Monument monument) {
         this.gameObjects = gameObjects;
-        this.enemyPaths = enemyPaths;
         this.monument = monument;
         this.map = map;
         this.mapWidth = this.map[0].length;
         this.mapHeight = this.map.length;
+        findPath(map);
     }
 
-    public ArrayList<GameObject>[] getEnemyPaths() {
-        return enemyPaths;
+    public void findPath(int[][] map) {
+        enemyPath = new ArrayList<>();
+        int row = 0;
+        while (row < map.length && map[row][0] != 1) {
+            row++;
+        }
+        int col = 0;
+        while (col < map[0].length) {
+            if (map[row][col + 1] == 1) {
+                while (col < map[0].length && map[row][col + 1] == 1) {
+                    enemyPath.add(new GameObject(row, col));
+                    col++;
+                }
+                continue;
+            }
+            if (row > 0 && map[row - 1][col] == 1) {
+                while (row > 0 && (map[row - 1][col] == 1)) {
+                    enemyPath.add(new GameObject(row, col));
+                    row--;
+                }
+                continue;
+            }
+            if (row < map.length - 1 && map[row + 1][col] == 1) {
+                while (row < map.length - 1 && (map[row + 1][col] == 1)) {
+                    enemyPath.add(new GameObject(row, col));
+                    row++;
+                }
+                continue;
+            }
+            break;
+        }
+        enemyPath.add(new GameObject(row, col));
+        enemyPath.add(monument);
+
     }
 
-    public void setEnemyPaths(ArrayList<GameObject>[] enemyPaths) {
-        this.enemyPaths = enemyPaths;
+    public ArrayList<GameObject> getEnemyPath() {
+        return enemyPath;
+    }
+
+    public void setEnemyPath(ArrayList<GameObject> enemyPath) {
+        this.enemyPath = enemyPath;
     }
 
     public Monument getMonument() {
