@@ -37,7 +37,7 @@ is chosen because we want the player to be directed to the GameOverScreen with p
 The implementation of the feature is tested by checking whether the “Game Over” label and the “You Lose” label appear on
 the GameOverScreen.
 
-TowerAttack()
+testTowerAttack()
 The method test whether the towers will attack the enemies under certain condition. The test is simple test only to test the
 behavior of tower attacking without considering the tower attack in different condition. The component is chosen because we
 want to test that the tower will attack first so that we can later assure that other advanced feature also work. The implementation

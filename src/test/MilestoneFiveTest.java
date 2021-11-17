@@ -168,7 +168,7 @@ public class MilestoneFiveTest extends ApplicationTest {
     }
 
     @Test
-    public void TowerAttack() throws Exception {
+    public void testTowerAttack() throws Exception {
         this.clickOn("Start");
         this.write("George P. Burdell");
         this.clickOn("Next");
