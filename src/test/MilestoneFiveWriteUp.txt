@@ -1,0 +1,80 @@
+testEnemyAppearEasyLevel():
+The method tests whether the enemies start to appear after the start combat button is clicked under the level of Easy.
+We test the feature again because we change the way we implement the Enemy. Thus changing the way of implementation makes
+the previous test invalid and required us to test the newly implemented Enemies.  This component is chosen because we
+want to ensure that the enemies won’t appear until the player is ready for the game. We tested the feature by
+checking the visibility of the enemy. If the enemy is invisible before and becomes visible after the button is clicked,
+it implies the enemy appears as we expected.
+
+testEnemyAppearMediumLevel()
+The method tests whether the enemies start to appear after the start combat button is clicked under the level of Medium.
+We test the feature again because we change the way we implement the Enemy. Thus changing the way of implementation makes
+the previous test invalid and required us to test the newly implemented Enemies.  This component is chosen because we
+want to ensure that the enemies won’t appear until the player is ready for the game. We tested the feature by
+checking the visibility of the enemy. If the enemy is invisible before and becomes visible after the button is clicked,
+it implies the enemy appears as we expected.
+
+testEnemyAppearHardLevel()
+The method tests whether the enemies start to appear after the start combat button is clicked under the level of Hard.
+We test the feature again because we change the way we implement the Enemy. Thus changing the way of implementation makes
+the previous test invalid and required us to test the newly implemented Enemies.  This component is chosen because we
+want to ensure that the enemies won’t appear until the player is ready for the game. We tested the feature by
+checking the visibility of the enemy. If the enemy is invisible before and becomes visible after the button is clicked,
+it implies the enemy appears as we expected.
+
+testEnemyAppearHellLevel()
+The method tests whether the enemies start to appear after the start combat button is clicked under the level of Hell.
+We test the feature again because we change the way we implement the Enemy. Thus changing the way of implementation makes
+the previous test invalid and required us to test the newly implemented Enemies.  This component is chosen because we
+want to ensure that the enemies won’t appear until the player is ready for the game. We tested the feature by
+checking the visibility of the enemy. If the enemy is invisible before and becomes visible after the button is clicked,
+it implies the enemy appears as we expected.
+
+testGameOver()
+The method tests whether the gameover screen will appear when the after the monument’s health goes to zero. We change the
+implementation of the enemy so that it might have different behavior compared to behavior in previous milestone. This component
+is chosen because we want the player to be directed to the GameOverScreen with proper message of “You Lose” when losing the game.
+The implementation of the feature is tested by checking whether the “Game Over” label and the “You Lose” label appear on
+the GameOverScreen.
+
+TowerAttack()
+The method test whether the towers will attack the enemies under certain condition. The test is simple test only to test the
+behavior of tower attacking without considering the tower attack in different condition. The component is chosen because we
+want to test that the tower will attack first so that we can later assure that other advanced feature also work. The implementation
+of the feature is tested by checking whether the "attack" node has appeared on the InitGameScreen.
+
+testMoneyGainEasyLevel()
+The method tests serve two purposes: One is that the towers under this level of difficulty attack normally. The other is that
+attacking the enemy is the important way for players to gain money. The component is chosen because we want players to gain money
+so that players can continue play by placing more towers to defend their monuments. We tested this feature by checking the attack node
+and the fund node. The implementation of the feature is tested by checking whether the attack node has appeared and the text of the fund
+node.
+
+testMoneyGainMediumLevel()
+The method tests serve two purposes: One is that the towers under this level of difficulty attack normally. The other is that
+attacking the enemy is the important way for players to gain money. The component is chosen because we want players to gain money
+so that players can continue play by placing more towers to defend their monuments. We tested this feature by checking the attack node
+and the fund node. The implementation of the feature is tested by checking whether the attack node has appeared and the text of the fund
+node.
+
+testMoneyGainHardLevel()
+The method tests serve two purposes: One is that the towers under this level of difficulty attack normally. The other is that
+attacking the enemy is the important way for players to gain money. The component is chosen because we want players to gain money
+so that players can continue play by placing more towers to defend their monuments. We tested this feature by checking the attack node
+and the fund node. The implementation of the feature is tested by checking whether the attack node has appeared and the text of the fund
+node.
+
+testMoneyGainHellLevel()
+The method tests serve two purposes: One is that the towers under this level of difficulty attack normally. The other is that
+attacking the enemy is the important way for players to gain money. The component is chosen because we want players to gain money
+so that players can continue play by placing more towers to defend their monuments. We tested this feature by checking the attack node
+and the fund node. The implementation of the feature is tested by checking whether the attack node has appeared and the text of the fund
+node.
+
+testPlaceTowers()
+The method test whether players can successfully place the towers before they hit the start button or during the play. We
+choose to test the placement of towers because we have change ways of implementation of the whole game so that some tests we
+wrote previously might be invalid. The component is chosen because placing towers is the main point of the game. Players need
+to place the towers on the map so that they can play the game with their own strategy. The implementation of the feature is
+tested by looking three different tower type we placed on the map.
+

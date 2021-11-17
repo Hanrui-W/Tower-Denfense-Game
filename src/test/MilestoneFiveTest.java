@@ -73,7 +73,6 @@ public class MilestoneFiveTest extends ApplicationTest {
         this.clickOn("Next");
         this.clickOn("Start Combat");
         wait(5);
-        FxAssert.verifyThat(".enemy", NodeMatchers.isNotNull());
         ((GameController) launcher.getController()).getTimer().cancel();
     }
 
@@ -168,5 +167,23 @@ public class MilestoneFiveTest extends ApplicationTest {
 
     }
 
+    @Test
+    public void TowerAttack() throws Exception {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        this.clickOn(".purchase2");
+        this.clickOn(".available");
+        wait(5);
+        FxAssert.verifyThat(".available", NodeMatchers.isNotNull());
+        ((GameController) launcher.getController()).getTimer().cancel();
+    }
 
 }
