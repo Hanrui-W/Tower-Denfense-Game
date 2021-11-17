@@ -131,7 +131,6 @@ public class InitGameScreen {
                 case 0:
                     rect.setFill(Color.WHITE);
                     rect.getStyleClass().add("available");
-//                    rect.getStyleClass().add(i+""+ j);
                     break;
 
                 case 1:

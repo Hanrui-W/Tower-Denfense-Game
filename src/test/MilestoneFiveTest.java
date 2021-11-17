@@ -1,9 +1,7 @@
 import controller.AppLauncher;
 import controller.GameController;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
@@ -21,7 +19,7 @@ public class MilestoneFiveTest extends ApplicationTest {
         }
     }
 
-    AppLauncher launcher;
+    private AppLauncher launcher;
     @Override
     public void start(Stage primaryStage) {
         launcher = new AppLauncher();
