@@ -150,7 +150,7 @@ public class Model {
             return;
         }
         newEnemyCounter_final_boss = 0;
-        finalBoss = new Enemy((int) (enemyHealthBaseValue * 10),
+        finalBoss = new Enemy((int) (2500),
                 (int) (enemyDamageBaseValue * 100000.0),
                 (int) (enemyIterationBaseValue * 5),
                 Color.BLACK);

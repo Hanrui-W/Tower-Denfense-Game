@@ -54,11 +54,10 @@ public class GameController implements IController {
                                 System.out.println("Defeated!!!");
                             }
                             ////////////////////////////////////////////
-                            if (model.updateListOfEnemies()) {
-                                screen.updateEnemiesPosition(model.getListOfEnemies());
-                                screen.setHealthValue(model.getMonumentHealth());
-                                screen.setMoneyValue(model.getMoney());
-                            }
+                            model.updateListOfEnemies();
+                            screen.updateEnemiesPosition(model.getListOfEnemies());
+                            screen.setHealthValue(model.getMonumentHealth());
+                            screen.setMoneyValue(model.getMoney());
                             List<List<Integer>> towerToEnemy = model.towerAttack();
                             screen.drawAttack(towerToEnemy);
                         }
