@@ -27,6 +27,7 @@ public class GameController implements IController {
         model = Model.getInstance();
         timer = new Timer();
     }
+
     @Override
     public Scene initScreen() {
         ArrayList<TowerType> listOfTowers = model.getListOfTowerTypes();
@@ -54,7 +55,7 @@ public class GameController implements IController {
                             ///////////////////////////////////////////
                             //for test purpose, should lead to win menu
                             if (model.isFinalBossDefeated()) {
-                                System.out.println("Defeated!!!");
+                                AppLauncher.goToWinScreen();
                             }
                             ////////////////////////////////////////////
                             model.updateListOfEnemies();
@@ -65,7 +66,7 @@ public class GameController implements IController {
                             screen.drawAttack(towerToEnemy);
                         }
                     });
-                    if (model.getMonumentHealth() <= 0) {
+                    if (model.getMonumentHealth() <= 0 || model.isFinalBossDefeated()) {
                         this.cancel();
                     }
                 }
@@ -126,6 +127,7 @@ public class GameController implements IController {
                     model.addTower(new Tower(GridPane.getRowIndex(node),
                                             GridPane.getColumnIndex(node),
                                             purchasedTower));
+
                     screen.setPurchasedTower(false);
                     screen.setMessageLabel("Tower is placed.");
                 } else if (screen.getPurchased() && (tile.getStyleClass().contains("unavailable")
@@ -171,6 +173,7 @@ public class GameController implements IController {
                 screen.setUpgradeLevel(chosenTower.getLevel());
                 model.setMoney(model.getMoney() - 100);
                 screen.setMoneyValue(model.getMoney());
+                model.incrementTowersUpgraded();
             }
         });
         screen.getUpgradeMenu().setVisible(true);

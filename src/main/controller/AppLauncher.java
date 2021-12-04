@@ -45,11 +45,17 @@ public class AppLauncher extends Application {
         switchScene();
     }
 
+    public static void goToWinScreen() {
+        controller = new WinGameController(WIDTH, HEIGHT);
+        switchScene();
+    }
+
     public static void switchScene() {
         Scene scene = controller.initScreen();
         mainWindow.setScene(scene);
         mainWindow.show();
     }
+
     public IController getController() {
         return controller;
     }

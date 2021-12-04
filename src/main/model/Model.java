@@ -29,9 +29,24 @@ public class Model {
     private int newEnemyCounter_final_boss;
     private boolean isFinalBossAppeared;
     private boolean isWin;
+    private int towersPlaced;
+    private int towersUpgraded;
+    private int enemiesKilled;
     private Enemy finalBoss;
 
+
     private Model() {
+        init();
+    }
+
+    public static synchronized Model getInstance() {
+        if (model == null) {
+            model = new Model();
+        }
+        return model;
+    }
+
+    public synchronized void init() {
         player = new Player();
         map = new Map();
         monument = new Monument();
@@ -42,14 +57,6 @@ public class Model {
         newEnemyCounter_final_boss = 0;
         isFinalBossAppeared = false;
         finalBoss = null;
-    }
-
-    public static Model getInstance() {
-        return model;
-    }
-
-    public static void init() {
-        model = new Model();
     }
 
     public boolean initGame(String name, GameDifficultyLevel level) {
@@ -223,6 +230,7 @@ public class Model {
                 }
                 if (currentEnemy.getHealth() <= 0) {
                     removedEnemies.add(currentEnemy);
+                    model.incrementEnemiesKilled();
                 }
             }
         }
@@ -249,6 +257,7 @@ public class Model {
     public int[][] getMap() {
         return map.getMap();
     }
+
     public Map getMapObject() {
         return map;
     }
@@ -315,5 +324,25 @@ public class Model {
 
     public void addTower(Tower tower) {
         listOfTowers.add(tower);
+    }
+
+    public void incrementEnemiesKilled() {
+        this.enemiesKilled++;
+    }
+
+    public void incrementTowersUpgraded() {
+        this.towersUpgraded++;
+    }
+
+    public int getTowersPlaced() {
+        return listOfTowers.size();
+    }
+
+    public int getEnemiesKilled() {
+        return enemiesKilled;
+    }
+
+    public int getTowersUpgraded() {
+        return towersUpgraded;
     }
 }

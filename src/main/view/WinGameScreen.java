@@ -12,20 +12,17 @@ import javafx.scene.text.Font;
 
 import java.io.File;
 
-public class GameOverScreen {
+public class WinGameScreen {
     private final int width;
     private final int height;
     private final Button restartButton;
     private final Button exitButton;
-    private final Label gameOverLabel;
-    private Label towersPlacedText;
-    private Label enemiesKilledText;
-    private Label towersUpgradedText;
+    private final Label winGameLabel;
     private int enemiesKilled;
     private int towersPlaced;
     private int towersUpgraded;
 
-    public GameOverScreen(int width, int height) {
+    public WinGameScreen(int width, int height) {
         this.width = width;
         this.height = height;
         restartButton = new Button("Restart");
@@ -36,26 +33,27 @@ public class GameOverScreen {
         exitButton.setMinSize(70, 30);
         exitButton.setFont(Font.font("Verdana", 40));
 
-        gameOverLabel = new Label("You lost. Try again?!");
-        gameOverLabel.setFont(Font.font("Comic Sans MS", 70));
-        gameOverLabel.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
+        winGameLabel = new Label("Congratulations. You win!");
+        winGameLabel.setFont(Font.font("Comic Sans MS", 70));
+        winGameLabel.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
     }
 
     public Scene getScene() {
-        towersPlacedText = new Label("Total amount of towers placed: " + towersPlaced);
+        Label towersPlacedText = new Label("Total amount of towers placed: " + towersPlaced);
         towersPlacedText.setFont(Font.font("Comic San MS", 25));
         towersPlacedText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
 
-        towersUpgradedText = new Label("Total amount of towers upgraded: " + towersUpgraded);
+
+        Label towersUpgradedText = new Label("Total amount of towers upgraded: " + towersUpgraded);
         towersUpgradedText.setFont(Font.font("Comic San MS", 25));
         towersUpgradedText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
 
-        enemiesKilledText = new Label("Total amount of enemies killed: " + enemiesKilled);
+        Label enemiesKilledText = new Label("Total amount of enemies killed: " + enemiesKilled);
         enemiesKilledText.setFont(Font.font("Comic San MS", 25));
         enemiesKilledText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
 
         StackPane root = new StackPane();
-        VBox vBox = new VBox(gameOverLabel, restartButton, exitButton,
+        VBox vBox = new VBox(winGameLabel, restartButton, exitButton,
                 enemiesKilledText, towersPlacedText, towersUpgradedText);
         vBox.setAlignment(Pos.CENTER);
         vBox.setMinSize(40, 70);
@@ -68,7 +66,7 @@ public class GameOverScreen {
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
-        gameOverLabel.setAlignment(Pos.TOP_CENTER);
+        winGameLabel.setAlignment(Pos.TOP_CENTER);
 
         root.getChildren().add(imageView);
         root.getChildren().add(vBox);
@@ -93,7 +91,6 @@ public class GameOverScreen {
 
     public void setTowersPlaced(int towersPlaced) {
         this.towersPlaced = towersPlaced;
-        System.out.println(towersPlaced);
     }
 
     public void setTowersUpgraded(int towersUpgraded) {
