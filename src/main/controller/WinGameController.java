@@ -2,7 +2,6 @@ package controller;
 
 import javafx.scene.control.Button;
 import model.Model;
-import view.GameOverScreen;
 import view.WinGameScreen;
 
 public class WinGameController implements IController {

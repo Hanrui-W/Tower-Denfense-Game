@@ -9,9 +9,11 @@ import model.Model;
 import view.InitConfigScreen;
 
 public class ConfigController implements IController {
+
     public ConfigController(int width, int height) {
         initScreen(width, height);
     }
+
     @Override
     public void initScreen(int width, int height) {
         InitConfigScreen screen = new InitConfigScreen(width, height);
