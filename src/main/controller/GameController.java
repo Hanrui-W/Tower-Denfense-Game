@@ -36,7 +36,7 @@ public class GameController implements IController {
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
         screen.initMap(model.getMap());
-
+        Scene scene = screen.getScene();
         //Call this method will start Enemies Animation
         Button combat = screen.getStartCombatStatus();
 
@@ -82,6 +82,7 @@ public class GameController implements IController {
         towerNames.add("wag wag mushroom");
 
         for (Button button : buttons) {
+            System.out.println("1");
             button.setOnAction(e -> {
                 TowerType tower = listOfTowers.get(buttons.indexOf(button));
                 if (screen.getPurchased()) {
@@ -153,7 +154,7 @@ public class GameController implements IController {
                 }
             }));
         }
-        return screen.getScene();
+        return scene;
     }
 
     public void showUpgradeMenu(int x, int y) {
