@@ -178,7 +178,7 @@ public class Model {
                                                     - currentEnemy.getyPosition()), 2), 0.5);
                 if (distance <= tower.getType().getRange()) {
                     currentEnemy.setHealth(currentEnemy.getHealth()
-                                            - tower.getType().getAttackDamage());
+                                            - tower.getType().getAttackDamage() * tower.getLevel());
                     ArrayList<Integer> towerToEnemy = new ArrayList<>();
                     towerToEnemy.add(tower.getxPosition());
                     towerToEnemy.add(tower.getyPosition());

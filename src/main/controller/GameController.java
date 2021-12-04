@@ -110,6 +110,10 @@ public class GameController implements IController {
                     tile.setFill(new ImagePattern(purchasedTower.getImage()));
                     tile.getStyleClass().remove("available");
                     tile.getStyleClass().add("unavailable");
+                    tile.getStyleClass().add("tower");
+                    tile.setOnMouseClicked(e -> {
+                        showUpgradeMenu(GridPane.getRowIndex(node), GridPane.getColumnIndex(node));
+                    });
                     model.addTower(new Tower(GridPane.getRowIndex(node),
                                             GridPane.getColumnIndex(node),
                                             purchasedTower));
@@ -138,6 +142,28 @@ public class GameController implements IController {
                 }
             }));
         }
+    }
+
+    public void showUpgradeMenu(int x, int y) {
+        List<Tower> listOfTowers = model.getListOfTowers();
+        Tower tower = new Tower();
+        for (Tower t : listOfTowers) {
+            if (t.getxPosition() == x && t.getyPosition() == y) {
+                tower = t;
+                break;
+            }
+        }
+        final Tower chosenTower = tower;
+        screen.setUpgradeLevel(chosenTower.getLevel());
+        screen.getUpgradeButton().setOnAction(e -> {
+            if (model.getMoney() >= 100) {
+                chosenTower.setLevel(chosenTower.getLevel() + 1);
+                screen.setUpgradeLevel(chosenTower.getLevel());
+                model.setMoney(model.getMoney() - 100);
+                screen.setMoneyValue(model.getMoney());
+            }
+        });
+        screen.getUpgradeMenu().setVisible(true);
     }
 
     public Timer getTimer() {
