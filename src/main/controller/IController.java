@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.scene.Scene;
+
 public interface IController {
-    void initScreen(int width, int height);
+    Scene initScreen();
 }

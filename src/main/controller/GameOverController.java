@@ -1,19 +1,22 @@
 package controller;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import model.Model;
 import view.GameOverScreen;
 
 public class GameOverController implements IController {
-    Model model;
-
+    private int width;
+    private int height;
+    private Model model;
     public GameOverController(int width, int height) {
+        this.width = width;
+        this.height = height;
         model = Model.getInstance();
-        initScreen(width, height);
     }
 
     @Override
-    public void initScreen(int width, int height) {
+    public Scene initScreen() {
         GameOverScreen screen = new GameOverScreen(width, height);
         Button restartButton = screen.getRestartButton();
         restartButton.setOnAction(e -> {
@@ -28,7 +31,6 @@ public class GameOverController implements IController {
         screen.setTowersPlaced(model.getTowersPlaced());
         screen.setTowersUpgraded(model.getTowersUpgraded());
 
-        AppLauncher.getMainWindow().setScene(screen.getScene());
-        AppLauncher.getMainWindow().show();
+        return screen.getScene();
     }
 }

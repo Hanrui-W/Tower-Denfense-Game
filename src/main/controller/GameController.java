@@ -2,6 +2,7 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -14,26 +15,28 @@ import view.InitGameScreen;
 import java.util.*;
 
 public class GameController implements IController {
+    private int width;
+    private int height;
     private Model model;
     private TowerType purchasedTower;
     private InitGameScreen screen;
     private Timer timer;
     public GameController(int width, int height) {
+        this.width = width;
+        this.height = height;
         model = Model.getInstance();
         timer = new Timer();
-        initScreen(width, height);
     }
 
     @Override
-    public void initScreen(int width, int height) {
+    public Scene initScreen() {
         ArrayList<TowerType> listOfTowers = model.getListOfTowerTypes();
 
         screen = new InitGameScreen(width, height, listOfTowers);
         screen.setHealthValue(model.getMonumentHealth());
         screen.setMoneyValue(model.getMoney());
         screen.initMap(model.getMap());
-        AppLauncher.getMainWindow().setScene(screen.getScene());
-
+        Scene scene = screen.getScene();
         //Call this method will start Enemies Animation
         Button combat = screen.getStartCombatStatus();
 
@@ -79,6 +82,7 @@ public class GameController implements IController {
         towerNames.add("wag wag mushroom");
 
         for (Button button : buttons) {
+            System.out.println("1");
             button.setOnAction(e -> {
                 TowerType tower = listOfTowers.get(buttons.indexOf(button));
                 if (screen.getPurchased()) {
@@ -150,6 +154,7 @@ public class GameController implements IController {
                 }
             }));
         }
+        return scene;
     }
 
     public void showUpgradeMenu(int x, int y) {

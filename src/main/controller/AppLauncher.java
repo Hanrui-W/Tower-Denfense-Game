@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Model;
 
@@ -26,22 +27,33 @@ public class AppLauncher extends Application {
 
     public static void goToWelcomeScreen() {
         controller = new StartController(WIDTH, HEIGHT);
+        switchScene();
     }
 
     public static void goToInitConfigScreen() {
         controller = new ConfigController(WIDTH, HEIGHT);
+        switchScene();
     }
 
     public static void goToInitGameScreen() {
         controller = new GameController(WIDTH, HEIGHT);
+        switchScene();
     }
 
     public static void goToGameOverScreen() {
         controller = new GameOverController(WIDTH, HEIGHT);
+        switchScene();
     }
 
     public static void goToWinScreen() {
         controller = new WinGameController(WIDTH, HEIGHT);
+        switchScene();
+    }
+
+    public static void switchScene() {
+        Scene scene = controller.initScreen();
+        mainWindow.setScene(scene);
+        mainWindow.show();
     }
 
     public IController getController() {

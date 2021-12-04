@@ -1,19 +1,23 @@
 package controller;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import model.Model;
 import view.WinGameScreen;
 
 public class WinGameController implements IController {
+    private int width;
+    private int height;
     private Model model;
 
     public WinGameController(int width, int height) {
+        this.width = width;
+        this.height = height;
         model = Model.getInstance();
-        initScreen(width, height);
     }
 
     @Override
-    public void initScreen(int width, int height) {
+    public Scene initScreen() {
         WinGameScreen screen = new WinGameScreen(width, height);
         screen.setTowersUpgraded(model.getTowersUpgraded());
         screen.setTowersPlaced(model.getTowersPlaced());
@@ -27,7 +31,6 @@ public class WinGameController implements IController {
             AppLauncher.getMainWindow().close();
         });
 
-        AppLauncher.getMainWindow().setScene(screen.getScene());
-        AppLauncher.getMainWindow().show();
+        return screen.getScene();
     }
 }
