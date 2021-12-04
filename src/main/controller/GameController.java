@@ -56,11 +56,11 @@ public class GameController implements IController {
                             ////////////////////////////////////////////
                             if (model.updateListOfEnemies()) {
                                 screen.updateEnemiesPosition(model.getListOfEnemies());
-                                List<List<Integer>> towerToEnemy = model.towerAttack();
-                                screen.drawAttack(towerToEnemy);
                                 screen.setHealthValue(model.getMonumentHealth());
                                 screen.setMoneyValue(model.getMoney());
                             }
+                            List<List<Integer>> towerToEnemy = model.towerAttack();
+                            screen.drawAttack(towerToEnemy);
                         }
                     });
                     if (model.getMonumentHealth() <= 0) {
