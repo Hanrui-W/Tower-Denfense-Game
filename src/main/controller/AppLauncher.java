@@ -17,7 +17,8 @@ public class AppLauncher extends Application {
         mainWindow.setTitle("Game");
         model = Model.getInstance();
         controller = new StartController(WIDTH, HEIGHT);
-        goToWelcomeScreen();
+        //goToWelcomeScreen();
+        goToGameOverScreen();
     }
 
     public static Stage getMainWindow() {

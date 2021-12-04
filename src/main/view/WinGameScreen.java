@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 
 import java.io.File;
 
-public class GameOverScreen {
+public class WinGameScreen {
     private final int width;
     private final int height;
     private final Button restartButton;
@@ -25,7 +25,7 @@ public class GameOverScreen {
     private int towersPlaced;
     private int towersUpgraded;
 
-    public GameOverScreen(int width, int height) {
+    public WinGameScreen(int width, int height) {
         this.width = width;
         this.height = height;
         restartButton = new Button("Restart");

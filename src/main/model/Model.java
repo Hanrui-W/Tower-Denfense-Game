@@ -37,12 +37,11 @@ public class Model {
         newEnemyCounter = 0;
     }
 
-    public static Model getInstance() {
+    public static synchronized Model getInstance() {
+        if (model == null) {
+            model = new Model();
+        }
         return model;
-    }
-
-    public static void init() {
-        model = new Model();
     }
 
     public boolean initGame(String name, GameDifficultyLevel level) {

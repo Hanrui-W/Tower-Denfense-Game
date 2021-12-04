@@ -140,12 +140,6 @@ public class GameController implements IController {
         }
     }
 
-    public void updateMoney() {
-        model.setMoney(model.getMoney() + 10);
-        screen.setMoneyValue(model.getMoney());
-        model.setNewEnemyCounter(model.getNewEnemyCounter() + 1);
-    }
-
     public Timer getTimer() {
         return timer;
     }
