@@ -47,13 +47,19 @@ public class GameController implements IController {
                                 AppLauncher.goToGameOverScreen();
                             }
                             model.generateNewEnemy();
-                            if (model.updateListOfEnemies()) {
-                                screen.updateEnemiesPosition(model.getListOfEnemies());
-                                List<List<Integer>> towerToEnemy = model.towerAttack();
-                                screen.drawAttack(towerToEnemy);
-                                screen.setHealthValue(model.getMonumentHealth());
-                                screen.setMoneyValue(model.getMoney());
+                            model.generateFinalBoss();
+                            ///////////////////////////////////////////
+                            //for test purpose, should lead to win menu
+                            if (model.isFinalBossDefeated()) {
+                                System.out.println("Defeated!!!");
                             }
+                            ////////////////////////////////////////////
+                            model.updateListOfEnemies();
+                            screen.updateEnemiesPosition(model.getListOfEnemies());
+                            screen.setHealthValue(model.getMonumentHealth());
+                            screen.setMoneyValue(model.getMoney());
+                            List<List<Integer>> towerToEnemy = model.towerAttack();
+                            screen.drawAttack(towerToEnemy);
                         }
                     });
                     if (model.getMonumentHealth() <= 0) {
