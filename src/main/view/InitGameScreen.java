@@ -38,6 +38,9 @@ public class InitGameScreen {
     private final GridPane mapView;
     private Rectangle[][] gridPaneArray;
     private Rectangle monument;
+    private Label currentLevel;
+    private Button upgradeButton;
+    private VBox upgradeMenu;
     private final Label messageLabel;
     private final Button startCombat;
     private final ArrayList<Rectangle> enemyPath;
@@ -72,10 +75,15 @@ public class InitGameScreen {
         HBox messagePrompt = new HBox(messageLabel);
         HBox combatButton = new HBox(startCombat);
 
-        VBox textualPrompts = new VBox(moneyPrompt, healthPrompt, messagePrompt, combatButton);
+        VBox textualPrompts = new VBox(moneyPrompt, healthPrompt, combatButton, messagePrompt);
 
         HBox towerMenu = getTowerMenu();
-        VBox vbox = new VBox(mapView, new HBox(textualPrompts, towerMenu));
+
+        currentLevel = new Label();
+        upgradeButton = new Button("Upgrade");
+        upgradeMenu = new VBox(currentLevel, new Label("Cost: 100"), upgradeButton);
+        upgradeMenu.setVisible(false);
+        VBox vbox = new VBox(mapView, new HBox(textualPrompts, towerMenu, upgradeMenu));
         bottomSupport = new Pane(vbox);
         return new Scene(bottomSupport, width, height);
     }
@@ -234,6 +242,18 @@ public class InitGameScreen {
             hBox.getChildren().add(vbox);
         }
         return hBox;
+    }
+
+    public void setUpgradeLevel(int level) {
+        currentLevel.setText("Level: " + level);
+    }
+
+    public Button getUpgradeButton() {
+        return upgradeButton;
+    }
+
+    public VBox getUpgradeMenu() {
+        return upgradeMenu;
     }
 
     public ArrayList<Button> getButtons() {
