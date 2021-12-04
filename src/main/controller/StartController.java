@@ -1,21 +1,23 @@
 package controller;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import view.WelcomeScreen;
 
 public class StartController implements IController {
+    private int width;
+    private int height;
     public StartController(int width, int height) {
-        initScreen(width, height);
+        this.width = width;
+        this.height = height;
     }
     @Override
-    public void initScreen(int width, int height) {
+    public Scene initScreen() {
         WelcomeScreen screen = new WelcomeScreen(width, height);
         Button startButton = screen.getStartButton();
         startButton.setOnAction(e -> {
             AppLauncher.goToInitConfigScreen();
         });
-
-        AppLauncher.getMainWindow().setScene(screen.getScene());
-        AppLauncher.getMainWindow().show();
+        return screen.getScene();
     }
 }
