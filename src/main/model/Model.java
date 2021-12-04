@@ -151,9 +151,9 @@ public class Model {
         }
         newEnemyCounter_final_boss = 0;
         finalBoss = new Enemy((int) (enemyHealthBaseValue * 10),
-                (int) (enemyDamageBaseValue * 3.0),
+                (int) (enemyDamageBaseValue * 100000.0),
                 (int) (enemyIterationBaseValue * 5),
-                Color.DARKGREEN);
+                Color.BLACK);
         listOfEnemies.add(finalBoss);
         isFinalBossAppeared = true;
     }
@@ -167,18 +167,20 @@ public class Model {
     }
 
     public void generateNewEnemy() {
-
-        // Generate a new enemy after every 50 iterations of the timer
+        if (isFinalBossAppeared) {
+            return;
+        }
+//         Generate a new enemy after every 50 iterations of the timer
         if (newEnemyCounter++ < 50) {
             return;
         }
         newEnemyCounter = 0;
         int enemyType = new Random().nextInt(3);
         switch (enemyType) {
-        case 0:
-            listOfEnemies.add(new Enemy(enemyHealthBaseValue,
-                                        enemyDamageBaseValue,
-                                        enemyIterationBaseValue,
+            case 0:
+                listOfEnemies.add(new Enemy(enemyHealthBaseValue,
+                        enemyDamageBaseValue,
+                        enemyIterationBaseValue,
                                         Color.VIOLET));
             break;
         case 1:
