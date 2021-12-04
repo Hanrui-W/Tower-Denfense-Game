@@ -42,15 +42,15 @@ public class GameOverScreen {
     }
 
     public Scene getScene() {
-        towersPlacedText = new Label("Total amount of towers placed: " + towersPlaced);
+        towersPlacedText = new Label("Total number of towers placed: " + towersPlaced);
         towersPlacedText.setFont(Font.font("Comic San MS", 25));
         towersPlacedText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
 
-        towersUpgradedText = new Label("Total amount of towers upgraded: " + towersUpgraded);
+        towersUpgradedText = new Label("Total number of upgrades: " + towersUpgraded);
         towersUpgradedText.setFont(Font.font("Comic San MS", 25));
         towersUpgradedText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
 
-        enemiesKilledText = new Label("Total amount of enemies killed: " + enemiesKilled);
+        enemiesKilledText = new Label("Total number of enemies killed: " + enemiesKilled);
         enemiesKilledText.setFont(Font.font("Comic San MS", 25));
         enemiesKilledText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
 
