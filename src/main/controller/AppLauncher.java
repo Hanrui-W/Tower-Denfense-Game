@@ -40,6 +40,10 @@ public class AppLauncher extends Application {
         controller = new GameOverController(WIDTH, HEIGHT);
     }
 
+    public static void goToWinScreen() {
+        controller = new WinGameController(WIDTH, HEIGHT);
+    }
+
     public IController getController() {
         return controller;
     }

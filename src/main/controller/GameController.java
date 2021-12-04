@@ -41,20 +41,29 @@ public class GameController implements IController {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    Platform.runLater(() -> {
-                        if (model.getMonumentHealth() <= 0) {
-                            AppLauncher.goToGameOverScreen();
-                        }
-                        model.generateNewEnemy();
-                        if (model.updateListOfEnemies()) {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (model.getMonumentHealth() <= 0) {
+                                AppLauncher.goToGameOverScreen();
+                            }
+                            model.generateNewEnemy();
+                            model.generateFinalBoss();
+                            ///////////////////////////////////////////
+                            //for test purpose, should lead to win menu
+                            if (model.isFinalBossDefeated()) {
+                                AppLauncher.goToWinScreen();
+                            }
+                            ////////////////////////////////////////////
+                            model.updateListOfEnemies();
                             screen.updateEnemiesPosition(model.getListOfEnemies());
-                            List<List<Integer>> towerToEnemy = model.towerAttack();
-                            screen.drawAttack(towerToEnemy);
                             screen.setHealthValue(model.getMonumentHealth());
                             screen.setMoneyValue(model.getMoney());
+                            List<List<Integer>> towerToEnemy = model.towerAttack();
+                            screen.drawAttack(towerToEnemy);
                         }
                     });
-                    if (model.getMonumentHealth() <= 0) {
+                    if (model.getMonumentHealth() <= 0 || model.isFinalBossDefeated()) {
                         this.cancel();
                     }
                 }

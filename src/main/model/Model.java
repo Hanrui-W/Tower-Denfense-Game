@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.io.File;
+import java.security.cert.TrustAnchor;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,10 +26,13 @@ public class Model {
     private int enemyDamageBaseValue;
     private int enemyIterationBaseValue;
     private int newEnemyCounter;
+    private int newEnemyCounter_final_boss;
+    private boolean isFinalBossAppeared;
     private boolean isWin;
     private int towersPlaced;
     private int towersUpgraded;
     private int enemiesKilled;
+    private Enemy finalBoss;
 
 
     private Model() {
@@ -50,6 +54,9 @@ public class Model {
         listOfTowers = new ArrayList<>();
         listOfTowerTypes = new ArrayList<>();
         newEnemyCounter = 0;
+        newEnemyCounter_final_boss = 0;
+        isFinalBossAppeared = false;
+        finalBoss = null;
     }
 
     public boolean initGame(String name, GameDifficultyLevel level) {
@@ -142,18 +149,45 @@ public class Model {
                 towerPriceBaseValue * 3, 3, 3, 3, 3));
     }
 
+    public void generateFinalBoss() {
+        if (isFinalBossAppeared) {
+            return;
+        }
+        if (newEnemyCounter_final_boss++ < 320) {
+            return;
+        }
+        newEnemyCounter_final_boss = 0;
+        finalBoss = new Enemy((int) (2500),
+                (int) (enemyDamageBaseValue * 100000.0),
+                (int) (enemyIterationBaseValue * 5),
+                Color.BLACK);
+        listOfEnemies.add(finalBoss);
+        isFinalBossAppeared = true;
+    }
+
+    public boolean isFinalBossDefeated() {
+        if (finalBoss == null) return false;
+        if (finalBoss.getHealth() <= 0) {
+            return true;
+        }
+        return false;
+    }
+
     public void generateNewEnemy() {
-        // Generate a new enemy after every 50 iterations of the timer
+        if (isFinalBossAppeared) {
+            return;
+        }
+//         Generate a new enemy after every 50 iterations of the timer
         if (newEnemyCounter++ < 50) {
             return;
         }
         newEnemyCounter = 0;
         int enemyType = new Random().nextInt(3);
         switch (enemyType) {
-        case 0:
-            listOfEnemies.add(new Enemy(enemyHealthBaseValue,
-                                        enemyDamageBaseValue,
-                                        enemyIterationBaseValue,
+            case 0:
+                listOfEnemies.add(new Enemy(enemyHealthBaseValue,
+                        enemyDamageBaseValue,
+                        enemyIterationBaseValue,
                                         Color.VIOLET));
             break;
         case 1:
