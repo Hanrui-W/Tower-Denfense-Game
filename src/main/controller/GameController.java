@@ -23,6 +23,7 @@ public class GameController implements IController {
         timer = new Timer();
         initScreen(width, height);
     }
+
     @Override
     public void initScreen(int width, int height) {
         ArrayList<TowerType> listOfTowers = model.getListOfTowerTypes();
@@ -40,20 +41,17 @@ public class GameController implements IController {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (model.getMonumentHealth() <= 0) {
-                                AppLauncher.goToGameOverScreen();
-                            }
-                            model.generateNewEnemy();
-                            if (model.updateListOfEnemies()) {
-                                screen.updateEnemiesPosition(model.getListOfEnemies());
-                                List<List<Integer>> towerToEnemy = model.towerAttack();
-                                screen.drawAttack(towerToEnemy);
-                                screen.setHealthValue(model.getMonumentHealth());
-                                screen.setMoneyValue(model.getMoney());
-                            }
+                    Platform.runLater(() -> {
+                        if (model.getMonumentHealth() <= 0) {
+                            AppLauncher.goToGameOverScreen();
+                        }
+                        model.generateNewEnemy();
+                        if (model.updateListOfEnemies()) {
+                            screen.updateEnemiesPosition(model.getListOfEnemies());
+                            List<List<Integer>> towerToEnemy = model.towerAttack();
+                            screen.drawAttack(towerToEnemy);
+                            screen.setHealthValue(model.getMonumentHealth());
+                            screen.setMoneyValue(model.getMoney());
                         }
                     });
                     if (model.getMonumentHealth() <= 0) {
@@ -117,6 +115,7 @@ public class GameController implements IController {
                     model.addTower(new Tower(GridPane.getRowIndex(node),
                                             GridPane.getColumnIndex(node),
                                             purchasedTower));
+
                     screen.setPurchasedTower(false);
                     screen.setMessageLabel("Tower is placed.");
                 } else if (screen.getPurchased() && (tile.getStyleClass().contains("unavailable")
@@ -161,6 +160,7 @@ public class GameController implements IController {
                 screen.setUpgradeLevel(chosenTower.getLevel());
                 model.setMoney(model.getMoney() - 100);
                 screen.setMoneyValue(model.getMoney());
+                model.incrementTowersUpgraded();
             }
         });
         screen.getUpgradeMenu().setVisible(true);

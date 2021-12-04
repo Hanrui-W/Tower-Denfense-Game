@@ -18,9 +18,9 @@ public class GameOverScreen {
     private final Button restartButton;
     private final Button exitButton;
     private final Label gameOverLabel;
-    private final Label towersPlacedText;
-    private final Label enemiesKilledText;
-    private final Label towersUpgradedText;
+    private Label towersPlacedText;
+    private Label enemiesKilledText;
+    private Label towersUpgradedText;
     private int enemiesKilled;
     private int towersPlaced;
     private int towersUpgraded;
@@ -39,11 +39,12 @@ public class GameOverScreen {
         gameOverLabel = new Label("You lost. Try again?!");
         gameOverLabel.setFont(Font.font("Comic Sans MS", 70));
         gameOverLabel.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
+    }
 
+    public Scene getScene() {
         towersPlacedText = new Label("Total amount of towers placed: " + towersPlaced);
         towersPlacedText.setFont(Font.font("Comic San MS", 25));
         towersPlacedText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
-
 
         towersUpgradedText = new Label("Total amount of towers upgraded: " + towersUpgraded);
         towersUpgradedText.setFont(Font.font("Comic San MS", 25));
@@ -52,9 +53,7 @@ public class GameOverScreen {
         enemiesKilledText = new Label("Total amount of enemies killed: " + enemiesKilled);
         enemiesKilledText.setFont(Font.font("Comic San MS", 25));
         enemiesKilledText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
-    }
 
-    public Scene getScene() {
         StackPane root = new StackPane();
         VBox vBox = new VBox(gameOverLabel, restartButton, exitButton,
                 enemiesKilledText, towersPlacedText, towersUpgradedText);
@@ -94,6 +93,7 @@ public class GameOverScreen {
 
     public void setTowersPlaced(int towersPlaced) {
         this.towersPlaced = towersPlaced;
+        System.out.println(towersPlaced);
     }
 
     public void setTowersUpgraded(int towersUpgraded) {

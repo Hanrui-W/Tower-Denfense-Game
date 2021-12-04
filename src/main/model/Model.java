@@ -26,15 +26,13 @@ public class Model {
     private int enemyIterationBaseValue;
     private int newEnemyCounter;
     private boolean isWin;
+    private int towersPlaced;
+    private int towersUpgraded;
+    private int enemiesKilled;
+
 
     private Model() {
-        player = new Player();
-        map = new Map();
-        monument = new Monument();
-        listOfEnemies = new LinkedList<>();
-        listOfTowers = new ArrayList<>();
-        listOfTowerTypes = new ArrayList<>();
-        newEnemyCounter = 0;
+        init();
     }
 
     public static synchronized Model getInstance() {
@@ -42,6 +40,16 @@ public class Model {
             model = new Model();
         }
         return model;
+    }
+
+    public synchronized void init() {
+        player = new Player();
+        map = new Map();
+        monument = new Monument();
+        listOfEnemies = new LinkedList<>();
+        listOfTowers = new ArrayList<>();
+        listOfTowerTypes = new ArrayList<>();
+        newEnemyCounter = 0;
     }
 
     public boolean initGame(String name, GameDifficultyLevel level) {
@@ -188,6 +196,7 @@ public class Model {
                 }
                 if (currentEnemy.getHealth() <= 0) {
                     removedEnemies.add(currentEnemy);
+                    model.incrementEnemiesKilled();
                 }
             }
         }
@@ -214,6 +223,7 @@ public class Model {
     public int[][] getMap() {
         return map.getMap();
     }
+
     public Map getMapObject() {
         return map;
     }
@@ -280,5 +290,25 @@ public class Model {
 
     public void addTower(Tower tower) {
         listOfTowers.add(tower);
+    }
+
+    public void incrementEnemiesKilled() {
+        this.enemiesKilled++;
+    }
+
+    public void incrementTowersUpgraded() {
+        this.towersUpgraded++;
+    }
+
+    public int getTowersPlaced() {
+        return listOfTowers.size();
+    }
+
+    public int getEnemiesKilled() {
+        return enemiesKilled;
+    }
+
+    public int getTowersUpgraded() {
+        return towersUpgraded;
     }
 }
