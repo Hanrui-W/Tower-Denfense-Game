@@ -210,16 +210,15 @@ public class Model {
     public List<List<Integer>> towerAttack() {
         List<List<Integer>> list = new ArrayList<>();
         ArrayList<Enemy> removedEnemies = new ArrayList<>();
-        for (int i = 0; i < listOfEnemies.size(); i++) {
-            Enemy currentEnemy = listOfEnemies.get(i);
+        for (Enemy currentEnemy : listOfEnemies) {
             for (Tower tower : listOfTowers) {
                 double distance = Math.pow(Math.pow(Math.abs(tower.getxPosition()
-                                                    - currentEnemy.getxPosition()), 2)
-                                + Math.pow(Math.abs(tower.getyPosition()
-                                                    - currentEnemy.getyPosition()), 2), 0.5);
+                        - currentEnemy.getxPosition()), 2)
+                        + Math.pow(Math.abs(tower.getyPosition()
+                        - currentEnemy.getyPosition()), 2), 0.5);
                 if (distance <= tower.getType().getRange()) {
                     currentEnemy.setHealth(currentEnemy.getHealth()
-                                            - tower.getType().getAttackDamage() * tower.getLevel());
+                            - tower.getType().getAttackDamage() * tower.getLevel());
                     ArrayList<Integer> towerToEnemy = new ArrayList<>();
                     towerToEnemy.add(tower.getxPosition());
                     towerToEnemy.add(tower.getyPosition());
@@ -237,7 +236,6 @@ public class Model {
             listOfEnemies.remove(enemy);
             setMoney(getMoney() + (int) (enemy.getAttackDamage() * 0.1));
         }
-
         return list;
     }
 

@@ -43,7 +43,6 @@ public class WinGameScreen {
         towersPlacedText.setFont(Font.font("Comic San MS", 25));
         towersPlacedText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
 
-
         Label towersUpgradedText = new Label("Total number of upgrades: " + towersUpgraded);
         towersUpgradedText.setFont(Font.font("Comic San MS", 25));
         towersUpgradedText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
@@ -57,9 +56,6 @@ public class WinGameScreen {
                 enemiesKilledText, towersPlacedText, towersUpgradedText);
         vBox.setAlignment(Pos.CENTER);
         vBox.setMinSize(40, 70);
-
-
-
         Image image = new Image(new File("src/main/resources/TowerDefenseLogo.jpeg")
                 .toURI()
                 .toString());
@@ -71,8 +67,7 @@ public class WinGameScreen {
         root.getChildren().add(imageView);
         root.getChildren().add(vBox);
 
-        Scene scene = new Scene(root, width, height);
-        return scene;
+        return new Scene(root, width, height);
     }
 
     public Button getRestartButton() {

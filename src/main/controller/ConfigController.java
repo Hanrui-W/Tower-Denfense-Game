@@ -30,8 +30,8 @@ public class ConfigController implements IController {
         });
         Button nextButton = screen.getNextButton();
         nextButton.setOnAction(e -> {
-            Model.getInstance().init();
-            if (Model.getInstance().initGame(nameText.getText().trim(), box.getValue())) {
+            Model model = Model.getInstance();
+            if (model.initGame(nameText.getText().trim(), box.getValue())) {
                 AppLauncher.goToInitGameScreen();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

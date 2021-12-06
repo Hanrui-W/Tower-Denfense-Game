@@ -14,14 +14,6 @@ public class GameObject {
         this.yPosition = 0;
     }
 
-    @Override
-    public String toString() {
-        return "Position{"
-                + "xPosition=" + xPosition
-                + ", yPosition=" + yPosition
-                + '}';
-    }
-
     public int getxPosition() {
         return xPosition;
     }
@@ -36,6 +28,14 @@ public class GameObject {
 
     public void setyPosition(int yPosition) {
         this.yPosition = yPosition;
+    }
+
+    @Override
+    public String toString() {
+        return "Position{"
+                + "xPosition=" + xPosition
+                + ", yPosition=" + yPosition
+                + '}';
     }
 
     @Override

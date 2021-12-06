@@ -56,9 +56,6 @@ public class GameOverScreen {
                 enemiesKilledText, towersPlacedText, towersUpgradedText);
         vBox.setAlignment(Pos.CENTER);
         vBox.setMinSize(40, 70);
-
-
-
         Image image = new Image(new File("src/main/resources/TowerDefenseLogo.jpeg")
                 .toURI()
                 .toString());
