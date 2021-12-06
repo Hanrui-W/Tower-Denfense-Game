@@ -15,12 +15,12 @@ import view.InitGameScreen;
 import java.util.*;
 
 public class GameController implements IController {
-    private int width;
-    private int height;
-    private Model model;
+    private final int width;
+    private final int height;
+    private final Model model;
     private TowerType purchasedTower;
     private InitGameScreen screen;
-    private Timer timer;
+    private final Timer timer;
     public GameController(int width, int height) {
         this.width = width;
         this.height = height;
@@ -44,27 +44,24 @@ public class GameController implements IController {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (model.getMonumentHealth() <= 0) {
-                                AppLauncher.goToGameOverScreen();
-                            }
-                            model.generateNewEnemy();
-                            model.generateFinalBoss();
-                            ///////////////////////////////////////////
-                            //for test purpose, should lead to win menu
-                            if (model.isFinalBossDefeated()) {
-                                AppLauncher.goToWinScreen();
-                            }
-                            ////////////////////////////////////////////
-                            model.updateListOfEnemies();
-                            screen.updateEnemiesPosition(model.getListOfEnemies());
-                            screen.setHealthValue(model.getMonumentHealth());
-                            screen.setMoneyValue(model.getMoney());
-                            List<List<Integer>> towerToEnemy = model.towerAttack();
-                            screen.drawAttack(towerToEnemy);
+                    Platform.runLater(() -> {
+                        if (model.getMonumentHealth() <= 0) {
+                            AppLauncher.goToGameOverScreen();
                         }
+                        model.generateNewEnemy();
+                        model.generateFinalBoss();
+                        ///////////////////////////////////////////
+                        //for test purpose, should lead to win menu
+                        if (model.isFinalBossDefeated()) {
+                            AppLauncher.goToWinScreen();
+                        }
+                        ////////////////////////////////////////////
+                        model.updateListOfEnemies();
+                        screen.updateEnemiesPosition(model.getListOfEnemies());
+                        screen.setHealthValue(model.getMonumentHealth());
+                        screen.setMoneyValue(model.getMoney());
+                        List<List<Integer>> towerToEnemy = model.towerAttack();
+                        screen.drawAttack(towerToEnemy);
                     });
                     if (model.getMonumentHealth() <= 0 || model.isFinalBossDefeated()) {
                         this.cancel();
@@ -82,7 +79,6 @@ public class GameController implements IController {
         towerNames.add("wag wag mushroom");
 
         for (Button button : buttons) {
-            System.out.println("1");
             button.setOnAction(e -> {
                 TowerType tower = listOfTowers.get(buttons.indexOf(button));
                 if (screen.getPurchased()) {

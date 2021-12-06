@@ -6,9 +6,9 @@ import model.Model;
 import view.WinGameScreen;
 
 public class WinGameController implements IController {
-    private int width;
-    private int height;
-    private Model model;
+    private final int width;
+    private final int height;
+    private final Model model;
 
     public WinGameController(int width, int height) {
         this.width = width;

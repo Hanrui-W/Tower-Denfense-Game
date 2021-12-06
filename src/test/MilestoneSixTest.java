@@ -2,9 +2,13 @@ import controller.AppLauncher;
 import controller.GameController;
 import javafx.stage.Stage;
 import org.junit.Test;
+import org.junit.platform.engine.support.hierarchical.Node;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
+import model.Model;
+
+import java.util.Timer;
 
 public class MilestoneSixTest extends ApplicationTest {
     public MilestoneSixTest() {
@@ -28,20 +32,71 @@ public class MilestoneSixTest extends ApplicationTest {
     }
 
     @Test
-    public void testLoseGameStatistic() throws Exception {
+    public void testPlaceTowerStatistics() {
         this.clickOn("Start");
         this.write("George P. Burdell");
         this.clickOn("Easy");
-        this.clickOn("Hell");
         this.clickOn("Next");
         this.clickOn("Start Combat");
-        wait(40);
-        FxAssert.verifyThat("Exit", NodeMatchers.isNotNull());
-//        ((GameController) launcher.getController()).getTimer().cancel();
+        this.clickOn(".purchase1");
+        this.clickOn(".available");
+        this.clickOn(".unavailable");
+        Timer timer = ((GameController) launcher.getController()).getTimer();
+        wait(50);
+        FxAssert.verifyThat("Total number of towers placed: " + Model.getInstance().getTowersPlaced(),
+                NodeMatchers.isNotNull());
+        this.clickOn("Exit");
+        timer.cancel();
     }
 
     @Test
-    public void testBossAppearEasyLevel() throws Exception {
+    public void testEnemiesKilledStatistics() {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+        this.clickOn(".purchase1");
+        this.clickOn(".available");
+        this.clickOn(".unavailable");
+        Timer timer = ((GameController) launcher.getController()).getTimer();
+        wait(50);
+        FxAssert.verifyThat("Total number of enemies killed: "  + Model.getInstance().getEnemiesKilled(),
+                NodeMatchers.isNotNull());
+        this.clickOn("Exit");
+        timer.cancel();
+    }
+
+    @Test
+    public void testNumberOfUpgradesStatistics() {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+        this.clickOn(".purchase1");
+        this.clickOn(".available");
+        this.clickOn(".tower");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        Timer timer = ((GameController) launcher.getController()).getTimer();
+        wait(10);
+        FxAssert.verifyThat("Total number of upgrades: " + Model.getInstance().getTowersUpgraded(),
+                NodeMatchers.isNotNull());
+        this.clickOn("Exit");
+        timer.cancel();
+    }
+
+    @Test
+    public void testBossAppearEasyLevel() {
         this.clickOn("Start");
         this.write("George P. Burdell");
         this.clickOn("Easy");
@@ -53,7 +108,7 @@ public class MilestoneSixTest extends ApplicationTest {
     }
 
     @Test
-    public void testBossAppearMediumLevel() throws Exception {
+    public void testBossAppearMediumLevel() {
         this.clickOn("Start");
         this.write("George P. Burdell");
         this.clickOn("Easy");
@@ -66,7 +121,7 @@ public class MilestoneSixTest extends ApplicationTest {
     }
 
     @Test
-    public void testBossAppearHardLevel() throws Exception {
+    public void testBossAppearHardLevel() {
         this.clickOn("Start");
         this.write("George P. Burdell");
         this.clickOn("Easy");
@@ -79,7 +134,7 @@ public class MilestoneSixTest extends ApplicationTest {
     }
 
     @Test
-    public void testBossAppearHellLevel() throws Exception {
+    public void testBossAppearHellLevel() {
         this.clickOn("Start");
         this.write("George P. Burdell");
         this.clickOn("Easy");
@@ -92,7 +147,7 @@ public class MilestoneSixTest extends ApplicationTest {
     }
 
     @Test
-    public void testUpgradeEasyLevel() throws Exception {
+    public void testUpgradeEasyLevel() {
         this.clickOn("Start");
         this.write("George P. Burdell");
         this.clickOn("Easy");
@@ -104,5 +159,58 @@ public class MilestoneSixTest extends ApplicationTest {
         ((GameController) launcher.getController()).getTimer().cancel();
     }
 
+    @Test
+    public void testWinGameMessage() {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+        this.clickOn(".purchase1");
+        this.clickOn(".available");
+        this.clickOn(".tower");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        Timer timer = ((GameController) launcher.getController()).getTimer();
+        wait(10);
+        FxAssert.verifyThat("Congratulations. You win!", NodeMatchers.isNotNull());
+        this.clickOn("Exit");
+        timer.cancel();
+    }
 
+    @Test
+    public void testRestartGameFormWinPage() {
+        this.clickOn("Start");
+        this.write("George P. Burdell");
+        this.clickOn("Easy");
+        this.clickOn("Next");
+        this.clickOn("Start Combat");
+        this.clickOn(".purchase1");
+        this.clickOn(".available");
+        this.clickOn(".tower");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        this.clickOn("Upgrade");
+        Timer timer = ((GameController) launcher.getController()).getTimer();
+        wait(10);
+        FxAssert.verifyThat("Congratulations. You win!", NodeMatchers.isNotNull());
+        timer.cancel();
+        this.clickOn("Restart");
+        FxAssert.verifyThat("Start", NodeMatchers.isNotNull());
+    }
 }

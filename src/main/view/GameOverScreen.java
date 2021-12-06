@@ -18,9 +18,6 @@ public class GameOverScreen {
     private final Button restartButton;
     private final Button exitButton;
     private final Label gameOverLabel;
-    private Label towersPlacedText;
-    private Label enemiesKilledText;
-    private Label towersUpgradedText;
     private int enemiesKilled;
     private int towersPlaced;
     private int towersUpgraded;
@@ -42,15 +39,15 @@ public class GameOverScreen {
     }
 
     public Scene getScene() {
-        towersPlacedText = new Label("Total number of towers placed: " + towersPlaced);
+        Label towersPlacedText = new Label("Total number of towers placed: " + towersPlaced);
         towersPlacedText.setFont(Font.font("Comic San MS", 25));
         towersPlacedText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
 
-        towersUpgradedText = new Label("Total number of upgrades: " + towersUpgraded);
+        Label towersUpgradedText = new Label("Total number of upgrades: " + towersUpgraded);
         towersUpgradedText.setFont(Font.font("Comic San MS", 25));
         towersUpgradedText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
 
-        enemiesKilledText = new Label("Total number of enemies killed: " + enemiesKilled);
+        Label enemiesKilledText = new Label("Total number of enemies killed: " + enemiesKilled);
         enemiesKilledText.setFont(Font.font("Comic San MS", 25));
         enemiesKilledText.setStyle("-fx-text-fill: WHITE; -fx-background-color: #87c136");
 
@@ -73,8 +70,7 @@ public class GameOverScreen {
         root.getChildren().add(imageView);
         root.getChildren().add(vBox);
 
-        Scene scene = new Scene(root, width, height);
-        return scene;
+        return new Scene(root, width, height);
     }
 
     public Button getRestartButton() {
@@ -93,7 +89,6 @@ public class GameOverScreen {
 
     public void setTowersPlaced(int towersPlaced) {
         this.towersPlaced = towersPlaced;
-        System.out.println(towersPlaced);
     }
 
     public void setTowersUpgraded(int towersUpgraded) {

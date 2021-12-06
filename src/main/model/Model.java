@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.io.File;
-import java.security.cert.TrustAnchor;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
