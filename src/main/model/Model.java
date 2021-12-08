@@ -51,8 +51,6 @@ public class Model {
         monument = new Monument();
         listOfEnemies = new LinkedList<>();
         listOfTowers = new ArrayList<>();
-        listOfTowerTypes = new ArrayList<>();
-        initTowerTypes();
         newEnemyCounter = 0;
         newEnemyCounter_final_boss = 0;
         isFinalBossAppeared = false;
@@ -101,6 +99,7 @@ public class Model {
         default:
             break;
         }
+        initTowerTypes();
         return true;
     }
 
@@ -129,6 +128,8 @@ public class Model {
         return updated;
     }
     public void initTowerTypes() {
+        listOfTowerTypes = new ArrayList<>();
+        System.out.println(1);
         listOfTowerTypes.add(new TowerType("Flowy Flower",
                 new Image(new File("src/main/resources/sunflower.gif")
                         .toURI()
