@@ -154,7 +154,9 @@ public class MilestoneSixTest extends ApplicationTest {
         this.clickOn("Start Combat");
         this.clickOn(".purchase1");
         this.clickOn(".available");
-        this.clickOn(".unavailable");
+        this.clickOn(".tower");
+        this.clickOn("Upgrade");
+        FxAssert.verifyThat("Level: 2", NodeMatchers.isNotNull());
         ((GameController) launcher.getController()).getTimer().cancel();
     }
 
