@@ -31,6 +31,7 @@ public class ConfigController implements IController {
         Button nextButton = screen.getNextButton();
         nextButton.setOnAction(e -> {
             Model model = Model.getInstance();
+            model.init();
             if (model.initGame(nameText.getText().trim(), box.getValue())) {
                 AppLauncher.goToInitGameScreen();
             } else {
