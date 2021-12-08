@@ -56,6 +56,7 @@ public class Model {
         isFinalBossAppeared = false;
         finalBoss = null;
         enemiesKilled = 0;
+        towersUpgraded = 0;
     }
 
     public boolean initGame(String name, GameDifficultyLevel level) {
