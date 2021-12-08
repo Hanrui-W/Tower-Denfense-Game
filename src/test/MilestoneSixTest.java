@@ -2,7 +2,6 @@ import controller.AppLauncher;
 import controller.GameController;
 import javafx.stage.Stage;
 import org.junit.Test;
-import org.junit.platform.engine.support.hierarchical.Node;
 import org.testfx.api.FxAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;

@@ -129,7 +129,6 @@ public class Model {
     }
     public void initTowerTypes() {
         listOfTowerTypes = new ArrayList<>();
-        System.out.println(1);
         listOfTowerTypes.add(new TowerType("Flowy Flower",
                 new Image(new File("src/main/resources/sunflower.gif")
                         .toURI()
